@@ -59,7 +59,7 @@ const processSteps = [
 
 function Home() {
   const featured = featuredSlugs.map((s) => projects.find((p) => p.slug === s)!);
-  const caseStudy = projects[0];
+  const caseStudy = projects[0]!;
 
   return (
     <>

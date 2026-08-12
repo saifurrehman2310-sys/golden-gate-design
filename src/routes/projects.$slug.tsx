@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight, Play } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticAnchor, MagneticLink } from "@/components/site/MagneticLink";
-import { getProject, projects } from "@/data/projects";
+import { getProject, projects, type Project } from "@/data/projects";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -29,9 +29,9 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function CaseStudy() {
-  const { project: p } = Route.useLoaderData();
+  const { project: p } = Route.useLoaderData() as { project: Project };
   const index = projects.findIndex((x) => x.slug === p.slug);
-  const next = projects[(index + 1) % projects.length];
+  const next = projects[(index + 1) % projects.length]!;
 
   return (
     <>
@@ -156,7 +156,7 @@ function CaseStudy() {
       {/* WALKTHROUGH / RESULTS */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         {p.video && (
-          <Reveal id-="walkthrough">
+          <Reveal>
             <div id="walkthrough" className="scroll-mt-28">
               <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-semibold">Project Walkthrough</h2>
               <p className="mt-4 max-w-xl text-muted-foreground">
