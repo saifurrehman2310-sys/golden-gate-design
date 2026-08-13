@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import heroImg from "@/assets/hero-gold.jpg";
+import { HeroGlass } from "@/components/site/HeroGlass";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink, MagneticAnchor } from "@/components/site/MagneticLink";
 import { projects } from "@/data/projects";
