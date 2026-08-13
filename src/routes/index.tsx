@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import heroImg from "@/assets/hero-gold.jpg";
+import { HeroGlass } from "@/components/site/HeroGlass";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink, MagneticAnchor } from "@/components/site/MagneticLink";
 import { projects } from "@/data/projects";
@@ -65,45 +65,52 @@ function Home() {
     <>
       {/* HERO */}
       <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-grain">
-        <img
-          src={heroImg}
-          alt=""
-          width={1536}
-          height={1024}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(90% 70% at 70% 30%, color-mix(in oklab, var(--ice) 10%, transparent), transparent 65%), radial-gradient(70% 60% at 15% 80%, color-mix(in oklab, var(--iris) 9%, transparent), transparent 70%)",
+          }}
           aria-hidden
-          className="absolute inset-0 h-full w-full object-cover opacity-45"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/70 via-[#0a0a0a]/80 to-[#0a0a0a]" />
-        <div className="relative mx-auto w-full max-w-7xl px-6 pt-32 pb-24 lg:px-10">
-          <Reveal>
-            <p className="flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-[var(--gold)]">
-              <span className="h-px w-10 bg-[var(--gold)]" /> Creative Studio · Est. Pune
-            </p>
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-14 px-6 pt-32 pb-24 lg:grid-cols-[1.05fr_1fr] lg:px-10">
+          <div>
+            <Reveal>
+              <p className="flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-[var(--champagne)]">
+                <span className="h-px w-10 bg-[var(--champagne)]/60" /> Creative Studio · Est. Pune
+              </p>
+            </Reveal>
+            <Reveal delay={120}>
+              <h1 className="mt-8 max-w-3xl text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.98] font-semibold">
+                Websites your <br />
+                <span className="text-lux-gradient">customers remember.</span>
+              </h1>
+            </Reveal>
+            <Reveal delay={240}>
+              <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
+                We design and build premium websites that earn trust in seconds, turn visitors into
+                enquiries, and give growing businesses a presence that finally matches their
+                standards.
+              </p>
+            </Reveal>
+            <Reveal delay={340}>
+              <div className="mt-12 flex flex-wrap items-center gap-4">
+                <MagneticLink to="/portfolio">
+                  Explore Portfolio <ArrowRight size={16} />
+                </MagneticLink>
+                <MagneticLink to="/contact" variant="ghost">
+                  Start a Project
+                </MagneticLink>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={200} className="order-first lg:order-none">
+            <HeroGlass />
           </Reveal>
-          <Reveal delay={120}>
-            <h1 className="mt-8 max-w-4xl text-[clamp(2.9rem,8.5vw,7rem)] leading-[0.95] font-semibold">
-              Websites Your <br />
-              <span className="text-gold-gradient">Customers Remember.</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={240}>
-            <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              We design and build premium websites that earn trust in seconds, turn visitors into
-              enquiries, and give growing businesses a presence that finally matches their standards.
-            </p>
-          </Reveal>
-          <Reveal delay={340}>
-            <div className="mt-12 flex flex-wrap items-center gap-4">
-              <MagneticLink to="/portfolio">
-                Explore Portfolio <ArrowRight size={16} />
-              </MagneticLink>
-              <MagneticLink to="/contact" variant="ghost">
-                Start a Project
-              </MagneticLink>
-            </div>
-          </Reveal>
-          <Reveal delay={460}>
-            <dl className="mt-24 grid max-w-3xl grid-cols-2 gap-8 border-t border-white/[0.08] pt-8 sm:grid-cols-4">
+
+          <Reveal delay={460} className="lg:col-span-2">
+            <dl className="glass-panel glass-edge mt-8 grid grid-cols-2 gap-8 rounded-2xl px-8 py-8 sm:grid-cols-4 lg:mt-16">
               {[
                 ["7+", "Projects delivered"],
                 ["3", "Markets served"],
@@ -111,7 +118,7 @@ function Home() {
                 ["48h", "Typical first draft"],
               ].map(([k, v]) => (
                 <div key={v}>
-                  <dt className="font-display text-3xl text-[var(--gold)]">{k}</dt>
+                  <dt className="font-display text-3xl text-lux-gradient">{k}</dt>
                   <dd className="mt-1 text-xs tracking-wide text-muted-foreground uppercase">{v}</dd>
                 </div>
               ))}
@@ -119,6 +126,7 @@ function Home() {
           </Reveal>
         </div>
       </section>
+
 
       {/* FEATURED PROJECTS */}
       <section className="mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
