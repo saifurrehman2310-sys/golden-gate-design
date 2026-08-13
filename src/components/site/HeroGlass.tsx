@@ -111,13 +111,12 @@ export function HeroGlass() {
       {fragments.map((f) => (
         <div
           key={f.alt}
-          className="float-slower glass-panel glass-edge absolute overflow-hidden rounded-xl"
+          className={`float-slower glass-panel glass-edge absolute aspect-[16/11] overflow-hidden rounded-xl ${f.cls}`}
           style={{
             animationDelay: f.delay,
             transform: `translate3d(${tilt.x * -18}px, ${tilt.y * -14}px, 0)`,
             transition: "transform 900ms var(--ease-lux)",
           }}
-          data-cls={f.cls}
         >
           <img
             src={f.src}
