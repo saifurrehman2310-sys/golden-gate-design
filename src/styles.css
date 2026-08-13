@@ -42,37 +42,44 @@
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.965 0 0);
-  --surface: oklch(0.19 0 0);
-  --card: oklch(0.19 0 0);
-  --card-foreground: oklch(0.965 0 0);
-  --popover: oklch(0.19 0 0);
-  --popover-foreground: oklch(0.965 0 0);
+  --background: oklch(0.18 0.004 265);
+  --foreground: oklch(0.985 0 0);
+  --surface: oklch(0.235 0.005 265);
+  --card: oklch(0.235 0.005 265);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.235 0.005 265);
+  --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.75 0.079 78.5);
-  --primary-foreground: oklch(0.145 0 0);
-  --secondary: oklch(0.24 0 0);
-  --secondary-foreground: oklch(0.965 0 0);
-  --muted: oklch(0.24 0 0);
-  --muted-foreground: oklch(0.72 0.012 286);
-  --accent: oklch(0.24 0 0);
-  --accent-foreground: oklch(0.965 0 0);
+  --primary-foreground: oklch(0.16 0 0);
+  --secondary: oklch(0.28 0.005 265);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.28 0.005 265);
+  --muted-foreground: oklch(0.78 0.012 265);
+  --accent: oklch(0.28 0.005 265);
+  --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.6 0.22 27);
   --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 10%);
-  --ring: oklch(0.75 0.079 78.5);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.78 0.09 250);
 
   --gold: #c8a96a;
   --gold-hover: #e7c98a;
+  --ice: #9ec5ff;
+  --iris: #b3a4ff;
+  --champagne: #e7d3ad;
 
   --gradient-gold: linear-gradient(120deg, #c8a96a 0%, #e7c98a 45%, #8c7440 100%);
+  --gradient-lux: linear-gradient(110deg, #dfe9ff 0%, #b3a4ff 40%, #e7d3ad 100%);
   --gradient-glow: radial-gradient(
     60% 60% at 50% 40%,
-    color-mix(in oklab, var(--gold) 22%, transparent) 0%,
+    color-mix(in oklab, var(--ice) 16%, transparent) 0%,
     transparent 70%
   );
+  --gradient-env: radial-gradient(120% 90% at 50% -10%, #1c1d22 0%, #131316 45%, #0b0b0d 100%);
   --shadow-lux: 0 30px 80px -40px rgb(0 0 0 / 0.9);
+  --shadow-glass:
+    0 1px 0 0 rgb(255 255 255 / 0.14) inset, 0 24px 60px -30px rgb(120 150 255 / 0.35);
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -87,8 +94,10 @@
   }
 
   body {
-    background-color: #0a0a0a;
-    color: #f5f5f5;
+    background-color: #0b0b0d;
+    background-image: var(--gradient-env);
+    background-attachment: fixed;
+    color: #f7f7f8;
     font-family: var(--font-sans);
   }
 
