@@ -34,7 +34,7 @@ function Portfolio() {
           </Reveal>
           <Reveal delay={100}>
             <h1 className="mt-6 max-w-4xl text-[clamp(2.6rem,7vw,5.5rem)] leading-[0.98] font-semibold">
-              Seven businesses. <span className="text-gold-gradient">Seven results.</span>
+              Eight builds. <span className="text-gold-gradient">Eight results.</span>
             </h1>
           </Reveal>
           <Reveal delay={200}>
