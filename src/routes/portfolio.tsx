@@ -16,7 +16,7 @@ export const Route = createFileRoute("/portfolio")({
       { property: "og:title", content: "Portfolio — Saif Studio Case Studies" },
       {
         property: "og:description",
-        content: "Seven case studies showing how Saif Studio turns websites into business results.",
+        content: "Eight case studies showing how Saif Studio turns websites into business results.",
       },
     ],
   }),
@@ -34,7 +34,7 @@ function Portfolio() {
           </Reveal>
           <Reveal delay={100}>
             <h1 className="mt-6 max-w-4xl text-[clamp(2.6rem,7vw,5.5rem)] leading-[0.98] font-semibold">
-              Seven businesses. <span className="text-gold-gradient">Seven results.</span>
+              Eight builds. <span className="text-gold-gradient">Eight results.</span>
             </h1>
           </Reveal>
           <Reveal delay={200}>
@@ -48,53 +48,77 @@ function Portfolio() {
 
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <div className="space-y-24 lg:space-y-36">
-          {projects.map((p, i) => (
-            <Reveal key={p.slug}>
-              <Link
-                to="/projects/$slug"
-                params={{ slug: p.slug }}
-                className={`group grid items-center gap-10 lg:grid-cols-12 ${
-                  i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-                }`}
-              >
-                <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] lg:col-span-7">
-                  <img
-                    src={p.image}
-                    alt={`${p.name} — ${p.category} website`}
-                    loading="lazy"
-                    width={1280}
-                    height={960}
-                    className="aspect-[4/3] w-full object-cover opacity-75 transition-all duration-[1.2s] ease-[var(--ease-lux)] group-hover:scale-105 group-hover:opacity-100"
-                  />
-                  <span className="absolute top-5 left-5 rounded-full border border-white/15 bg-[#0a0a0a]/70 px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <div className="lg:col-span-5">
-                  <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">{p.category}</p>
-                  <h2 className="mt-5 text-[clamp(1.9rem,4vw,3rem)] leading-tight font-semibold">{p.name}</h2>
-                  <p className="mt-5 leading-relaxed text-muted-foreground">{p.tagline}</p>
-                  <ul className="mt-7 flex flex-wrap gap-2">
-                    {p.services.map((s) => (
-                      <li
-                        key={s}
-                        className="rounded-full border border-white/[0.08] px-3.5 py-1.5 text-xs text-muted-foreground"
-                      >
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                  <span className="mt-9 inline-flex items-center gap-2 text-sm transition-colors group-hover:text-[var(--gold)]">
-                    View case study
-                    <ArrowUpRight
-                      size={16}
-                      className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
+          {projects.map((p, i) => {
+            const isMusic = p.slug === "goxxti";
+            return (
+              <Reveal key={p.slug}>
+                <Link
+                  to="/projects/$slug"
+                  params={{ slug: p.slug }}
+                  className={`group grid items-center gap-10 lg:grid-cols-12 ${
+                    i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
+                  }`}
+                >
+                  <div
+                    className={`relative overflow-hidden rounded-2xl border lg:col-span-7 transition-all duration-500 ${
+                      isMusic
+                        ? "border-[#39FF14]/30 shadow-[0_0_40px_-12px_rgba(57,255,20,0.25)] group-hover:border-[#39FF14]/60 group-hover:shadow-[0_0_60px_-8px_rgba(57,255,20,0.35)]"
+                        : "border-white/[0.08]"
+                    }`}
+                  >
+                    <img
+                      src={p.image}
+                      alt={`${p.name} — ${p.category} website`}
+                      loading="lazy"
+                      width={1280}
+                      height={960}
+                      className="aspect-[4/3] w-full object-cover opacity-75 transition-all duration-[1.2s] ease-[var(--ease-lux)] group-hover:scale-105 group-hover:opacity-100"
                     />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+                    <span className="absolute top-5 left-5 rounded-full border border-white/15 bg-[#0a0a0a]/70 px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {isMusic && (
+                      <span className="absolute top-5 right-5 rounded-full border border-[#39FF14]/40 bg-[#0a0a0a]/80 px-4 py-1.5 text-xs tracking-wide text-[#39FF14] backdrop-blur-sm">
+                        Music & Entertainment
+                      </span>
+                    )}
+                  </div>
+                  <div className="lg:col-span-5">
+                    <p className={`text-xs uppercase tracking-[0.25em] ${isMusic ? "text-[#39FF14]" : "text-[var(--gold)]"}`}>
+                      {p.category}
+                    </p>
+                    <h2 className="mt-5 text-[clamp(1.9rem,4vw,3rem)] leading-tight font-semibold">{p.name}</h2>
+                    <p className="mt-5 leading-relaxed text-muted-foreground">{p.tagline}</p>
+                    <ul className="mt-7 flex flex-wrap gap-2">
+                      {p.services.map((s) => (
+                        <li
+                          key={s}
+                          className={`rounded-full border px-3.5 py-1.5 text-xs ${
+                            isMusic
+                              ? "border-[#39FF14]/15 text-[#39FF14]/80"
+                              : "border-white/[0.08] text-muted-foreground"
+                          }`}
+                        >
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                    <span
+                      className={`mt-9 inline-flex items-center gap-2 text-sm transition-colors ${
+                        isMusic ? "group-hover:text-[#39FF14]" : "group-hover:text-[var(--gold)]"
+                      }`}
+                    >
+                      View case study
+                      <ArrowUpRight
+                        size={16}
+                        className="transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
+                      />
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 

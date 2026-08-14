@@ -1,6 +1,7 @@
 import burger from "@/assets/proj-burger.jpg";
 import advisor from "@/assets/proj-advisor.jpg";
 import realestate from "@/assets/proj-realestate.jpg";
+import goxxti from "@/assets/proj-goxxti.jpg";
 import gold from "@/assets/hero-gold.jpg";
 
 export type Project = {
@@ -222,6 +223,35 @@ export const projects: Project[] = [
       "Discoverable on Google Maps for local property searches",
       "Enquiries routed instantly into WhatsApp",
       "Measurable lead tracking from day one",
+    ],
+  },
+  {
+    slug: "goxxti",
+    name: "GOXXTI",
+    category: "Music / Artist Brand",
+    year: "2025",
+    tagline: "A raw, industrial artist site for a rising hard techno producer — built to help him book more shows.",
+    image: goxxti,
+    liveUrl: "https://id-preview--5082e761-e8d7-4443-a88a-d51e30f32589.lovable.app",
+    services: ["Website Design", "Artist Branding", "Booking Funnel", "EPK / Press Section"],
+    overview:
+      "GOXXTI is a rising hard techno producer who needed more than a Linktree — he needed a branded destination where promoters, press and fans could immediately understand his sound, see his stats and start a booking conversation.",
+    challenge:
+      "With only a Linktree and scattered social profiles, GOXXTI had no controlled first impression. Promoters could not quickly find his latest tracks, upcoming dates or press assets, and there was no professional path from discovery to booking enquiry.",
+    solution:
+      "We built a full dark/industrial one-page artist site with a glitch-grain visual identity in black and acid-green. The page functions as both portfolio and electronic press kit: embedded music player, tour dates, discography, bio/stats and a direct booking form.",
+    features: [
+      "Dark industrial one-page artist site with acid-green accent system",
+      "Embedded latest-track player section for immediate sound sampling",
+      "Upcoming shows and tour dates module",
+      "Press / EPK section with bio, stats and downloadable assets",
+      "Discography grid with release artwork and links",
+      "Direct booking contact form routed to management",
+    ],
+    results: [
+      "Single professional destination replaces scattered links",
+      "Promoters can evaluate sound, stats and availability in one scroll",
+      "Direct booking funnel turns interest into enquiries",
     ],
   },
 ];
