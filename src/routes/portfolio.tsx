@@ -16,7 +16,7 @@ export const Route = createFileRoute("/portfolio")({
       { property: "og:title", content: "Portfolio — Saif Studio Case Studies" },
       {
         property: "og:description",
-        content: "Seven case studies showing how Saif Studio turns websites into business results.",
+        content: "Eight case studies showing how Saif Studio turns websites into business results.",
       },
     ],
   }),

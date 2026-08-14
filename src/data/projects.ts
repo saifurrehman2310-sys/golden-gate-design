@@ -1,6 +1,7 @@
 import burger from "@/assets/proj-burger.jpg";
 import advisor from "@/assets/proj-advisor.jpg";
 import realestate from "@/assets/proj-realestate.jpg";
+import goxxti from "@/assets/proj-goxxti.jpg";
 import gold from "@/assets/hero-gold.jpg";
 
 export type Project = {
