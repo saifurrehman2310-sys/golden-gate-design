@@ -137,7 +137,7 @@ function Portfolio() {
                           key={s}
                           className={`rounded-full border px-3.5 py-1.5 text-xs ${
                             style
-                              ? `project-border-${p.slug} project-text-${p.slug}/80`
+                              ? `project-border-${p.slug} project-text-faint-${p.slug}`
                               : "border-white/[0.08] text-muted-foreground"
                           }`}
                         >
