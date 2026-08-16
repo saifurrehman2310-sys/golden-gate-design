@@ -4,6 +4,41 @@ import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { projects } from "@/data/projects";
 
+type ProjectStyle = {
+  color: string;
+  badge: string;
+};
+
+const projectStyles: Record<string, ProjectStyle> = {
+  "burger-bliss": { color: "#F59E0B", badge: "Food & Hospitality" },
+  "financial-advisor": { color: "#1E40AF", badge: "Finance" },
+  "dental-clinic": { color: "#14B8A6", badge: "Healthcare" },
+  "law-firm": { color: "#9CA3AF", badge: "Legal" },
+  "ease-living-decor": { color: "#D97757", badge: "E-Commerce" },
+  "pruthak-infra": { color: "#64748B", badge: "Construction" },
+  "sai-real-estate": { color: "#B45309", badge: "Real Estate" },
+  "goxxti": { color: "#39FF14", badge: "Music & Entertainment" },
+};
+
+const generatedAccentCss = Object.entries(projectStyles)
+  .map(
+    ([slug, { color }]) => `
+      .project-accent-${slug} {
+        border-color: ${color}30;
+        box-shadow: 0 0 40px -12px ${color}25;
+      }
+      .project-accent-${slug}:hover {
+        border-color: ${color}60;
+        box-shadow: 0 0 60px -8px ${color}35;
+      }
+      .project-text-${slug} { color: ${color}; }
+      .project-text-faint-${slug} { color: ${color}CC; }
+      .project-border-${slug} { border-color: ${color}15; }
+      .project-border-light-${slug} { border-color: ${color}40; }
+    `
+  )
+  .join("");
+
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
@@ -26,6 +61,8 @@ export const Route = createFileRoute("/portfolio")({
 function Portfolio() {
   return (
     <>
+      <style>{generatedAccentCss}</style>
+
       <section className="relative overflow-hidden border-b border-white/[0.08] bg-grain">
         <div className="absolute inset-0" style={{ background: "var(--gradient-glow)" }} aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-24 lg:px-10 lg:pt-52 lg:pb-32">
@@ -49,7 +86,8 @@ function Portfolio() {
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <div className="space-y-24 lg:space-y-36">
           {projects.map((p, i) => {
-            const isMusic = p.slug === "goxxti";
+            const style = projectStyles[p.slug];
+            const isDefault = !style;
             return (
               <Reveal key={p.slug}>
                 <Link
@@ -61,9 +99,7 @@ function Portfolio() {
                 >
                   <div
                     className={`relative overflow-hidden rounded-2xl border lg:col-span-7 transition-all duration-500 ${
-                      isMusic
-                        ? "border-[#39FF14]/30 shadow-[0_0_40px_-12px_rgba(57,255,20,0.25)] group-hover:border-[#39FF14]/60 group-hover:shadow-[0_0_60px_-8px_rgba(57,255,20,0.35)]"
-                        : "border-white/[0.08]"
+                      style ? `project-accent-${p.slug}` : "border-white/[0.08]"
                     }`}
                   >
                     <img
@@ -77,14 +113,20 @@ function Portfolio() {
                     <span className="absolute top-5 left-5 rounded-full border border-white/15 bg-[#0a0a0a]/70 px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    {isMusic && (
-                      <span className="absolute top-5 right-5 rounded-full border border-[#39FF14]/40 bg-[#0a0a0a]/80 px-4 py-1.5 text-xs tracking-wide text-[#39FF14] backdrop-blur-sm">
-                        Music & Entertainment
+                    {style?.badge && (
+                      <span
+                        className={`absolute top-5 right-5 rounded-full border px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm bg-[#0a0a0a]/80 project-text-${p.slug} project-border-light-${p.slug}`}
+                      >
+                        {style.badge}
                       </span>
                     )}
                   </div>
                   <div className="lg:col-span-5">
-                    <p className={`text-xs uppercase tracking-[0.25em] ${isMusic ? "text-[#39FF14]" : "text-[var(--gold)]"}`}>
+                    <p
+                      className={`text-xs uppercase tracking-[0.25em] ${
+                        style ? `project-text-${p.slug}` : "text-[var(--gold)]"
+                      }`}
+                    >
                       {p.category}
                     </p>
                     <h2 className="mt-5 text-[clamp(1.9rem,4vw,3rem)] leading-tight font-semibold">{p.name}</h2>
@@ -94,8 +136,8 @@ function Portfolio() {
                         <li
                           key={s}
                           className={`rounded-full border px-3.5 py-1.5 text-xs ${
-                            isMusic
-                              ? "border-[#39FF14]/15 text-[#39FF14]/80"
+                            style
+                              ? `project-border-${p.slug} project-text-faint-${p.slug}`
                               : "border-white/[0.08] text-muted-foreground"
                           }`}
                         >
@@ -105,7 +147,7 @@ function Portfolio() {
                     </ul>
                     <span
                       className={`mt-9 inline-flex items-center gap-2 text-sm transition-colors ${
-                        isMusic ? "group-hover:text-[#39FF14]" : "group-hover:text-[var(--gold)]"
+                        style ? `project-text-${p.slug}` : "group-hover:text-[var(--gold)]"
                       }`}
                     >
                       View case study
