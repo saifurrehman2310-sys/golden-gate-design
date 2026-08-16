@@ -24,7 +24,6 @@ const generatedAccentCss = Object.entries(projectStyles)
   .map(
     ([slug, { color }]) => `
       .project-accent-${slug} {
-        --accent: ${color};
         border-color: ${color}30;
         box-shadow: 0 0 40px -12px ${color}25;
       }
@@ -33,9 +32,9 @@ const generatedAccentCss = Object.entries(projectStyles)
         box-shadow: 0 0 60px -8px ${color}35;
       }
       .project-text-${slug} { color: ${color}; }
+      .project-text-faint-${slug} { color: ${color}CC; }
       .project-border-${slug} { border-color: ${color}15; }
       .project-border-light-${slug} { border-color: ${color}40; }
-      .project-bg-${slug} { background-color: ${color}0D; }
     `
   )
   .join("");
