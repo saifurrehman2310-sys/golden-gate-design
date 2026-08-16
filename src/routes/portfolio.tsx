@@ -11,7 +11,7 @@ type ProjectStyle = {
 
 const projectStyles: Record<string, ProjectStyle> = {
   "burger-bliss": { color: "#F59E0B", badge: "Food & Hospitality" },
-  "financial-advisor": { color: "#3B82F6", badge: "Finance" },
+  "financial-advisor": { color: "#1E40AF", badge: "Finance" },
   "dental-clinic": { color: "#14B8A6", badge: "Healthcare" },
   "law-firm": { color: "#9CA3AF", badge: "Legal" },
   "ease-living-decor": { color: "#D97757", badge: "E-Commerce" },
@@ -19,6 +19,26 @@ const projectStyles: Record<string, ProjectStyle> = {
   "sai-real-estate": { color: "#B45309", badge: "Real Estate" },
   "goxxti": { color: "#39FF14", badge: "Music & Entertainment" },
 };
+
+const generatedAccentCss = Object.entries(projectStyles)
+  .map(
+    ([slug, { color }]) => `
+      .project-accent-${slug} {
+        --accent: ${color};
+        border-color: ${color}30;
+        box-shadow: 0 0 40px -12px ${color}25;
+      }
+      .project-accent-${slug}:hover {
+        border-color: ${color}60;
+        box-shadow: 0 0 60px -8px ${color}35;
+      }
+      .project-text-${slug} { color: ${color}; }
+      .project-border-${slug} { border-color: ${color}15; }
+      .project-border-light-${slug} { border-color: ${color}40; }
+      .project-bg-${slug} { background-color: ${color}0D; }
+    `
+  )
+  .join("");
 
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
@@ -42,6 +62,8 @@ export const Route = createFileRoute("/portfolio")({
 function Portfolio() {
   return (
     <>
+      <style>{generatedAccentCss}</style>
+
       <section className="relative overflow-hidden border-b border-white/[0.08] bg-grain">
         <div className="absolute inset-0" style={{ background: "var(--gradient-glow)" }} aria-hidden />
         <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-24 lg:px-10 lg:pt-52 lg:pb-32">
@@ -66,9 +88,7 @@ function Portfolio() {
         <div className="space-y-24 lg:space-y-36">
           {projects.map((p, i) => {
             const style = projectStyles[p.slug];
-            const accent = style?.color ?? "var(--gold)";
-            const badge = style?.badge;
-            const isAgencyDefault = !style;
+            const isDefault = !style;
             return (
               <Reveal key={p.slug}>
                 <Link
@@ -79,19 +99,10 @@ function Portfolio() {
                   }`}
                 >
                   <div
-                    className="relative overflow-hidden rounded-2xl border lg:col-span-7 transition-all duration-500"
-                    style={{
-                      borderColor: `${accent}30`,
-                      boxShadow: `0 0 40px -12px ${accent}25`,
-                    }}
+                    className={`relative overflow-hidden rounded-2xl border lg:col-span-7 transition-all duration-500 ${
+                      style ? `project-accent-${p.slug}` : "border-white/[0.08]"
+                    }`}
                   >
-                    <style>{`
-                      .project-card-${p.slug}:hover {
-                        border-color: ${accent}60 !important;
-                        box-shadow: 0 0 60px -8px ${accent}35 !important;
-                      }
-                    `}</style>
-                    <div className={`project-card-${p.slug} absolute inset-0 pointer-events-none rounded-2xl`} />
                     <img
                       src={p.image}
                       alt={`${p.name} — ${p.category} website`}
@@ -103,23 +114,19 @@ function Portfolio() {
                     <span className="absolute top-5 left-5 rounded-full border border-white/15 bg-[#0a0a0a]/70 px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    {badge && (
+                    {style?.badge && (
                       <span
-                        className="absolute top-5 right-5 rounded-full border px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm"
-                        style={{
-                          borderColor: `${accent}40`,
-                          color: accent,
-                          backgroundColor: "rgba(10,10,10,0.8)",
-                        }}
+                        className={`absolute top-5 right-5 rounded-full border px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm bg-[#0a0a0a]/80 project-text-${p.slug} project-border-light-${p.slug}`}
                       >
-                        {badge}
+                        {style.badge}
                       </span>
                     )}
                   </div>
                   <div className="lg:col-span-5">
                     <p
-                      className="text-xs uppercase tracking-[0.25em]"
-                      style={{ color: isAgencyDefault ? "var(--gold)" : accent }}
+                      className={`text-xs uppercase tracking-[0.25em] ${
+                        style ? `project-text-${p.slug}` : "text-[var(--gold)]"
+                      }`}
                     >
                       {p.category}
                     </p>
@@ -129,19 +136,20 @@ function Portfolio() {
                       {p.services.map((s) => (
                         <li
                           key={s}
-                          className="rounded-full border px-3.5 py-1.5 text-xs"
-                          style={{
-                            borderColor: isAgencyDefault ? "rgba(255,255,255,0.08)" : `${accent}15`,
-                            color: isAgencyDefault ? undefined : `${accent}CC`,
-                          }}
+                          className={`rounded-full border px-3.5 py-1.5 text-xs ${
+                            style
+                              ? `project-border-${p.slug} project-text-${p.slug}/80`
+                              : "border-white/[0.08] text-muted-foreground"
+                          }`}
                         >
                           {s}
                         </li>
                       ))}
                     </ul>
                     <span
-                      className="mt-9 inline-flex items-center gap-2 text-sm transition-colors"
-                      style={{ color: isAgencyDefault ? undefined : accent }}
+                      className={`mt-9 inline-flex items-center gap-2 text-sm transition-colors ${
+                        style ? `project-text-${p.slug}` : "group-hover:text-[var(--gold)]"
+                      }`}
                     >
                       View case study
                       <ArrowUpRight
