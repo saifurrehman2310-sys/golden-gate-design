@@ -4,6 +4,22 @@ import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { projects } from "@/data/projects";
 
+type ProjectStyle = {
+  color: string;
+  badge: string;
+};
+
+const projectStyles: Record<string, ProjectStyle> = {
+  "burger-bliss": { color: "#F59E0B", badge: "Food & Hospitality" },
+  "financial-advisor": { color: "#3B82F6", badge: "Finance" },
+  "dental-clinic": { color: "#14B8A6", badge: "Healthcare" },
+  "law-firm": { color: "#9CA3AF", badge: "Legal" },
+  "ease-living-decor": { color: "#D97757", badge: "E-Commerce" },
+  "pruthak-infra": { color: "#64748B", badge: "Construction" },
+  "sai-real-estate": { color: "#B45309", badge: "Real Estate" },
+  "goxxti": { color: "#39FF14", badge: "Music & Entertainment" },
+};
+
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
@@ -49,7 +65,10 @@ function Portfolio() {
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <div className="space-y-24 lg:space-y-36">
           {projects.map((p, i) => {
-            const isMusic = p.slug === "goxxti";
+            const style = projectStyles[p.slug];
+            const accent = style?.color ?? "var(--gold)";
+            const badge = style?.badge;
+            const isAgencyDefault = !style;
             return (
               <Reveal key={p.slug}>
                 <Link
@@ -60,12 +79,19 @@ function Portfolio() {
                   }`}
                 >
                   <div
-                    className={`relative overflow-hidden rounded-2xl border lg:col-span-7 transition-all duration-500 ${
-                      isMusic
-                        ? "border-[#39FF14]/30 shadow-[0_0_40px_-12px_rgba(57,255,20,0.25)] group-hover:border-[#39FF14]/60 group-hover:shadow-[0_0_60px_-8px_rgba(57,255,20,0.35)]"
-                        : "border-white/[0.08]"
-                    }`}
+                    className="relative overflow-hidden rounded-2xl border lg:col-span-7 transition-all duration-500"
+                    style={{
+                      borderColor: `${accent}30`,
+                      boxShadow: `0 0 40px -12px ${accent}25`,
+                    }}
                   >
+                    <style>{`
+                      .project-card-${p.slug}:hover {
+                        border-color: ${accent}60 !important;
+                        box-shadow: 0 0 60px -8px ${accent}35 !important;
+                      }
+                    `}</style>
+                    <div className={`project-card-${p.slug} absolute inset-0 pointer-events-none rounded-2xl`} />
                     <img
                       src={p.image}
                       alt={`${p.name} — ${p.category} website`}
@@ -77,14 +103,24 @@ function Portfolio() {
                     <span className="absolute top-5 left-5 rounded-full border border-white/15 bg-[#0a0a0a]/70 px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    {isMusic && (
-                      <span className="absolute top-5 right-5 rounded-full border border-[#39FF14]/40 bg-[#0a0a0a]/80 px-4 py-1.5 text-xs tracking-wide text-[#39FF14] backdrop-blur-sm">
-                        Music & Entertainment
+                    {badge && (
+                      <span
+                        className="absolute top-5 right-5 rounded-full border px-4 py-1.5 text-xs tracking-wide backdrop-blur-sm"
+                        style={{
+                          borderColor: `${accent}40`,
+                          color: accent,
+                          backgroundColor: "rgba(10,10,10,0.8)",
+                        }}
+                      >
+                        {badge}
                       </span>
                     )}
                   </div>
                   <div className="lg:col-span-5">
-                    <p className={`text-xs uppercase tracking-[0.25em] ${isMusic ? "text-[#39FF14]" : "text-[var(--gold)]"}`}>
+                    <p
+                      className="text-xs uppercase tracking-[0.25em]"
+                      style={{ color: isAgencyDefault ? "var(--gold)" : accent }}
+                    >
                       {p.category}
                     </p>
                     <h2 className="mt-5 text-[clamp(1.9rem,4vw,3rem)] leading-tight font-semibold">{p.name}</h2>
@@ -93,20 +129,19 @@ function Portfolio() {
                       {p.services.map((s) => (
                         <li
                           key={s}
-                          className={`rounded-full border px-3.5 py-1.5 text-xs ${
-                            isMusic
-                              ? "border-[#39FF14]/15 text-[#39FF14]/80"
-                              : "border-white/[0.08] text-muted-foreground"
-                          }`}
+                          className="rounded-full border px-3.5 py-1.5 text-xs"
+                          style={{
+                            borderColor: isAgencyDefault ? "rgba(255,255,255,0.08)" : `${accent}15`,
+                            color: isAgencyDefault ? undefined : `${accent}CC`,
+                          }}
                         >
                           {s}
                         </li>
                       ))}
                     </ul>
                     <span
-                      className={`mt-9 inline-flex items-center gap-2 text-sm transition-colors ${
-                        isMusic ? "group-hover:text-[#39FF14]" : "group-hover:text-[var(--gold)]"
-                      }`}
+                      className="mt-9 inline-flex items-center gap-2 text-sm transition-colors"
+                      style={{ color: isAgencyDefault ? undefined : accent }}
                     >
                       View case study
                       <ArrowUpRight
