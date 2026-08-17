@@ -148,7 +148,7 @@ function Home() {
               <Link
                 to="/projects/$slug"
                 params={{ slug: p.slug }}
-                className="group relative block overflow-hidden rounded-2xl border border-white/[0.08] bg-[#121212]"
+                className="glass-panel glass-edge group relative block overflow-hidden rounded-2xl transition-all duration-700 ease-[var(--ease-lux)] hover:-translate-y-1 hover:shadow-[var(--shadow-lux)]"
               >
                 <div className="grid md:grid-cols-2">
                   <div className="relative aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[26rem]">
@@ -160,7 +160,17 @@ function Home() {
                       height={960}
                       className="absolute inset-0 h-full w-full object-cover opacity-70 transition-all duration-[1.2s] ease-[var(--ease-lux)] group-hover:scale-105 group-hover:opacity-100"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#121212]/70" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent to-[color-mix(in_oklab,var(--background)_75%,transparent)]" />
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-60 transition-opacity duration-700 group-hover:opacity-100"
+                      style={{
+                        background:
+                          "radial-gradient(70% 60% at 20% 20%, color-mix(in oklab, var(--ice) 12%, transparent), transparent 70%)",
+                      }}
+                      aria-hidden
+                    />
+                  </div>
+
                   </div>
                   <div className="flex flex-col justify-center gap-5 p-8 lg:p-14">
                     <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">
