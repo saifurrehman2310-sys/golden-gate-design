@@ -291,16 +291,17 @@ function Home() {
           </h2>
         </Reveal>
 
-        <Reveal delay={120} className="mt-14 overflow-hidden rounded-2xl border border-white/[0.08]">
+        <Reveal delay={120} className="glass-panel glass-edge mt-14 overflow-hidden rounded-2xl p-2">
           <img
             src={caseStudy.image}
             alt="Burger Bliss restaurant website case study"
             loading="lazy"
             width={1280}
             height={960}
-            className="h-[22rem] w-full object-cover md:h-[34rem]"
+            className="h-[22rem] w-full rounded-xl object-cover md:h-[34rem]"
           />
         </Reveal>
+
 
         <div className="mt-14 grid gap-12 lg:grid-cols-3">
           <Reveal>
