@@ -194,19 +194,27 @@ function Home() {
       </section>
 
       {/* WHY */}
-      <section className="border-y border-white/[0.08] bg-[#0d0d0d]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
+      <section className="relative overflow-hidden border-y border-white/[0.08]">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 80% 10%, color-mix(in oklab, var(--iris) 8%, transparent), transparent 70%), radial-gradient(50% 45% at 10% 90%, color-mix(in oklab, var(--ice) 7%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Why Saif Studio</p>
             <h2 className="mt-4 max-w-3xl text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-semibold">
               Four disciplines behind every website we ship.
             </h2>
           </Reveal>
-          <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.06] md:grid-cols-2">
+          <div className="mt-20 grid gap-5 md:grid-cols-2">
             {pillars.map((p, i) => (
-              <Reveal key={p.n} delay={i * 90} className="bg-[#0d0d0d]">
-                <div className="group h-full p-10 transition-colors duration-500 hover:bg-[#121212] lg:p-14">
-                  <span className="font-display text-sm text-[var(--gold)]">{p.n}</span>
+              <Reveal key={p.n} delay={i * 90}>
+                <div className="glass-panel glass-edge group h-full rounded-2xl p-10 transition-all duration-700 ease-[var(--ease-lux)] hover:-translate-y-1 hover:shadow-[var(--shadow-glass)] lg:p-14">
+                  <span className="font-display text-sm text-[var(--champagne)]">{p.n}</span>
                   <h3 className="mt-6 text-2xl font-semibold">{p.title}</h3>
                   <div className="gold-rule mt-5 w-16 origin-left scale-x-50 transition-transform duration-700 group-hover:scale-x-100" />
                   <p className="mt-5 leading-relaxed text-muted-foreground">{p.body}</p>
@@ -214,6 +222,7 @@ function Home() {
               </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 
