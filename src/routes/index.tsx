@@ -148,7 +148,7 @@ function Home() {
               <Link
                 to="/projects/$slug"
                 params={{ slug: p.slug }}
-                className="group relative block overflow-hidden rounded-2xl border border-white/[0.08] bg-[#121212]"
+                className="glass-panel glass-edge group relative block overflow-hidden rounded-2xl transition-all duration-700 ease-[var(--ease-lux)] hover:-translate-y-1 hover:shadow-[var(--shadow-lux)]"
               >
                 <div className="grid md:grid-cols-2">
                   <div className="relative aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[26rem]">
@@ -160,8 +160,18 @@ function Home() {
                       height={960}
                       className="absolute inset-0 h-full w-full object-cover opacity-70 transition-all duration-[1.2s] ease-[var(--ease-lux)] group-hover:scale-105 group-hover:opacity-100"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#121212]/70" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent to-[color-mix(in_oklab,var(--background)_75%,transparent)]" />
+                    <div
+                      className="pointer-events-none absolute inset-0 opacity-60 transition-opacity duration-700 group-hover:opacity-100"
+                      style={{
+                        background:
+                          "radial-gradient(70% 60% at 20% 20%, color-mix(in oklab, var(--ice) 12%, transparent), transparent 70%)",
+                      }}
+                      aria-hidden
+                    />
                   </div>
+
+
                   <div className="flex flex-col justify-center gap-5 p-8 lg:p-14">
                     <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">
                       {p.category} · {p.year}
@@ -184,19 +194,27 @@ function Home() {
       </section>
 
       {/* WHY */}
-      <section className="border-y border-white/[0.08] bg-[#0d0d0d]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
+      <section className="relative overflow-hidden border-y border-white/[0.08]">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 80% 10%, color-mix(in oklab, var(--iris) 8%, transparent), transparent 70%), radial-gradient(50% 45% at 10% 90%, color-mix(in oklab, var(--ice) 7%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Why Saif Studio</p>
             <h2 className="mt-4 max-w-3xl text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-semibold">
               Four disciplines behind every website we ship.
             </h2>
           </Reveal>
-          <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.06] md:grid-cols-2">
+          <div className="mt-20 grid gap-5 md:grid-cols-2">
             {pillars.map((p, i) => (
-              <Reveal key={p.n} delay={i * 90} className="bg-[#0d0d0d]">
-                <div className="group h-full p-10 transition-colors duration-500 hover:bg-[#121212] lg:p-14">
-                  <span className="font-display text-sm text-[var(--gold)]">{p.n}</span>
+              <Reveal key={p.n} delay={i * 90}>
+                <div className="glass-panel glass-edge group h-full rounded-2xl p-10 transition-all duration-700 ease-[var(--ease-lux)] hover:-translate-y-1 hover:shadow-[var(--shadow-glass)] lg:p-14">
+                  <span className="font-display text-sm text-[var(--champagne)]">{p.n}</span>
                   <h3 className="mt-6 text-2xl font-semibold">{p.title}</h3>
                   <div className="gold-rule mt-5 w-16 origin-left scale-x-50 transition-transform duration-700 group-hover:scale-x-100" />
                   <p className="mt-5 leading-relaxed text-muted-foreground">{p.body}</p>
@@ -204,6 +222,7 @@ function Home() {
               </Reveal>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -272,38 +291,46 @@ function Home() {
           </h2>
         </Reveal>
 
-        <Reveal delay={120} className="mt-14 overflow-hidden rounded-2xl border border-white/[0.08]">
+        <Reveal delay={120} className="glass-panel glass-edge mt-14 overflow-hidden rounded-2xl p-2">
           <img
             src={caseStudy.image}
             alt="Burger Bliss restaurant website case study"
             loading="lazy"
             width={1280}
             height={960}
-            className="h-[22rem] w-full object-cover md:h-[34rem]"
+            className="h-[22rem] w-full rounded-xl object-cover md:h-[34rem]"
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-3">
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-3">
           <Reveal>
-            <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Challenge</h3>
-            <p className="mt-4 leading-relaxed text-muted-foreground">{caseStudy.challenge}</p>
+            <div className="glass-panel glass-edge h-full rounded-2xl p-8 lg:p-10">
+              <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Challenge</h3>
+              <p className="mt-4 leading-relaxed text-muted-foreground">{caseStudy.challenge}</p>
+            </div>
           </Reveal>
           <Reveal delay={90}>
-            <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Solution</h3>
-            <p className="mt-4 leading-relaxed text-muted-foreground">{caseStudy.solution}</p>
+            <div className="glass-panel glass-edge h-full rounded-2xl p-8 lg:p-10">
+              <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Solution</h3>
+              <p className="mt-4 leading-relaxed text-muted-foreground">{caseStudy.solution}</p>
+            </div>
           </Reveal>
           <Reveal delay={180}>
-            <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Results</h3>
-            <ul className="mt-4 space-y-3 text-muted-foreground">
-              {caseStudy.results.map((r) => (
-                <li key={r} className="flex gap-3">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--gold)]" />
-                  {r}
-                </li>
-              ))}
-            </ul>
+            <div className="glass-panel glass-edge h-full rounded-2xl p-8 lg:p-10">
+              <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Results</h3>
+              <ul className="mt-4 space-y-3 text-muted-foreground">
+                {caseStudy.results.map((r) => (
+                  <li key={r} className="flex gap-3">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--champagne)]" />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
         </div>
+
 
         <Reveal delay={120} className="mt-12 flex flex-wrap gap-4">
           <MagneticAnchor href={caseStudy.liveUrl!}>
