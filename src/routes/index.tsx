@@ -303,27 +303,34 @@ function Home() {
         </Reveal>
 
 
-        <div className="mt-14 grid gap-12 lg:grid-cols-3">
+        <div className="mt-8 grid gap-5 lg:grid-cols-3">
           <Reveal>
-            <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Challenge</h3>
-            <p className="mt-4 leading-relaxed text-muted-foreground">{caseStudy.challenge}</p>
+            <div className="glass-panel glass-edge h-full rounded-2xl p-8 lg:p-10">
+              <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Challenge</h3>
+              <p className="mt-4 leading-relaxed text-muted-foreground">{caseStudy.challenge}</p>
+            </div>
           </Reveal>
           <Reveal delay={90}>
-            <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Solution</h3>
-            <p className="mt-4 leading-relaxed text-muted-foreground">{caseStudy.solution}</p>
+            <div className="glass-panel glass-edge h-full rounded-2xl p-8 lg:p-10">
+              <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Solution</h3>
+              <p className="mt-4 leading-relaxed text-muted-foreground">{caseStudy.solution}</p>
+            </div>
           </Reveal>
           <Reveal delay={180}>
-            <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Results</h3>
-            <ul className="mt-4 space-y-3 text-muted-foreground">
-              {caseStudy.results.map((r) => (
-                <li key={r} className="flex gap-3">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--gold)]" />
-                  {r}
-                </li>
-              ))}
-            </ul>
+            <div className="glass-panel glass-edge h-full rounded-2xl p-8 lg:p-10">
+              <h3 className="text-sm uppercase tracking-[0.2em] text-[var(--gold)]">Results</h3>
+              <ul className="mt-4 space-y-3 text-muted-foreground">
+                {caseStudy.results.map((r) => (
+                  <li key={r} className="flex gap-3">
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--champagne)]" />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Reveal>
         </div>
+
 
         <Reveal delay={120} className="mt-12 flex flex-wrap gap-4">
           <MagneticAnchor href={caseStudy.liveUrl!}>
