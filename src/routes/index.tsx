@@ -171,7 +171,7 @@ function Home() {
                     />
                   </div>
 
-                  </div>
+
                   <div className="flex flex-col justify-center gap-5 p-8 lg:p-14">
                     <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">
                       {p.category} · {p.year}
