@@ -227,58 +227,96 @@ function Home() {
       </section>
 
       {/* SERVICES */}
-      <section className="mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
-        <Reveal>
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Services</p>
-          <h2 className="mt-4 max-w-3xl text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-semibold">
-            Everything your business needs to look inevitable online.
-          </h2>
-        </Reveal>
-        <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
-            <Reveal key={s.slug} delay={i * 70}>
-              <Link
-                to="/services"
-                hash={s.slug}
-                className="group flex h-full flex-col justify-between rounded-2xl border border-white/[0.08] bg-[#121212] p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--gold)]/40"
-              >
-                <div>
-                  <h3 className="text-xl font-semibold transition-colors group-hover:text-[var(--gold)]">
-                    {s.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.short}</p>
-                </div>
-                <ArrowUpRight
-                  size={18}
-                  className="mt-10 text-muted-foreground transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--gold)]"
-                />
-              </Link>
-            </Reveal>
-          ))}
+      <section className="relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 20% 20%, color-mix(in oklab, var(--ice) 8%, transparent), transparent 70%), radial-gradient(50% 45% at 85% 85%, color-mix(in oklab, var(--iris) 7%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Services</p>
+            <h2 className="mt-4 max-w-3xl text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-semibold">
+              Everything your business needs to look inevitable online.
+            </h2>
+          </Reveal>
+          <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {services.map((s, i) => (
+              <Reveal key={s.slug} delay={i * 70}>
+                <Link
+                  to="/services"
+                  hash={s.slug}
+                  className="glass-panel glass-edge group flex h-full flex-col justify-between rounded-2xl p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--champagne)]/30"
+                >
+                  <div>
+                    <h3 className="text-xl font-semibold transition-colors group-hover:text-[var(--champagne)]">
+                      {s.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.short}</p>
+                  </div>
+                  <ArrowUpRight
+                    size={18}
+                    className="mt-10 text-muted-foreground transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--champagne)]"
+                  />
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* PROCESS */}
-      <section className="border-y border-white/[0.08] bg-[#0d0d0d]">
-        <div className="mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
+      <section className="relative overflow-hidden border-y border-white/[0.08]">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 80% 10%, color-mix(in oklab, var(--iris) 8%, transparent), transparent 70%), radial-gradient(50% 45% at 10% 90%, color-mix(in oklab, var(--ice) 7%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Process</p>
             <h2 className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-semibold">
               Five steps. No surprises.
             </h2>
           </Reveal>
-          <ol className="mt-20 border-l border-white/[0.08] pl-8 lg:pl-14">
-            {processSteps.map((s, i) => (
-              <Reveal as="li" key={s.step} delay={i * 90} className="relative pb-14 last:pb-0">
-                <span className="absolute top-2 -left-[2.3rem] h-2.5 w-2.5 rounded-full bg-[var(--gold)] lg:-left-[3.8rem]" />
-                <div className="flex flex-wrap items-baseline gap-4">
-                  <span className="font-display text-sm text-[var(--gold)]">0{i + 1}</span>
-                  <h3 className="text-[clamp(1.6rem,3.2vw,2.4rem)] font-semibold">{s.step}</h3>
-                </div>
-                <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">{s.body}</p>
-              </Reveal>
-            ))}
-          </ol>
+
+          <div className="relative mt-20 lg:pl-10">
+            <div
+              className="pointer-events-none absolute top-4 bottom-4 left-[1.25rem] w-px lg:left-[3.75rem]"
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent 0%, color-mix(in oklab, var(--champagne) 50%, transparent) 12%, color-mix(in oklab, var(--champagne) 50%, transparent) 88%, transparent 100%)",
+              }}
+              aria-hidden
+            />
+            <ol className="space-y-6">
+              {processSteps.map((s, i) => (
+                <Reveal as="li" key={s.step} delay={i * 90} className="relative pl-10 lg:pl-20">
+                  <span
+                    className="absolute top-9 left-[0.875rem] h-3 w-3 rounded-full lg:left-[3.35rem]"
+                    style={{
+                      background: "var(--champagne)",
+                      boxShadow: "0 0 18px 3px color-mix(in oklab, var(--champagne) 45%, transparent)",
+                    }}
+                    aria-hidden
+                  />
+                  <div className="glass-panel glass-edge rounded-2xl p-8 lg:p-10">
+                    <div className="flex flex-wrap items-baseline gap-4">
+                      <span className="font-display text-sm text-[var(--champagne)]">0{i + 1}</span>
+                      <h3 className="text-[clamp(1.6rem,3.2vw,2.4rem)] font-semibold">{s.step}</h3>
+                    </div>
+                    <p className="mt-3 max-w-xl leading-relaxed text-muted-foreground">{s.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
         </div>
       </section>
 
