@@ -383,26 +383,31 @@ function Home() {
       {/* FINAL CTA */}
       <section className="relative overflow-hidden border-t border-white/[0.08] bg-grain">
         <div
-          className="absolute inset-0"
-          style={{ background: "var(--gradient-glow)" }}
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(60% 55% at 50% 25%, color-mix(in oklab, var(--ice) 14%, transparent), transparent 70%), radial-gradient(50% 45% at 50% 85%, color-mix(in oklab, var(--iris) 10%, transparent), transparent 70%)",
+          }}
           aria-hidden
         />
-        <div className="relative mx-auto max-w-4xl px-6 py-32 text-center lg:py-44">
-          <Reveal>
-            <h2 className="text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.02] font-semibold">
-              Ready to Build Something <span className="text-gold-gradient">Unforgettable?</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={120}>
-            <p className="mx-auto mt-7 max-w-xl text-lg text-muted-foreground">
-              Tell us about the business. We'll come back with a plan, a timeline and a fixed price.
-            </p>
-          </Reveal>
-          <Reveal delay={220} className="mt-12 flex justify-center">
-            <MagneticLink to="/contact">
-              Start Your Project <ArrowRight size={16} />
-            </MagneticLink>
-          </Reveal>
+        <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-10 lg:py-32">
+          <div className="glass-panel glass-edge rounded-2xl px-6 py-20 text-center lg:px-16 lg:py-24">
+            <Reveal>
+              <h2 className="text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.02] font-semibold">
+                Ready to Build Something <span className="text-gold-gradient">Unforgettable?</span>
+              </h2>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="mx-auto mt-7 max-w-xl text-lg text-muted-foreground">
+                Tell us about the business. We'll come back with a plan, a timeline and a fixed price.
+              </p>
+            </Reveal>
+            <Reveal delay={220} className="mt-12 flex justify-center">
+              <MagneticLink to="/contact">
+                Start Your Project <ArrowRight size={16} />
+              </MagneticLink>
+            </Reveal>
+          </div>
         </div>
       </section>
     </>
