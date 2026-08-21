@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Target, Sparkles, Search, TrendingUp } from "lucide-react";
 import { HeroGlass } from "@/components/site/HeroGlass";
 import { ProcessOrbs } from "@/components/site/ProcessOrbs";
 import { CtaGlass } from "@/components/site/CtaGlass";
@@ -31,23 +31,31 @@ const featuredSlugs = ["burger-bliss", "financial-advisor", "sai-real-estate"];
 const pillars = [
   {
     n: "01",
+    icon: Target,
     title: "Strategy",
     body: "Every project starts with the business, not the browser. We map who you're selling to, what stops them, and the single action the site must drive.",
+    offset: "lg:mt-0",
   },
   {
     n: "02",
+    icon: Sparkles,
     title: "Design",
     body: "Design that carries authority. Considered typography, generous space and imagery that makes a small business look like a category leader.",
+    offset: "lg:mt-16",
   },
   {
     n: "03",
+    icon: Search,
     title: "Performance",
     body: "Fast on a mid-range phone on mobile data. Clean markup, optimised media, accessible by default — because speed is a conversion feature.",
+    offset: "lg:-mt-6",
   },
   {
     n: "04",
+    icon: TrendingUp,
     title: "Growth",
     body: "Search-ready structure, clean tracking and conversion paths you can measure. You should know exactly where enquiries come from.",
+    offset: "lg:mt-10",
   },
 ];
 
@@ -213,16 +221,28 @@ function Home() {
             </h2>
           </Reveal>
           <div className="mt-20 grid gap-5 md:grid-cols-2">
-            {pillars.map((p, i) => (
-              <Reveal key={p.n} delay={i * 90}>
-                <div className="glass-panel glass-edge group h-full rounded-2xl p-10 transition-all duration-700 ease-[var(--ease-lux)] hover:-translate-y-1 hover:shadow-[var(--shadow-glass)] lg:p-14">
-                  <span className="font-display text-sm text-[var(--champagne)]">{p.n}</span>
-                  <h3 className="mt-6 text-2xl font-semibold">{p.title}</h3>
-                  <div className="gold-rule mt-5 w-16 origin-left scale-x-50 transition-transform duration-700 group-hover:scale-x-100" />
-                  <p className="mt-5 leading-relaxed text-muted-foreground">{p.body}</p>
-                </div>
-              </Reveal>
-            ))}
+            {pillars.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <Reveal key={p.n} delay={i * 90} className={p.offset}>
+                  <div className="glass-panel glass-edge group h-full rounded-2xl p-10 transition-all duration-700 ease-[var(--ease-lux)] hover:-translate-y-1 hover:shadow-[var(--shadow-glass)] lg:p-14">
+                    <div
+                      className="flex h-11 w-11 items-center justify-center rounded-full"
+                      style={{
+                        background:
+                          "radial-gradient(circle at 35% 30%, color-mix(in oklab, var(--ice) 22%, transparent), color-mix(in oklab, var(--iris) 14%, transparent) 70%)",
+                        border: "1px solid color-mix(in oklab, var(--champagne) 35%, transparent)",
+                      }}
+                    >
+                      <Icon size={18} className="text-[var(--champagne)]" strokeWidth={1.75} />
+                    </div>
+                    <h3 className="mt-6 text-2xl font-semibold">{p.title}</h3>
+                    <div className="gold-rule mt-5 w-16 origin-left scale-x-50 transition-transform duration-700 group-hover:scale-x-100" />
+                    <p className="mt-5 leading-relaxed text-muted-foreground">{p.body}</p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </div>
 
         </div>
