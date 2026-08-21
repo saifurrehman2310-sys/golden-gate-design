@@ -1,13 +1,17 @@
 import orbChain from "@/assets/process-orbs.png";
 
-/** Liquid-glass orb chain — sits behind the Process timeline as the visual spine. */
+/** Liquid-glass orb chain — the literal visual spine of the Process timeline. */
 export function ProcessOrbs() {
   return (
-    <div className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden opacity-[0.35] lg:opacity-[0.45]" aria-hidden>
+    <div className="relative mx-auto w-full max-w-4xl" aria-hidden>
       <div
-        className="float-slower relative w-[140%] max-w-none lg:w-[85%]"
-        style={{ transform: "translateX(-4%)" }}
-      >
+        className="pointer-events-none absolute inset-[-20%] blur-3xl opacity-60"
+        style={{
+          background:
+            "radial-gradient(35% 45% at 15% 40%, color-mix(in oklab, var(--ice) 24%, transparent), transparent 70%), radial-gradient(35% 45% at 85% 60%, color-mix(in oklab, var(--champagne) 22%, transparent), transparent 70%)",
+        }}
+      />
+      <div className="float-slower relative">
         <img
           src={orbChain}
           alt=""
