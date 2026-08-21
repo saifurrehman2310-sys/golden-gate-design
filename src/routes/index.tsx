@@ -34,38 +34,38 @@ const pillars = [
     n: "01",
     icon: Target,
     title: "Strategy",
-    body: "Every project starts with the business, not the browser. We map who you're selling to, what stops them, and the single action the site must drive.",
+    body: "Right business, right visitor, right action.",
     offset: "lg:mt-0",
   },
   {
     n: "02",
     icon: Sparkles,
     title: "Design",
-    body: "Design that carries authority. Considered typography, generous space and imagery that makes a small business look like a category leader.",
+    body: "Looks like a category leader.",
     offset: "lg:mt-16",
   },
   {
     n: "03",
     icon: Search,
     title: "Performance",
-    body: "Fast on a mid-range phone on mobile data. Clean markup, optimised media, accessible by default — because speed is a conversion feature.",
+    body: "Fast everywhere. Every device.",
     offset: "lg:-mt-6",
   },
   {
     n: "04",
     icon: TrendingUp,
     title: "Growth",
-    body: "Search-ready structure, clean tracking and conversion paths you can measure. You should know exactly where enquiries come from.",
+    body: "Built to be found and measured.",
     offset: "lg:mt-10",
   },
 ];
 
 const processSteps = [
-  { step: "Discover", body: "A focused call to understand the business, the customer and what a win looks like." },
-  { step: "Design", body: "Structure first, then visual direction. You see the design before a line of code." },
-  { step: "Develop", body: "Hand-built, responsive and fast. Reviewed on real devices, not just a laptop." },
-  { step: "Launch", body: "Domain, analytics, search setup and QA. A launch you don't have to manage." },
-  { step: "Support", body: "Ongoing updates, monitoring and improvements as the business grows." },
+  { step: "Discover", body: "Understand the business." },
+  { step: "Design", body: "See it before it's built." },
+  { step: "Develop", body: "Hand-built, fast, tested." },
+  { step: "Launch", body: "Live, tracked, ready." },
+  { step: "Support", body: "We stay on it." },
 ];
 
 function Home() {
@@ -99,9 +99,7 @@ function Home() {
             </Reveal>
             <Reveal delay={240}>
               <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-                We design and build premium websites that earn trust in seconds, turn visitors into
-                enquiries, and give growing businesses a presence that finally matches their
-                standards.
+                Premium websites that earn trust and turn visitors into enquiries.
               </p>
             </Reveal>
             <Reveal delay={340}>
