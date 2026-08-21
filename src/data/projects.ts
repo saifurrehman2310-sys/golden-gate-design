@@ -1,259 +1,258 @@
-import burger from "@/assets/proj-burger.jpg";
-import advisor from "@/assets/proj-advisor.jpg";
-import realestate from "@/assets/proj-realestate.jpg";
-import goxxti from "@/assets/proj-goxxti.jpg";
-import gold from "@/assets/hero-gold.jpg";
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
 
-export type Project = {
-  slug: string;
-  name: string;
-  category: string;
-  year: string;
-  tagline: string;
-  image: string;
-  liveUrl?: string;
-  video?: boolean;
-  overview: string;
-  challenge: string;
-  solution: string;
-  features: string[];
-  results: string[];
-  services: string[];
-};
+@custom-variant dark (&:is(.dark *));
 
-export const projects: Project[] = [
-  {
-    slug: "burger-bliss",
-    name: "Burger Bliss",
-    category: "Restaurant",
-    year: "2025",
-    tagline: "A hunger-inducing digital storefront built to fill tables.",
-    image: burger,
-    liveUrl: "https://preview--burger-bliss-booster.lovable.app/",
-    services: ["Website Design", "Landing Page", "Brand Direction"],
-    overview:
-      "Burger Bliss needed a website that did more than show a menu — it needed to make people hungry and get them ordering within seconds of landing.",
-    challenge:
-      "Most local restaurant sites bury the menu, hide the phone number and look identical to every template competitor. Burger Bliss was losing orders to delivery aggregators because its own web presence gave customers no reason to order direct.",
-    solution:
-      "We built a cinematic, appetite-first experience: full-bleed food photography, a menu that reads like a magazine spread, and ordering CTAs that follow the customer down the page. Every section is engineered around one action — place the order.",
-    features: [
-      "Full-screen hero with appetite-driven food imagery",
-      "Structured, scannable menu with pricing and categories",
-      "Sticky order + reservation calls to action",
-      "Location, hours and directions above the fold on mobile",
-      "Testimonials and social proof positioned before checkout intent",
-      "Mobile-first performance tuning for sub-second interaction",
-    ],
-    results: [
-      "Direct-order path shortened from 4 taps to 1",
-      "Menu discoverability on mobile dramatically improved",
-      "A brand presence that finally matches the food",
-    ],
-  },
-  {
-    slug: "financial-advisor",
-    name: "Shekhar Pathare",
-    category: "Financial Advisor",
-    year: "2025",
-    tagline: "Trust, credibility and consultations — designed for a high-stakes decision.",
-    image: advisor,
-    liveUrl: "https://preview--shekhar-pathare-advisor.lovable.app/",
-    services: ["Website Design", "Copy Structure", "Lead Generation"],
-    overview:
-      "Financial advisory is sold on trust. This build was designed to make a first-time visitor feel safe enough to book a consultation.",
-    challenge:
-      "Clients hand over their life savings based on a first impression. The previous presence gave no clarity on services, credentials or process — visitors left without ever making contact.",
-    solution:
-      "A calm, authoritative layout that leads with credibility: clear service pillars, a transparent advisory process, and a consultation CTA repeated at every natural decision point.",
-    features: [
-      "Credibility-first hero with clear positioning statement",
-      "Service breakdown: planning, investments, insurance, retirement",
-      "Step-by-step advisory process to remove uncertainty",
-      "Consultation booking CTAs throughout the journey",
-      "Client testimonial and trust-signal sections",
-      "Fully responsive, fast-loading and accessible",
-    ],
-    results: [
-      "A single clear conversion path: book a consultation",
-      "Services and process explained without jargon",
-      "Positioning elevated from local advisor to trusted professional",
-    ],
-  },
-  {
-    slug: "dental-clinic",
-    name: "Bright Smile Dental Studio",
-    category: "Dental Clinic · Demo",
-    year: "2025",
-    tagline: "A clinic website that converts nervous visitors into booked appointments.",
-    image: gold,
-    liveUrl: "https://id-preview--60f4d0df-3134-449c-8768-f32fe5be80c7.lovable.app",
-    services: ["Website Design", "Appointment Funnel", "Local SEO Structure"],
-    overview:
-      "A concept build demonstrating how a modern dental practice should present itself online — warm, clinical-clean and booking-focused.",
-    challenge:
-      "Dental patients choose on comfort and proximity. Most clinic sites read like brochures and force patients to call during business hours.",
-    solution:
-      "A reassuring, treatment-led layout: services explained in plain language, transparent pricing cues, and an always-available appointment request flow.",
-    features: [
-      "Treatment-focused service sections in patient language",
-      "Appointment request form with clear response promise",
-      "Team and clinic credibility section",
-      "Before/after and results-oriented presentation",
-      "Location, hours and emergency contact prominence",
-      "Local SEO friendly structure and metadata",
-    ],
-    results: [
-      "Booking friction removed for after-hours visitors",
-      "Treatments explained without clinical intimidation",
-      "A template proven for multi-location clinics",
-    ],
-  },
-  {
-    slug: "law-firm",
-    name: "Sterling & Cole Law Group",
-    category: "Law Firm · Demo",
-    year: "2025",
-    tagline: "Authority, discretion and case enquiries — a firm presence built to command respect.",
-    image: gold,
-    liveUrl: "https://id-preview--21937cae-d99c-4f90-91d3-62e9fe219510.lovable.app",
-    services: ["Website Design", "Practice Area Architecture", "Enquiry Funnel"],
-    overview:
-      "A concept build for a modern law firm that needs to look established, discreet and worth its retainer.",
-    challenge:
-      "Legal clients are researching in a moment of stress. Cluttered firm sites with dense text and no clear next step lose qualified enquiries to better-presented competitors.",
-    solution:
-      "A restrained, editorial layout with clear practice areas, attorney credibility and a confidential case-enquiry path that respects the seriousness of the moment.",
-    features: [
-      "Practice area architecture with dedicated sections",
-      "Attorney profiles and firm credentials",
-      "Confidential case evaluation enquiry form",
-      "Results and representative matters presentation",
-      "Typography-led, authoritative visual language",
-      "Accessible, fast and fully responsive",
-    ],
-    results: [
-      "Practice areas findable in a single scroll",
-      "Enquiry path designed for sensitive first contact",
-      "Presentation aligned with premium retainer positioning",
-    ],
-  },
-  {
-    slug: "ease-living-decor",
-    name: "Ease Living Decor",
-    category: "Shopify · Home Decor",
-    year: "2025",
-    tagline: "A full Shopify storefront built to sell home decor, not just display it.",
-    image: gold,
-    liveUrl: "https://www.easelivingdecor.com/",
-    services: ["Shopify Development", "Store Design", "Conversion Optimisation"],
-    overview:
-      "A complete Shopify build for a home decor brand — from storefront design to product merchandising and checkout experience.",
-    challenge:
-      "Decor is an emotional, visual purchase. A generic theme flattens the product and kills average order value.",
-    solution:
-      "A tailored Shopify storefront with editorial product presentation, collection storytelling, and a checkout journey tuned to reduce drop-off.",
-    features: [
-      "Custom Shopify theme design and setup",
-      "Collection and product page merchandising",
-      "Trust badges, shipping and returns clarity",
-      "Cart and checkout optimisation",
-      "Mobile-first browsing experience",
-      "Product photography presentation system",
-    ],
-    results: [
-      "A branded storefront instead of a stock theme",
-      "Collections structured for cross-sell",
-      "Checkout friction reduced across mobile",
-    ],
-  },
-  {
-    slug: "pruthak-infra",
-    name: "Pruthak Infra",
-    category: "Construction · Real Estate",
-    year: "2025",
-    tagline: "Seven developments, one credible digital presence for a Pune construction firm.",
-    image: realestate,
-    liveUrl: "https://incredible-maamoul-19f747.netlify.app/",
-    services: ["Website Design", "Project Portfolio System", "Enquiry Generation"],
-    overview:
-      "A construction firm with seven completed and ongoing developments in Pune needed a website that demonstrates scale and track record to serious buyers.",
-    challenge:
-      "Property buyers evaluate a builder's credibility before they visit a site. Without a structured project portfolio, Pruthak Infra had no way to prove delivery history online.",
-    solution:
-      "A project-led website architecture: every development presented with imagery, specifications and status, backed by a company credibility narrative and direct enquiry routes.",
-    features: [
-      "Project portfolio covering all seven developments",
-      "Individual project detail presentation with status",
-      "Company history and delivery credibility section",
-      "Site-visit and enquiry contact routes",
-      "Location and amenity highlights per project",
-      "Responsive layouts for on-the-move buyers",
-    ],
-    results: [
-      "Full delivery track record visible in one place",
-      "Buyers able to evaluate projects before a site visit",
-      "Professional presence matching offline reputation",
-    ],
-  },
-  {
-    slug: "sai-real-estate",
-    name: "Sai Real Estate",
-    category: "Real Estate · Full Digital Presence",
-    year: "2025",
-    tagline: "A Kothrud property broker taken from invisible to findable, credible and contactable.",
-    image: realestate,
-    video: true,
-    services: ["Website", "Local SEO", "Google Business", "WhatsApp Business", "Analytics", "Social Branding"],
-    overview:
-      "Rohan Ranka's Sai Real Estate operates in Kothrud, Pune. This was not a website project — it was a complete digital presence build covering everything a local broker needs to be found and trusted.",
-    challenge:
-      "Property enquiries in Kothrud start on Google Maps and end in WhatsApp. Sai Real Estate had no website, no verified map listing, no analytics and no consistent brand — so every lead went to competitors who were simply easier to find.",
-    solution:
-      "We built the entire stack: a conversion-focused website, a verified Google Business Profile with Maps optimisation, WhatsApp Business set up as the primary enquiry channel, local SEO groundwork, social brand assets and analytics to measure what actually drives calls.",
-    features: [
-      "Conversion-focused broker website with listings structure",
-      "Google Business Profile setup and Maps optimisation",
-      "WhatsApp Business configured as the primary lead channel",
-      "Local SEO foundations for Kothrud property searches",
-      "Consistent social branding and profile assets",
-      "Analytics and tracking to measure enquiry sources",
-    ],
-    results: [
-      "Discoverable on Google Maps for local property searches",
-      "Enquiries routed instantly into WhatsApp",
-      "Measurable lead tracking from day one",
-    ],
-  },
-  {
-    slug: "goxxti",
-    name: "GOXXTI",
-    category: "Music / Artist Brand",
-    year: "2025",
-    tagline: "A raw, industrial artist site for a rising hard techno producer — built to help him book more shows.",
-    image: goxxti,
-    liveUrl: "https://id-preview--5082e761-e8d7-4443-a88a-d51e30f32589.lovable.app",
-    services: ["Website Design", "Artist Branding", "Booking Funnel", "EPK / Press Section"],
-    overview:
-      "GOXXTI is a rising hard techno producer who needed more than a Linktree — he needed a branded destination where promoters, press and fans could immediately understand his sound, see his stats and start a booking conversation.",
-    challenge:
-      "With only a Linktree and scattered social profiles, GOXXTI had no controlled first impression. Promoters could not quickly find his latest tracks, upcoming dates or press assets, and there was no professional path from discovery to booking enquiry.",
-    solution:
-      "We built a full dark/industrial one-page artist site with a glitch-grain visual identity in black and acid-green. The page functions as both portfolio and electronic press kit: embedded music player, tour dates, discography, bio/stats and a direct booking form.",
-    features: [
-      "Dark industrial one-page artist site with acid-green accent system",
-      "Embedded latest-track player section for immediate sound sampling",
-      "Upcoming shows and tour dates module",
-      "Press / EPK section with bio, stats and downloadable assets",
-      "Discography grid with release artwork and links",
-      "Direct booking contact form routed to management",
-    ],
-    results: [
-      "Single professional destination replaces scattered links",
-      "Promoters can evaluate sound, stats and availability in one scroll",
-      "Direct booking funnel turns interest into enquiries",
-    ],
-  },
-];
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-hover: var(--gold-hover);
+  --color-surface: var(--surface);
+  --color-ice: var(--ice);
+  --color-iris: var(--iris);
+  --color-champagne: var(--champagne);
+  --font-display: "Bricolage Grotesque", "Instrument Serif", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
 
-export const getProject = (slug: string) => projects.find((p) => p.slug === slug);
+:root {
+  --radius: 0.5rem;
+  --background: oklch(0.18 0.004 265);
+  --foreground: oklch(0.985 0 0);
+  --surface: oklch(0.235 0.005 265);
+  --card: oklch(0.235 0.005 265);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.235 0.005 265);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.75 0.079 78.5);
+  --primary-foreground: oklch(0.16 0 0);
+  --secondary: oklch(0.28 0.005 265);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.28 0.005 265);
+  --muted-foreground: oklch(0.78 0.012 265);
+  --accent: oklch(0.28 0.005 265);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.78 0.09 250);
+
+  --gold: #c8a96a;
+  --gold-hover: #e7c98a;
+  --ice: #9ec5ff;
+  --iris: #b3a4ff;
+  --champagne: #e7d3ad;
+
+  --gradient-gold: linear-gradient(120deg, #c8a96a 0%, #e7c98a 45%, #8c7440 100%);
+  --gradient-lux: linear-gradient(110deg, #dfe9ff 0%, #b3a4ff 40%, #e7d3ad 100%);
+  --gradient-glow: radial-gradient(
+    60% 60% at 50% 40%,
+    color-mix(in oklab, var(--ice) 16%, transparent) 0%,
+    transparent 70%
+  );
+  --gradient-env: radial-gradient(120% 90% at 50% -10%, #1c1d22 0%, #131316 45%, #0b0b0d 100%);
+  --shadow-lux: 0 30px 80px -40px rgb(0 0 0 / 0.9);
+  --shadow-glass:
+    0 1px 0 0 rgb(255 255 255 / 0.14) inset, 0 24px 60px -30px rgb(120 150 255 / 0.35);
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: #0b0b0d;
+    background-image: var(--gradient-env);
+    background-attachment: fixed;
+    color: #f7f7f8;
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: #0a0a0a;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility text-gold-gradient {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+}
+
+@utility glass-panel {
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, #ffffff 26%, transparent) 0%,
+    color-mix(in oklab, #ffffff 12%, transparent) 45%,
+    color-mix(in oklab, #ffffff 16%, transparent) 100%
+  );
+  border: 1px solid rgb(255 255 255 / 0.24);
+  backdrop-filter: blur(26px) saturate(180%);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.32) inset,
+    0 24px 60px -30px rgb(120 150 255 / 0.45);
+}
+
+@utility glass-edge {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.5) 0%,
+      rgb(255 255 255 / 0.1) 18%,
+      transparent 55%
+    );
+    mask: linear-gradient(#000, transparent 60%);
+    opacity: 0.9;
+  }
+}
+
+@utility text-lux-gradient {
+  background: var(--gradient-lux);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+@utility float-slower {
+  animation: float-slow 18s ease-in-out infinite;
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -18px, 0);
+  }
+}
+
+@keyframes drift-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translate3d(6px, -10px, 0);
+  }
+}
+
+@utility drift-point {
+  animation: drift-glow 9s ease-in-out infinite;
+}
+
+
+@utility gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease-lux),
+    transform 0.9s var(--ease-lux);
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility lux-link {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 1px;
+    width: 0;
+    background: var(--gold);
+    transition: width 0.4s var(--ease-lux);
+  }
+  &:hover::after {
+    width: 100%;
+  }
+}
