@@ -11,7 +11,7 @@ export function CtaGlass() {
             "radial-gradient(45% 45% at 40% 50%, color-mix(in oklab, var(--ice) 24%, transparent), transparent 70%), radial-gradient(40% 40% at 65% 55%, color-mix(in oklab, var(--champagne) 20%, transparent), transparent 70%)",
         }}
       />
-      <div className="float-slow relative w-[70%] max-w-md opacity-70 lg:w-[45%]">
+      <div className="float-slow relative w-[92%] max-w-2xl opacity-55 lg:w-[62%]">
         <img
           src={glassKnot}
           alt=""
@@ -20,6 +20,14 @@ export function CtaGlass() {
           className="h-auto w-full object-contain"
         />
       </div>
+      {/* frosted scrim so the headline stays fully legible over the sculpture */}
+      <div
+        className="absolute inset-0 backdrop-blur-md"
+        style={{
+          background:
+            "radial-gradient(60% 55% at 50% 50%, color-mix(in oklab, var(--background) 78%, transparent) 0%, color-mix(in oklab, var(--background) 55%, transparent) 45%, transparent 80%)",
+        }}
+      />
     </div>
   );
 }
