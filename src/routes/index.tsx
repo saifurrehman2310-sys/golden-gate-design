@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { HeroGlass } from "@/components/site/HeroGlass";
+import { ProcessOrbs } from "@/components/site/ProcessOrbs";
+import { CtaGlass } from "@/components/site/CtaGlass";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink, MagneticAnchor } from "@/components/site/MagneticLink";
 import { projects } from "@/data/projects";
@@ -278,6 +280,7 @@ function Home() {
           }}
           aria-hidden
         />
+        <ProcessOrbs />
         <div className="relative mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Process</p>
@@ -391,18 +394,19 @@ function Home() {
           aria-hidden
         />
         <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-10 lg:py-32">
-          <div className="glass-panel glass-edge rounded-2xl px-6 py-20 text-center lg:px-16 lg:py-24">
+          <div className="glass-panel glass-edge relative overflow-hidden rounded-2xl px-6 py-20 text-center lg:px-16 lg:py-24">
+            <CtaGlass />
             <Reveal>
-              <h2 className="text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.02] font-semibold">
+              <h2 className="relative text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.02] font-semibold">
                 Ready to Build Something <span className="text-gold-gradient">Unforgettable?</span>
               </h2>
             </Reveal>
             <Reveal delay={120}>
-              <p className="mx-auto mt-7 max-w-xl text-lg text-muted-foreground">
+              <p className="relative mx-auto mt-7 max-w-xl text-lg text-muted-foreground">
                 Tell us about the business. We'll come back with a plan, a timeline and a fixed price.
               </p>
             </Reveal>
-            <Reveal delay={220} className="mt-12 flex justify-center">
+            <Reveal delay={220} className="relative mt-12 flex justify-center">
               <MagneticLink to="/contact">
                 Start Your Project <ArrowRight size={16} />
               </MagneticLink>
