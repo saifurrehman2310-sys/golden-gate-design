@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight, Target, Sparkles, Search, TrendingUp } from "
 import { HeroGlass } from "@/components/site/HeroGlass";
 import { ProcessOrbs } from "@/components/site/ProcessOrbs";
 import { CtaGlass } from "@/components/site/CtaGlass";
-import { SectionGlassAccent } from "@/components/site/SectionGlassAccent";
+import { GlassSculptureCard } from "@/components/site/GlassSculptureCard";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink, MagneticAnchor } from "@/components/site/MagneticLink";
 import { projects } from "@/data/projects";
@@ -36,6 +36,9 @@ const pillars = [
     title: "Strategy",
     body: "Right business, right visitor, right action.",
     offset: "lg:mt-0",
+    sculpture: "ribbon" as const,
+    flip: false,
+    rotate: -8,
   },
   {
     n: "02",
@@ -43,6 +46,9 @@ const pillars = [
     title: "Design",
     body: "Looks like a category leader.",
     offset: "lg:mt-16",
+    sculpture: "leaves" as const,
+    flip: true,
+    rotate: 4,
   },
   {
     n: "03",
@@ -50,6 +56,9 @@ const pillars = [
     title: "Performance",
     body: "Fast everywhere. Every device.",
     offset: "lg:-mt-6",
+    sculpture: "droplet" as const,
+    flip: false,
+    rotate: 10,
   },
   {
     n: "04",
@@ -57,6 +66,9 @@ const pillars = [
     title: "Growth",
     body: "Built to be found and measured.",
     offset: "lg:mt-10",
+    sculpture: "wave" as const,
+    flip: true,
+    rotate: -6,
   },
 ];
 
@@ -212,7 +224,6 @@ function Home() {
           }}
           aria-hidden
         />
-        <SectionGlassAccent position="top-right" />
         <div className="relative mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Why Saif Studio</p>
@@ -225,7 +236,12 @@ function Home() {
               const Icon = p.icon;
               return (
                 <Reveal key={p.n} delay={i * 90} className={p.offset}>
-                  <div className="glass-panel glass-edge group h-full rounded-2xl p-10 transition-all duration-700 ease-[var(--ease-lux)] hover:-translate-y-1 hover:shadow-[var(--shadow-glass)] lg:p-14">
+                  <GlassSculptureCard
+                    sculpture={p.sculpture}
+                    flip={p.flip}
+                    rotate={p.rotate}
+                    className="group p-10 transition-all duration-700 ease-[var(--ease-lux)] hover:-translate-y-1 hover:shadow-[var(--shadow-glass)] lg:p-14"
+                  >
                     <div
                       className="flex h-11 w-11 items-center justify-center rounded-full"
                       style={{
@@ -239,7 +255,7 @@ function Home() {
                     <h3 className="mt-6 text-2xl font-semibold">{p.title}</h3>
                     <div className="gold-rule mt-5 w-16 origin-left scale-x-50 transition-transform duration-700 group-hover:scale-x-100" />
                     <p className="mt-5 leading-relaxed text-muted-foreground">{p.body}</p>
-                  </div>
+                  </GlassSculptureCard>
                 </Reveal>
               );
             })}
@@ -258,7 +274,6 @@ function Home() {
           }}
           aria-hidden
         />
-        <SectionGlassAccent position="bottom-left" />
         <div className="relative mx-auto max-w-7xl px-6 py-28 lg:px-10 lg:py-40">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Services</p>
@@ -267,26 +282,33 @@ function Home() {
             </h2>
           </Reveal>
           <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 70}>
-                <Link
-                  to="/services"
-                  hash={s.slug}
-                  className="glass-panel glass-edge group flex h-full flex-col justify-between rounded-2xl p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--champagne)]/30"
-                >
-                  <div>
-                    <h3 className="text-xl font-semibold transition-colors group-hover:text-[var(--champagne)]">
-                      {s.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.short}</p>
-                  </div>
-                  <ArrowUpRight
-                    size={18}
-                    className="mt-10 text-muted-foreground transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--champagne)]"
-                  />
-                </Link>
-              </Reveal>
-            ))}
+            {services.map((s, i) => {
+              const sculptureCycle = ["ribbon", "knot", "leaves", "droplet", "wave"] as const;
+              const sculpture = sculptureCycle[i % sculptureCycle.length];
+              return (
+                <Reveal key={s.slug} delay={i * 70}>
+                  <Link to="/services" hash={s.slug} className="block h-full">
+                    <GlassSculptureCard
+                      sculpture={sculpture}
+                      flip={i % 2 === 1}
+                      rotate={(i % 3) * 8 - 8}
+                      className="group flex h-full flex-col justify-between p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--champagne)]/30"
+                    >
+                      <div>
+                        <h3 className="text-xl font-semibold transition-colors group-hover:text-[var(--champagne)]">
+                          {s.title}
+                        </h3>
+                        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.short}</p>
+                      </div>
+                      <ArrowUpRight
+                        size={18}
+                        className="mt-10 text-muted-foreground transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--champagne)]"
+                      />
+                    </GlassSculptureCard>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
