@@ -311,26 +311,32 @@ export default function Home() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative overflow-hidden border-t border-white/[0.06] bg-grain">
-        <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-10 lg:py-32">
-          <div className="glass-panel glass-edge relative overflow-hidden rounded-2xl px-6 py-20 text-center lg:px-16 lg:py-24">
-            <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-64 opacity-45 sm:block" aria-hidden>
-              <img src={glassWave} alt="" className="h-full w-full object-contain" />
-            </div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-64 -scale-x-100 opacity-45 sm:block" aria-hidden>
-              <img src={glassRibbon} alt="" className="h-full w-full object-contain" />
-            </div>
-            <Reveal>
-              <h2 className="relative text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.02] font-semibold">
-                Let's build something <span className="text-gold-gradient">extraordinary.</span>
-              </h2>
-            </Reveal>
-            <Reveal delay={150} className="relative mt-11 flex justify-center">
-              <MagneticLink to="/contact">
-                Start a Project <ArrowRight size={16} />
-              </MagneticLink>
-            </Reveal>
+      <section className="relative overflow-hidden bg-grain">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(60% 55% at 50% 40%, color-mix(in oklab, var(--ice) 10%, transparent), transparent 70%), radial-gradient(50% 45% at 50% 90%, color-mix(in oklab, var(--iris) 8%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative mx-auto max-w-5xl px-6 py-28 text-center lg:px-10 lg:py-40">
+          <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-72 opacity-55 lg:block" aria-hidden>
+            <img src={glassWave} alt="" className="float-slow h-full w-full object-contain" />
           </div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 -scale-x-100 opacity-55 lg:block" aria-hidden>
+            <img src={glassRibbon} alt="" className="float-slow h-full w-full object-contain" />
+          </div>
+          <Reveal>
+            <h2 className="relative text-[clamp(2.2rem,6vw,4.5rem)] leading-[1.02] font-semibold">
+              Let's build something <span className="text-gold-gradient">extraordinary.</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={150} className="relative mt-11 flex justify-center">
+            <MagneticLink to="/contact">
+              Start a Project <ArrowRight size={16} />
+            </MagneticLink>
+          </Reveal>
         </div>
       </section>
     </>
