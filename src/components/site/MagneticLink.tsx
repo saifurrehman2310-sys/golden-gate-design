@@ -1,15 +1,17 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router-dom";
 import { useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Variant = "gold" | "ghost";
 
 const base =
-  "group relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium tracking-wide transition-colors duration-300 will-change-transform";
+  "group relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium tracking-wide backdrop-blur-md transition-all duration-300 will-change-transform";
 
 const variants: Record<Variant, string> = {
-  gold: "bg-[var(--gold)] text-[#0a0a0a] hover:bg-[var(--gold-hover)]",
-  ghost: "border border-white/15 text-foreground hover:border-[var(--gold)] hover:text-[var(--gold)]",
+  gold:
+    "border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_10%,transparent)] text-[var(--champagne)] hover:border-[var(--gold)] hover:bg-[color-mix(in_oklab,var(--gold)_18%,transparent)] hover:text-[var(--gold-hover)]",
+  ghost:
+    "border border-white/12 bg-[color-mix(in_oklab,#ffffff_4%,transparent)] text-foreground hover:border-[var(--ice)]/40 hover:text-[var(--ice)]",
 };
 
 function useMagnet() {

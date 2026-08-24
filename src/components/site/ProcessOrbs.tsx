@@ -1,6 +1,4 @@
 import orbChain from "@/assets/process-orbs.png";
-import glassCube from "@/assets/glass-cube.png";
-import glassSpiral from "@/assets/glass-spiral.png";
 
 /** Liquid-glass orb chain — the literal visual spine of the Process timeline. */
 export function ProcessOrbs() {
@@ -22,21 +20,6 @@ export function ProcessOrbs() {
           className="h-auto w-full object-contain"
         />
       </div>
-
-      {/* small companion sculptures drifting near either end of the chain */}
-      <img
-        src={glassCube}
-        alt=""
-        aria-hidden
-        className="float-slow pointer-events-none absolute -top-6 left-[2%] hidden w-16 opacity-70 sm:block lg:w-20"
-      />
-      <img
-        src={glassSpiral}
-        alt=""
-        aria-hidden
-        className="float-slower pointer-events-none absolute -bottom-8 right-[3%] hidden w-16 opacity-70 sm:block lg:w-20"
-        style={{ animationDelay: "2.4s" }}
-      />
     </div>
   );
 }

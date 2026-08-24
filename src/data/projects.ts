@@ -32,11 +32,11 @@ export const projects: Project[] = [
     liveUrl: "https://preview--burger-bliss-booster.lovable.app/",
     services: ["Website Design", "Landing Page", "Brand Direction"],
     overview:
-      "Burger Bliss needed a website that did more than show a menu — it needed to make people hungry and get them ordering within seconds of landing.",
+      "A website built to make people hungry and order within seconds.",
     challenge:
-      "Most local restaurant sites bury the menu, hide the phone number and look identical to every template competitor. Burger Bliss was losing orders to delivery aggregators because its own web presence gave customers no reason to order direct.",
+      "Local restaurant sites hide the menu and phone number. Orders were leaking to delivery apps.",
     solution:
-      "We built a cinematic, appetite-first experience: full-bleed food photography, a menu that reads like a magazine spread, and ordering CTAs that follow the customer down the page. Every section is engineered around one action — place the order.",
+      "Full-bleed food photography, a menu that reads like a magazine, and one job on every screen — place the order.",
     features: [
       "Full-screen hero with appetite-driven food imagery",
       "Structured, scannable menu with pricing and categories",

@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,33 +22,37 @@ export function Nav() {
   }, []);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled ? "glass-panel border-b border-white/[0.08]" : "border-b border-transparent",
-      )}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
-        <Link to="/" className="font-display text-lg tracking-tight" onClick={() => setOpen(false)}>
+    <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+      <nav
+        className={cn(
+          "glass-frame glass-edge flex w-full max-w-4xl items-center justify-between rounded-full px-6 py-3 backdrop-blur-md transition-all duration-500",
+          scrolled && "shadow-[0_20px_50px_-28px_rgb(80,110,220,0.35)]",
+        )}
+      >
+        <Link to="/" className="font-display text-base tracking-tight" onClick={() => setOpen(false)}>
           Saif<span className="text-[var(--gold)]"> Studio</span>
         </Link>
 
-        <div className="hidden items-center gap-9 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
-            <Link
+            <NavLink
               key={l.to}
               to={l.to}
-              className="lux-link text-sm text-muted-foreground transition-colors hover:text-foreground"
-              activeProps={{ className: "text-foreground" }}
+              className={({ isActive }) =>
+                cn(
+                  "lux-link text-sm text-muted-foreground transition-colors hover:text-foreground",
+                  isActive && "text-foreground",
+                )
+              }
             >
               {l.label}
-            </Link>
+            </NavLink>
           ))}
           <Link
             to="/contact"
-            className="rounded-full border border-[var(--gold)]/50 px-5 py-2 text-sm text-[var(--gold)] transition-all duration-300 hover:bg-[var(--gold)] hover:text-[#0a0a0a]"
+            className="rounded-full border border-[var(--gold)]/40 bg-[color-mix(in_oklab,var(--gold)_8%,transparent)] px-5 py-1.5 text-sm text-[var(--champagne)] backdrop-blur-sm transition-all duration-300 hover:border-[var(--gold)] hover:bg-[color-mix(in_oklab,var(--gold)_16%,transparent)]"
           >
-            Start a Project
+            Let's Talk
           </Link>
         </div>
 
@@ -57,12 +61,12 @@ export function Nav() {
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
       {open && (
-        <div className="glass-panel border-t border-white/[0.08] md:hidden">
+        <div className="glass-frame glass-edge absolute top-[calc(100%+0.5rem)] w-[calc(100%-2rem)] max-w-4xl rounded-2xl backdrop-blur-md md:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
             {[...links, { to: "/contact", label: "Contact" }].map((l) => (
               <Link

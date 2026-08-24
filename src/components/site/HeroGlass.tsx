@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import glassForm from "@/assets/hero-glass-sphere.png";
+import glassForm from "@/assets/hero-glass.png";
 import burger from "@/assets/proj-burger.jpg";
 import advisor from "@/assets/proj-advisor.jpg";
 import realestate from "@/assets/proj-realestate.jpg";
@@ -40,7 +40,6 @@ export function HeroGlass() {
       className="relative mx-auto aspect-square w-full max-w-[36rem]"
       aria-hidden
     >
-      {/* ambient emitted light */}
       <div
         className="absolute inset-[-18%] rounded-full blur-3xl"
         style={{
@@ -58,7 +57,6 @@ export function HeroGlass() {
         }}
       />
 
-      {/* the sculpture */}
       <div
         className="float-slow absolute inset-0"
         style={{
@@ -69,22 +67,20 @@ export function HeroGlass() {
         <img
           src={glassForm}
           alt=""
-          width={1312}
-          height={1199}
-          className="h-full w-full object-contain drop-shadow-[0_40px_90px_rgba(120,110,200,0.3)]"
+          width={1280}
+          height={1280}
+          className="h-full w-full object-contain drop-shadow-[0_40px_80px_rgba(80,110,220,0.28)]"
         />
-        {/* faint lift on the glass gradient — the sphere already carries its own sparkle highlights */}
         <div
-          className="pointer-events-none absolute left-[26%] top-[24%] h-32 w-32 rounded-full opacity-25 mix-blend-screen sm:h-40 sm:w-40"
+          className="pointer-events-none absolute left-[26%] top-[24%] h-32 w-32 rounded-full opacity-50 mix-blend-screen sm:h-40 sm:w-40"
           style={{
             background:
-              "radial-gradient(circle at 34% 34%, rgba(255,255,255,0.7), rgba(255,255,255,0) 58%)",
+              "radial-gradient(circle at 34% 34%, rgba(255,255,255,0.85), rgba(255,255,255,0) 58%)",
             maskImage: "radial-gradient(circle at 62% 62%, transparent 52%, #000 54%)",
           }}
         />
       </div>
 
-      {/* three faint aligned points of light */}
       <div className="pointer-events-none absolute inset-0">
         {[
           { l: "16%", t: "70%", d: "0s", s: 5 },
@@ -107,7 +103,6 @@ export function HeroGlass() {
         ))}
       </div>
 
-      {/* real project fragments caught in the glass */}
       {fragments.map((f) => (
         <div
           key={f.alt}
