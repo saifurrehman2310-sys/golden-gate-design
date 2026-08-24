@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import glassForm from "@/assets/hero-glass.png";
+import glassForm from "@/assets/hero-glass-sphere.png";
 import burger from "@/assets/proj-burger.jpg";
 import advisor from "@/assets/proj-advisor.jpg";
 import realestate from "@/assets/proj-realestate.jpg";
@@ -69,16 +69,16 @@ export function HeroGlass() {
         <img
           src={glassForm}
           alt=""
-          width={1280}
-          height={1280}
-          className="h-full w-full object-contain drop-shadow-[0_40px_80px_rgba(80,110,220,0.28)]"
+          width={1312}
+          height={1199}
+          className="h-full w-full object-contain drop-shadow-[0_40px_90px_rgba(120,110,200,0.3)]"
         />
-        {/* crescent highlight in the glass gradient */}
+        {/* faint lift on the glass gradient — the sphere already carries its own sparkle highlights */}
         <div
-          className="pointer-events-none absolute left-[26%] top-[24%] h-32 w-32 rounded-full opacity-50 mix-blend-screen sm:h-40 sm:w-40"
+          className="pointer-events-none absolute left-[26%] top-[24%] h-32 w-32 rounded-full opacity-25 mix-blend-screen sm:h-40 sm:w-40"
           style={{
             background:
-              "radial-gradient(circle at 34% 34%, rgba(255,255,255,0.85), rgba(255,255,255,0) 58%)",
+              "radial-gradient(circle at 34% 34%, rgba(255,255,255,0.7), rgba(255,255,255,0) 58%)",
             maskImage: "radial-gradient(circle at 62% 62%, transparent 52%, #000 54%)",
           }}
         />
