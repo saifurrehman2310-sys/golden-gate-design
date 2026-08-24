@@ -284,18 +284,24 @@ function Home() {
           <div className="mt-16 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {services.map((s, i) => {
               const sculptureCycle = ["ribbon", "knot", "leaves", "droplet", "wave"] as const;
-              const sculpture = sculptureCycle[i % sculptureCycle.length];
+              const tileCycle = ["deliver", "connect"] as const;
+              // every 3rd card gets one of the new self-contained icon tiles for variety
+              const useTile = i % 3 === 2;
+              const tileIndex = Math.floor(i / 3);
+              const sculpture = useTile ? undefined : sculptureCycle[i % sculptureCycle.length];
+              const tile = useTile ? tileCycle[tileIndex % tileCycle.length] : undefined;
               return (
                 <Reveal key={s.slug} delay={i * 70}>
                   <Link to="/services" hash={s.slug} className="block h-full">
                     <GlassSculptureCard
                       sculpture={sculpture}
+                      tile={tile}
                       flip={i % 2 === 1}
                       rotate={(i % 3) * 8 - 8}
                       className="group flex h-full flex-col justify-between p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-[var(--champagne)]/30"
                     >
                       <div>
-                        <h3 className="text-xl font-semibold transition-colors group-hover:text-[var(--champagne)]">
+                        <h3 className={`text-xl font-semibold transition-colors group-hover:text-[var(--champagne)] ${useTile ? "mt-16" : ""}`}>
                           {s.title}
                         </h3>
                         <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.short}</p>
@@ -335,7 +341,41 @@ function Home() {
             <ProcessOrbs />
           </Reveal>
 
-          <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-6">
+          {/* mobile/tablet: vertical connected timeline — desktop: 5-col grid (unchanged) */}
+          <div className="relative mt-4 lg:hidden">
+            <div
+              className="absolute top-0 bottom-0 left-[15px] w-px sm:left-1/2"
+              style={{ background: "linear-gradient(180deg, transparent, rgb(255 255 255 / 0.14) 8%, rgb(255 255 255 / 0.14) 92%, transparent)" }}
+              aria-hidden
+            />
+            <div className="space-y-8 sm:space-y-0">
+              {processSteps.map((s, i) => (
+                <Reveal
+                  key={s.step}
+                  delay={160 + i * 90}
+                  className={`relative flex items-start gap-5 sm:w-1/2 sm:gap-6 ${
+                    i % 2 === 0 ? "sm:mr-auto sm:pr-8 sm:text-right" : "sm:ml-auto sm:flex-row-reverse sm:pl-8 sm:text-left"
+                  } ${i > 0 ? "sm:-mt-2" : ""}`}
+                >
+                  <span
+                    className="glass-panel glass-edge relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-display text-xs text-[var(--champagne)] sm:absolute sm:top-0 sm:h-9 sm:w-9"
+                    style={{
+                      left: i % 2 === 0 ? "auto" : "-1.125rem",
+                      right: i % 2 === 0 ? "-1.125rem" : "auto",
+                    }}
+                  >
+                    0{i + 1}
+                  </span>
+                  <div className="pt-0.5 sm:pt-1">
+                    <h3 className="text-lg font-semibold">{s.step}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4 hidden grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:grid lg:grid-cols-5 lg:gap-x-6">
             {processSteps.map((s, i) => (
               <Reveal key={s.step} delay={160 + i * 90} className="text-center lg:text-left">
                 <span className="font-display text-sm text-[var(--champagne)]">0{i + 1}</span>
