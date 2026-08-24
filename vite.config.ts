@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // This project deploys via Netlify (not Cloudflare, the package default) — target Netlify's
+  // own Nitro preset so the build emits proper Netlify Functions for SSR routes/loaders.
+  nitro: {
+    preset: "netlify",
+  },
 });
