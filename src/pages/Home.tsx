@@ -5,7 +5,7 @@ import { MagneticLink } from "@/components/site/MagneticLink";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
-import heroSphere from "@/assets/v2/soft-blob.png";
+import heroSphere from "@/assets/v2/hero-swirl.png";
 import glassRibbon from "@/assets/glass-ribbon.png";
 import glassWave from "@/assets/glass-wave.png";
 import glassDroplet from "@/assets/glass-droplet.png";
@@ -43,18 +43,32 @@ const featured = ["burger-bliss", "financial-advisor", "sai-real-estate"].map(
   (s) => projects.find((p) => p.slug === s)!,
 );
 
-function GlassTile({ img, alt, className = "" }: { img: string; alt: string; className?: string }) {
+/** Process tiles already have their glass frame baked into the source image — render bare, no extra box. */
+function ProcessTile({ img, alt, className = "" }: { img: string; alt: string; className?: string }) {
   return (
-    <div className={`glass-frame glass-frame-hover glass-edge relative overflow-hidden rounded-2xl ${className}`}>
+    <div className={`relative ${className}`}>
+      <img src={img} alt={alt} className="h-full w-full object-contain" />
+    </div>
+  );
+}
+
+/** Services icons are raw un-framed sculptures — presented directly with ambient glow only, no border/card box. */
+function SculptureIcon({ img, alt, className = "" }: { img: string; alt: string; className?: string }) {
+  return (
+    <div className={`group relative ${className}`}>
       <div
-        className="pointer-events-none absolute inset-[10%] rounded-full opacity-60 blur-2xl"
+        className="pointer-events-none absolute inset-[6%] rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
         style={{
           background:
-            "radial-gradient(60% 60% at 40% 40%, color-mix(in oklab, var(--ice) 12%, transparent), transparent 70%), radial-gradient(50% 50% at 65% 65%, color-mix(in oklab, var(--champagne) 10%, transparent), transparent 70%)",
+            "radial-gradient(60% 60% at 40% 40%, color-mix(in oklab, var(--ice) 14%, transparent), transparent 70%), radial-gradient(50% 50% at 65% 65%, color-mix(in oklab, var(--champagne) 12%, transparent), transparent 70%)",
         }}
         aria-hidden
       />
-      <img src={img} alt={alt} className="relative h-full w-full object-contain p-5" />
+      <img
+        src={img}
+        alt={alt}
+        className="relative h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+      />
     </div>
   );
 }
@@ -184,7 +198,7 @@ export default function Home() {
             {services.map((s, i) => (
               <Reveal key={s.slug} delay={i * 70}>
                 <Link to="/services" className="group block">
-                  <GlassTile img={serviceIcons[s.slug]} alt={s.title} className="aspect-[4/3] w-full" />
+                  <SculptureIcon img={serviceIcons[s.slug]} alt={s.title} className="aspect-[4/3] w-full" />
                   <p className="mt-4 text-lg font-semibold transition-colors group-hover:text-[var(--champagne)]">
                     {s.title}
                   </p>
@@ -215,7 +229,7 @@ export default function Home() {
         <div className="mt-16 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
           {processSteps.map((s, i) => (
             <Reveal key={s.n} delay={i * 90} className="text-center">
-              <GlassTile img={s.img} alt={`${s.step} icon`} className="mx-auto aspect-square w-full" />
+              <ProcessTile img={s.img} alt={`${s.step} icon`} className="mx-auto aspect-square w-full" />
               <p className="mt-4 text-xs text-[var(--champagne)]">{s.n}</p>
               <p className="text-base font-medium">{s.step}</p>
             </Reveal>
