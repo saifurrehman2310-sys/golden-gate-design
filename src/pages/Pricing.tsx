@@ -49,8 +49,15 @@ const tiers = [
 export default function Pricing() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-white/[0.08] bg-grain">
-        <div className="absolute inset-0" style={{ background: "var(--gradient-glow)" }} aria-hidden />
+      <section className="relative overflow-hidden bg-grain">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(60% 50% at 50% 20%, color-mix(in oklab, var(--ice) 8%, transparent), transparent 70%), radial-gradient(55% 45% at 20% 90%, color-mix(in oklab, var(--iris) 7%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
         <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-24 text-center lg:px-10 lg:pt-52 lg:pb-32">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Pricing</p>
@@ -69,26 +76,43 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      <section className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(50% 40% at 85% 10%, color-mix(in oklab, var(--champagne) 6%, transparent), transparent 70%), radial-gradient(50% 40% at 10% 90%, color-mix(in oklab, var(--ice) 6%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
         <div className="grid gap-6 lg:grid-cols-3">
           {tiers.map((t, i) => (
             <Reveal key={t.name} delay={i * 100}>
               <div
-                className={`flex h-full flex-col rounded-2xl border p-9 transition-all duration-500 hover:-translate-y-1.5 lg:p-11 ${
-                  t.featured
-                    ? "border-[var(--gold)]/40 bg-[#141210]"
-                    : "border-white/[0.08] bg-[#121212] hover:border-[var(--gold)]/25"
+                className={`glass-frame glass-frame-hover glass-edge relative flex h-full flex-col overflow-hidden rounded-2xl p-9 transition-all duration-500 hover:-translate-y-1.5 lg:p-11 ${
+                  t.featured ? "border-[var(--gold)]/30" : ""
                 }`}
               >
+                <div
+                  className="pointer-events-none absolute inset-[-20%] opacity-50 blur-3xl"
+                  style={{
+                    background: t.featured
+                      ? "radial-gradient(45% 45% at 50% 30%, color-mix(in oklab, var(--champagne) 16%, transparent), transparent 70%)"
+                      : "radial-gradient(45% 45% at 50% 30%, color-mix(in oklab, var(--ice) 10%, transparent), transparent 70%)",
+                  }}
+                  aria-hidden
+                />
                 {t.featured && (
-                  <span className="mb-6 w-fit rounded-full bg-[var(--gold)] px-3 py-1 text-[11px] font-medium tracking-wide text-[#0a0a0a] uppercase">
+                  <span className="relative mb-6 w-fit rounded-full border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_12%,transparent)] px-3 py-1 text-[11px] font-medium tracking-wide text-[var(--champagne)] uppercase backdrop-blur-sm">
                     Most chosen
                   </span>
                 )}
-                <h2 className="text-xl font-semibold">{t.name}</h2>
-                <p className="mt-6 font-display text-[3.2rem] leading-none text-gold-gradient">{t.price}</p>
-                <p className="mt-6 text-sm leading-relaxed text-muted-foreground">{t.for}</p>
-                <ul className="mt-9 flex-1 space-y-4 border-t border-white/[0.08] pt-8 text-sm">
+                <h2 className="relative text-xl font-semibold">{t.name}</h2>
+                <p className="relative mt-6 font-display text-[3.2rem] leading-none text-gold-gradient">
+                  {t.price}
+                </p>
+                <p className="relative mt-6 text-sm leading-relaxed text-muted-foreground">{t.for}</p>
+                <ul className="relative mt-9 flex-1 space-y-4 border-t border-white/[0.08] pt-8 text-sm">
                   {t.features.map((f) => (
                     <li key={f} className="flex gap-3 text-muted-foreground">
                       <Check size={16} className="mt-0.5 shrink-0 text-[var(--gold)]" />
@@ -96,7 +120,7 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-10">
+                <div className="relative mt-10">
                   <MagneticLink to="/contact" variant={t.featured ? "gold" : "ghost"} className="w-full">
                     {t.price === "Custom" ? "Request a Quote" : "Get Started"}
                   </MagneticLink>
@@ -107,7 +131,7 @@ export default function Pricing() {
         </div>
 
         <Reveal delay={120}>
-          <div className="mt-16 grid gap-8 rounded-2xl border border-white/[0.08] bg-[#0d0d0d] p-10 md:grid-cols-3 lg:p-14">
+          <div className="mt-20 grid gap-10 border-t border-white/[0.06] pt-14 md:grid-cols-3">
             {[
               ["No templates", "Every build is custom-designed for the business, never a recycled theme."],
               ["You own it", "Domain, hosting, content and code stay in your name from day one."],
