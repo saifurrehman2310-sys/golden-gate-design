@@ -21,7 +21,6 @@ import tileDefine from "@/assets/v2/tile-sphere.png";
 import tileDesign from "@/assets/v2/tile-knot.png";
 import tileDevelop from "@/assets/v2/tile-cube.png";
 import tileDeliver from "@/assets/v2/tile-paperplane.png";
-import processConnector from "@/assets/v2/process-connector.png";
 
 const processSteps = [
   { n: "01", step: "Discover", img: tileDiscover },
@@ -228,12 +227,6 @@ export default function Home() {
           </h2>
         </Reveal>
         <div className="relative mt-16">
-          <div
-            className="pointer-events-none absolute top-1/2 left-1/2 hidden w-[130%] -translate-x-1/2 -translate-y-1/2 opacity-45 sm:block lg:w-[115%]"
-            aria-hidden
-          >
-            <img src={processConnector} alt="" className="h-auto w-full object-contain" />
-          </div>
           <div className="relative grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
             {processSteps.map((s, i) => (
               <Reveal key={s.n} delay={i * 90} className="text-center">

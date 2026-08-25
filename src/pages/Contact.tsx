@@ -92,7 +92,7 @@ export default function Contact() {
               </div>
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] px-8 py-4 text-sm font-medium text-[#0a0a0a] transition-colors duration-300 hover:bg-[var(--gold-hover)]"
+                className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_10%,transparent)] px-8 py-4 text-sm font-medium text-[var(--champagne)] backdrop-blur-md transition-all duration-300 hover:border-[var(--gold)] hover:bg-[color-mix(in_oklab,var(--gold)_18%,transparent)] hover:text-[var(--gold-hover)]"
               >
                 Send Enquiry <ArrowRight size={16} />
               </button>

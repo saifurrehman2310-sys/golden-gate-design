@@ -12,7 +12,7 @@ export default function NotFound() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-full border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_10%,transparent)] px-6 py-2.5 text-sm font-medium text-[var(--champagne)] backdrop-blur-md transition-all duration-300 hover:border-[var(--gold)] hover:bg-[color-mix(in_oklab,var(--gold)_18%,transparent)] hover:text-[var(--gold-hover)]"
           >
             Go home
           </Link>

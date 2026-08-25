@@ -56,7 +56,7 @@ export default function ProjectCaseStudy() {
             ) : (
               <a
                 href="#walkthrough"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] px-7 py-3.5 text-sm font-medium text-[#0a0a0a] transition-colors hover:bg-[var(--gold-hover)]"
+                className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_10%,transparent)] px-7 py-3.5 text-sm font-medium text-[var(--champagne)] backdrop-blur-md transition-all duration-300 hover:border-[var(--gold)] hover:bg-[color-mix(in_oklab,var(--gold)_18%,transparent)] hover:text-[var(--gold-hover)]"
               >
                 <Play size={15} /> Watch Walkthrough
               </a>
