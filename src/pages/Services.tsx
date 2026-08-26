@@ -1,6 +1,21 @@
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { services } from "@/data/services";
+import glassLeaves from "@/assets/v2/leaf-brand.png";
+import glassCube from "@/assets/v2/cube.png";
+import glassRibbon from "@/assets/glass-ribbon.png";
+import glassSpiral from "@/assets/v2/spiral.png";
+import glassBrackets from "@/assets/v2/code-brackets.png";
+import glassStar from "@/assets/v2/star.png";
+
+const serviceIcons: Record<string, string> = {
+  "brand-identity": glassLeaves,
+  "web-design": glassCube,
+  "ui-ux-design": glassRibbon,
+  "motion-design": glassSpiral,
+  "web-development": glassBrackets,
+  "digital-strategy": glassStar,
+};
 
 export default function Services() {
   return (
@@ -34,6 +49,16 @@ export default function Services() {
           >
             <div className="grid gap-12 lg:grid-cols-12">
               <Reveal className="lg:col-span-5">
+                <div className="relative mb-8 aspect-square w-full max-w-[12rem]" aria-hidden>
+                  <div
+                    className="absolute inset-[-20%] rounded-full opacity-50 blur-2xl"
+                    style={{
+                      background:
+                        "radial-gradient(60% 60% at 40% 40%, color-mix(in oklab, var(--ice) 14%, transparent), transparent 70%), radial-gradient(50% 50% at 65% 65%, color-mix(in oklab, var(--champagne) 12%, transparent), transparent 70%)",
+                    }}
+                  />
+                  <img src={serviceIcons[s.slug]} alt="" className="relative h-full w-full object-contain" />
+                </div>
                 <span className="font-display text-sm text-[var(--gold)]">
                   {String(i + 1).padStart(2, "0")}
                 </span>

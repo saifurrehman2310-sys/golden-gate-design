@@ -110,15 +110,23 @@ export default function ProjectCaseStudy() {
         </div>
       </section>
 
-      <section className="border-y border-white/[0.08] bg-[#0d0d0d]">
+      <section className="relative overflow-hidden border-y border-white/[0.06]">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(50% 40% at 15% 15%, color-mix(in oklab, var(--ice) 6%, transparent), transparent 70%), radial-gradient(55% 45% at 90% 90%, color-mix(in oklab, var(--champagne) 5%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
             <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-semibold">What we built</h2>
           </Reveal>
-          <div className="mt-14 grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.06] md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {p.features.map((f, i) => (
-              <Reveal key={f} delay={i * 60} className="bg-[#0d0d0d]">
-                <div className="h-full p-8 transition-colors duration-500 hover:bg-[#121212]">
+              <Reveal key={f} delay={i * 60}>
+                <div className="glass-frame glass-frame-hover glass-edge h-full rounded-2xl p-8">
                   <span className="font-display text-sm text-[var(--gold)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -159,7 +167,7 @@ export default function ProjectCaseStudy() {
           <ul className="mt-10 grid gap-6 md:grid-cols-3">
             {p.results.map((r, i) => (
               <Reveal as="li" key={r} delay={i * 80}>
-                <div className="h-full rounded-2xl border border-white/[0.08] bg-[#121212] p-8">
+                <div className="glass-frame glass-frame-hover glass-edge h-full rounded-2xl p-8">
                   <div className="gold-rule w-12" />
                   <p className="mt-5 leading-relaxed">{r}</p>
                 </div>

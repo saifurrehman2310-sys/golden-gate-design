@@ -67,7 +67,7 @@ export default function Contact() {
                     id="budget"
                     name="budget"
                     defaultValue={budgets[3]}
-                    className="mt-3 w-full rounded-lg border border-white/[0.08] bg-[#121212] px-4 py-3.5 text-sm outline-none transition-colors focus:border-[var(--gold)]"
+                    className="mt-3 w-full rounded-lg border border-white/[0.1] bg-[color-mix(in_oklab,#ffffff_4%,transparent)] px-4 py-3.5 text-sm outline-none backdrop-blur-sm transition-colors focus:border-[var(--gold)]"
                   >
                     {budgets.map((b) => (
                       <option key={b} value={b}>
@@ -87,7 +87,7 @@ export default function Contact() {
                   rows={6}
                   required
                   placeholder="What does your business do, and what should the website achieve?"
-                  className="mt-3 w-full resize-none rounded-lg border border-white/[0.08] bg-[#121212] px-4 py-3.5 text-sm outline-none transition-colors placeholder:text-muted-foreground/60 focus:border-[var(--gold)]"
+                  className="mt-3 w-full resize-none rounded-lg border border-white/[0.1] bg-[color-mix(in_oklab,#ffffff_4%,transparent)] px-4 py-3.5 text-sm outline-none backdrop-blur-sm transition-colors placeholder:text-muted-foreground/60 focus:border-[var(--gold)]"
                 />
               </div>
               <button
@@ -109,7 +109,7 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={120} className="lg:col-span-5">
-            <div className="rounded-2xl border border-white/[0.08] bg-[#121212] p-10">
+            <div className="glass-frame glass-edge rounded-2xl p-10">
               <h2 className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">Direct lines</h2>
               <ul className="mt-8 space-y-7 text-sm">
                 <li className="flex gap-4">
@@ -168,7 +168,7 @@ function Field({
         name={name}
         type={type}
         required={required}
-        className="mt-3 w-full rounded-lg border border-white/[0.08] bg-[#121212] px-4 py-3.5 text-sm outline-none transition-colors focus:border-[var(--gold)]"
+        className="mt-3 w-full rounded-lg border border-white/[0.1] bg-[color-mix(in_oklab,#ffffff_4%,transparent)] px-4 py-3.5 text-sm outline-none backdrop-blur-sm transition-colors focus:border-[var(--gold)]"
       />
     </div>
   );

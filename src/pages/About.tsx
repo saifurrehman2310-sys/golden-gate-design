@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
+import glassDroplet from "@/assets/glass-droplet.png";
 
 export default function About() {
   return (
@@ -18,7 +19,16 @@ export default function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      <section className="relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(55% 45% at 85% 15%, color-mix(in oklab, var(--iris) 7%, transparent), transparent 70%), radial-gradient(50% 40% at 10% 90%, color-mix(in oklab, var(--ice) 6%, transparent), transparent 70%)",
+          }}
+          aria-hidden
+        />
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <div className="grid gap-16 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
             <p className="font-display text-[clamp(1.4rem,2.8vw,2.1rem)] leading-[1.35]">
@@ -52,7 +62,17 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={120} className="lg:col-span-5">
-            <div className="rounded-2xl border border-white/[0.08] bg-[#121212] p-10">
+            <div className="relative mb-8 aspect-[4/3] w-full" aria-hidden>
+              <div
+                className="absolute inset-[-10%] rounded-full blur-3xl opacity-50"
+                style={{
+                  background:
+                    "radial-gradient(45% 45% at 45% 50%, color-mix(in oklab, var(--iris) 20%, transparent), transparent 70%)",
+                }}
+              />
+              <img src={glassDroplet} alt="" className="float-slow relative h-full w-full object-contain" />
+            </div>
+            <div className="glass-frame glass-edge rounded-2xl p-10">
               <h2 className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">What we stand for</h2>
               <ul className="mt-8 space-y-8">
                 {[
@@ -69,6 +89,7 @@ export default function About() {
               </ul>
             </div>
           </Reveal>
+        </div>
         </div>
       </section>
 
