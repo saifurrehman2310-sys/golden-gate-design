@@ -21,6 +21,13 @@ import tileDefine from "@/assets/v2/tile-sphere.png";
 import tileDesign from "@/assets/v2/tile-knot.png";
 import tileDevelop from "@/assets/v2/tile-cube.png";
 import tileDeliver from "@/assets/v2/tile-paperplane.png";
+import processRibbon from "@/assets/v3/process-ribbon.png";
+import blob0 from "@/assets/v3/blob-0.png";
+import blob1 from "@/assets/v3/blob-1.png";
+import blob2 from "@/assets/v3/blob-2.png";
+import blob3 from "@/assets/v3/blob-3.png";
+import blob4 from "@/assets/v3/blob-4.png";
+import blob5 from "@/assets/v3/blob-5.png";
 
 const processSteps = [
   { n: "01", step: "Discover", img: tileDiscover },
@@ -78,14 +85,50 @@ export default function Home() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden bg-grain pt-40 pb-20 lg:pt-48 lg:pb-28">
+        {/* strong ambient glow across the whole hero */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(90% 70% at 70% 30%, color-mix(in oklab, var(--ice) 8%, transparent), transparent 65%), radial-gradient(70% 60% at 15% 80%, color-mix(in oklab, var(--iris) 7%, transparent), transparent 70%)",
+              "radial-gradient(90% 70% at 70% 30%, color-mix(in oklab, var(--ice) 14%, transparent), transparent 65%), radial-gradient(70% 60% at 15% 80%, color-mix(in oklab, var(--iris) 12%, transparent), transparent 70%), radial-gradient(60% 50% at 40% 10%, color-mix(in oklab, var(--champagne) 9%, transparent), transparent 70%)",
           }}
           aria-hidden
         />
+        {/* scattered abstract glass blobs, heavily blurred, behind everything including the headline */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-60" aria-hidden>
+          <img src={blob0} alt="" className="float-slow absolute top-[8%] left-[6%] w-20 blur-md sm:w-28" />
+          <img
+            src={blob1}
+            alt=""
+            className="float-slower absolute top-[38%] left-[22%] w-24 blur-lg sm:w-32"
+            style={{ animationDelay: "2s" }}
+          />
+          <img
+            src={blob2}
+            alt=""
+            className="float-slow absolute top-[65%] left-[10%] w-16 blur-md sm:w-24"
+            style={{ animationDelay: "4s" }}
+          />
+          <img
+            src={blob3}
+            alt=""
+            className="float-slower absolute top-[15%] left-[42%] w-20 blur-lg sm:w-28"
+            style={{ animationDelay: "1s" }}
+          />
+          <img
+            src={blob4}
+            alt=""
+            className="float-slow absolute top-[55%] left-[48%] w-16 blur-md sm:w-24"
+            style={{ animationDelay: "3s" }}
+          />
+          <img
+            src={blob5}
+            alt=""
+            className="float-slower absolute top-[30%] left-[62%] w-20 blur-lg sm:w-28"
+            style={{ animationDelay: "5s" }}
+          />
+        </div>
+
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div>
@@ -116,10 +159,10 @@ export default function Home() {
             <Reveal delay={150}>
               <div className="relative mx-auto aspect-square w-full max-w-lg" aria-hidden>
                 <div
-                  className="absolute inset-[-15%] rounded-full blur-3xl opacity-60"
+                  className="absolute inset-[-25%] rounded-full blur-3xl opacity-80"
                   style={{
                     background:
-                      "radial-gradient(45% 45% at 40% 45%, color-mix(in oklab, var(--ice) 24%, transparent), transparent 70%), radial-gradient(40% 40% at 65% 60%, color-mix(in oklab, var(--champagne) 18%, transparent), transparent 70%)",
+                      "radial-gradient(45% 45% at 35% 40%, color-mix(in oklab, var(--ice) 32%, transparent), transparent 70%), radial-gradient(40% 40% at 68% 62%, color-mix(in oklab, var(--champagne) 28%, transparent), transparent 70%)",
                   }}
                 />
                 <img src={heroSphere} alt="" className="float-slow relative h-full w-full object-contain" />
@@ -151,42 +194,49 @@ export default function Home() {
           </Link>
         </Reveal>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
-            {featured.map((p, i) => (
-              <Reveal key={p.slug} delay={i * 90}>
-                <Link to={`/projects/${p.slug}`} className="group block">
-                  <div className="glass-panel glass-edge relative aspect-[4/5] overflow-hidden rounded-xl">
+        <div className="relative mt-20 grid gap-16 py-6 sm:grid-cols-3 sm:gap-6">
+          {featured.map((p, i) => {
+            const tilt = [-4, 3, -3][i % 3];
+            const offset = ["sm:mt-6", "sm:-mt-4", "sm:mt-10"][i % 3];
+            return (
+              <Reveal key={p.slug} delay={i * 90} className={offset}>
+                <Link
+                  to={`/projects/${p.slug}`}
+                  className="group relative block transition-transform duration-500 hover:z-10 hover:!rotate-0"
+                  style={{ transform: `rotate(${tilt}deg)` }}
+                >
+                  <div className="glass-panel glass-edge relative aspect-[4/5] overflow-hidden rounded-xl shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)]">
                     <img
                       src={p.image}
                       alt={`${p.name} website`}
-                      className="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 ease-[var(--ease-lux)] group-hover:scale-105 group-hover:opacity-100"
+                      className="absolute inset-0 h-full w-full object-cover opacity-85 transition-all duration-700 ease-[var(--ease-lux)] group-hover:scale-105 group-hover:opacity-100"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color-mix(in_oklab,var(--background)_70%,transparent)] via-transparent to-transparent" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color-mix(in_oklab,var(--background)_75%,transparent)] via-transparent to-transparent" />
                     <div
                       className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                       style={{
                         background:
-                          "radial-gradient(60% 50% at 30% 20%, color-mix(in oklab, var(--ice) 14%, transparent), transparent 70%)",
+                          "radial-gradient(60% 50% at 30% 20%, color-mix(in oklab, var(--ice) 16%, transparent), transparent 70%)",
                       }}
                       aria-hidden
                     />
+                    <span className="glass-frame absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-md">
+                      <ArrowUpRight size={15} className="text-foreground" />
+                    </span>
+                    <div className="absolute bottom-5 left-5">
+                      <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">{p.category}</p>
+                      <p className="mt-1 text-lg font-semibold">{p.name}</p>
+                    </div>
                   </div>
-                  <p className="mt-4 text-xs uppercase tracking-[0.2em] text-[var(--gold)]">{p.category}</p>
-                  <p className="mt-1.5 flex items-center gap-1.5 text-lg font-semibold">
-                    {p.name}
-                    <ArrowUpRight
-                      size={16}
-                      className="text-muted-foreground transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--champagne)]"
-                    />
-                  </p>
                 </Link>
               </Reveal>
-            ))}
+            );
+          })}
         </div>
       </section>
 
       {/* SERVICES */}
-      <section className="relative overflow-hidden border-y border-white/[0.06]">
+      <section className="relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Services</p>
@@ -194,89 +244,103 @@ export default function Home() {
               Everything your business needs to look inevitable online.
             </h2>
           </Reveal>
-          <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => {
-              const offsets = ["lg:mt-0", "lg:mt-10", "lg:-mt-4", "lg:mt-6", "lg:mt-0", "lg:mt-12"];
-              return (
-                <Reveal key={s.slug} delay={i * 70} className={offsets[i % offsets.length]}>
-                  <Link to="/services" className="group block">
-                    <SculptureIcon img={serviceIcons[s.slug]} alt={s.title} className="aspect-[4/3] w-full" />
-                    <p className="mt-4 text-lg font-semibold transition-colors group-hover:text-[var(--champagne)]">
-                      {s.title}
-                    </p>
-                    <p className="mt-1.5 text-sm text-muted-foreground">{s.short}</p>
-                  </Link>
-                </Reveal>
-              );
-            })}
-          </div>
+          <Reveal delay={100}>
+            <div className="glass-panel glass-edge relative mt-14 overflow-hidden rounded-2xl p-6 lg:p-10">
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(70% 60% at 15% 20%, color-mix(in oklab, var(--ice) 12%, transparent), transparent 70%), radial-gradient(70% 60% at 85% 80%, color-mix(in oklab, var(--champagne) 10%, transparent), transparent 70%)",
+                }}
+                aria-hidden
+              />
+              <div className="relative grid grid-cols-3 gap-4 sm:grid-cols-6">
+                {services.map((s, i) => (
+                  <Reveal key={s.slug} delay={i * 60}>
+                    <Link to="/services" className="group block text-center">
+                      <SculptureIcon img={serviceIcons[s.slug]} alt={s.title} className="aspect-square w-full" />
+                      <p className="mt-3 text-xs leading-tight font-medium transition-colors group-hover:text-[var(--champagne)] sm:text-sm">
+                        {s.title}
+                      </p>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* PROCESS */}
       <section className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-        <div
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(50% 40% at 20% 10%, color-mix(in oklab, var(--ice) 6%, transparent), transparent 70%), radial-gradient(55% 45% at 90% 90%, color-mix(in oklab, var(--champagne) 5%, transparent), transparent 70%)",
-          }}
-          aria-hidden
-        />
         <Reveal className="text-center">
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Process</p>
           <h2 className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-semibold">
             Five steps. No surprises.
           </h2>
         </Reveal>
-        <div className="relative mt-16">
-          <div className="relative grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
-            {processSteps.map((s, i) => {
-              const offsets = ["lg:mt-0", "lg:mt-8", "lg:-mt-3", "lg:mt-6", "lg:mt-1"];
-              return (
-                <Reveal key={s.n} delay={i * 90} className={`text-center ${offsets[i % offsets.length]}`}>
+        <Reveal delay={100}>
+          <div className="glass-panel glass-edge relative mt-14 overflow-hidden rounded-2xl p-6 lg:p-10">
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(60% 50% at 20% 10%, color-mix(in oklab, var(--ice) 10%, transparent), transparent 70%), radial-gradient(60% 50% at 90% 90%, color-mix(in oklab, var(--champagne) 9%, transparent), transparent 70%)",
+              }}
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute top-1/2 left-1/2 w-[130%] -translate-x-1/2 -translate-y-[35%] opacity-45 blur-[2px]"
+              aria-hidden
+            >
+              <img src={processRibbon} alt="" className="h-auto w-full object-contain" />
+            </div>
+            <div className="relative grid grid-cols-3 gap-4 sm:grid-cols-5">
+              {processSteps.map((s, i) => (
+                <Reveal key={s.n} delay={i * 90} className="text-center">
                   <ProcessTile img={s.img} alt={`${s.step} icon`} className="mx-auto aspect-square w-full" />
-                  <p className="mt-4 text-xs text-[var(--champagne)]">{s.n}</p>
-                  <p className="text-base font-medium">{s.step}</p>
+                  <p className="mt-3 text-xs text-[var(--champagne)]">{s.n}</p>
+                  <p className="text-sm font-medium">{s.step}</p>
                 </Reveal>
-              );
-            })}
+              ))}
+            </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* ABOUT */}
-      <section className="relative overflow-hidden border-y border-white/[0.06]">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
-          <div className="grid items-center gap-14 lg:grid-cols-2">
-            <Reveal>
-              <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">About Us</p>
-              <h2 className="mt-5 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] font-semibold">
-                We turn ideas into meaningful digital experiences.
-              </h2>
-              <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">
-                We're a small team of designers, thinkers and builders who believe premium doesn't have
-                to mean corporate. Every project starts with the business and ends with something worth
-                remembering.
-              </p>
-              <Link to="/about" className="lux-link mt-7 inline-flex items-center gap-2 text-sm">
-                Our Story <ArrowRight size={15} />
-              </Link>
-            </Reveal>
-            <Reveal delay={120}>
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+        <Reveal>
+          <div className="glass-panel glass-edge relative overflow-hidden rounded-2xl p-8 lg:p-14">
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(60% 55% at 15% 40%, color-mix(in oklab, var(--iris) 10%, transparent), transparent 70%), radial-gradient(55% 50% at 90% 70%, color-mix(in oklab, var(--ice) 8%, transparent), transparent 70%)",
+              }}
+              aria-hidden
+            />
+            <div className="relative grid items-center gap-14 lg:grid-cols-2">
+              <div>
+                <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">About Us</p>
+                <h2 className="mt-5 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] font-semibold">
+                  We turn ideas into meaningful digital experiences.
+                </h2>
+                <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">
+                  We're a small team of designers, thinkers and builders who believe premium doesn't have
+                  to mean corporate. Every project starts with the business and ends with something worth
+                  remembering.
+                </p>
+                <Link to="/about" className="lux-link mt-7 inline-flex items-center gap-2 text-sm">
+                  Our Story <ArrowRight size={15} />
+                </Link>
+              </div>
               <div className="relative mx-auto aspect-square w-full max-w-sm" aria-hidden>
-                <div
-                  className="absolute inset-[-10%] rounded-full blur-3xl opacity-50"
-                  style={{
-                    background:
-                      "radial-gradient(45% 45% at 45% 50%, color-mix(in oklab, var(--iris) 20%, transparent), transparent 70%)",
-                  }}
-                />
                 <img src={glassDroplet} alt="" className="float-slow relative h-full w-full object-contain" />
               </div>
-            </Reveal>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* LET'S CONNECT */}

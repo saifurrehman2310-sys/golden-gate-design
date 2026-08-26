@@ -174,14 +174,15 @@
 @utility nav-capsule {
   background: linear-gradient(
     160deg,
-    color-mix(in oklab, #ffffff 12%, transparent) 0%,
-    color-mix(in oklab, #ffffff 4%, transparent) 60%,
-    color-mix(in oklab, #ffffff 7%, transparent) 100%
+    color-mix(in oklab, #ffffff 14%, transparent) 0%,
+    color-mix(in oklab, #ffffff 5%, transparent) 55%,
+    color-mix(in oklab, var(--champagne) 8%, transparent) 100%
   );
-  border: 1px solid color-mix(in oklab, #ffffff 22%, transparent);
+  border: 1px solid color-mix(in oklab, var(--champagne) 26%, transparent);
   backdrop-filter: blur(20px) saturate(160%);
   box-shadow:
-    0 1px 0 0 rgb(255 255 255 / 0.22) inset,
+    0 1px 0 0 rgb(255 255 255 / 0.24) inset,
+    0 0 30px -6px color-mix(in oklab, var(--champagne) 35%, transparent),
     0 20px 45px -22px rgb(0 0 0 / 0.55);
 }
 
