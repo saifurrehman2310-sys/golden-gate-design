@@ -195,17 +195,20 @@ export default function Home() {
             </h2>
           </Reveal>
           <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 70}>
-                <Link to="/services" className="group block">
-                  <SculptureIcon img={serviceIcons[s.slug]} alt={s.title} className="aspect-[4/3] w-full" />
-                  <p className="mt-4 text-lg font-semibold transition-colors group-hover:text-[var(--champagne)]">
-                    {s.title}
-                  </p>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{s.short}</p>
-                </Link>
-              </Reveal>
-            ))}
+            {services.map((s, i) => {
+              const offsets = ["lg:mt-0", "lg:mt-10", "lg:-mt-4", "lg:mt-6", "lg:mt-0", "lg:mt-12"];
+              return (
+                <Reveal key={s.slug} delay={i * 70} className={offsets[i % offsets.length]}>
+                  <Link to="/services" className="group block">
+                    <SculptureIcon img={serviceIcons[s.slug]} alt={s.title} className="aspect-[4/3] w-full" />
+                    <p className="mt-4 text-lg font-semibold transition-colors group-hover:text-[var(--champagne)]">
+                      {s.title}
+                    </p>
+                    <p className="mt-1.5 text-sm text-muted-foreground">{s.short}</p>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -228,13 +231,16 @@ export default function Home() {
         </Reveal>
         <div className="relative mt-16">
           <div className="relative grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
-            {processSteps.map((s, i) => (
-              <Reveal key={s.n} delay={i * 90} className="text-center">
-                <ProcessTile img={s.img} alt={`${s.step} icon`} className="mx-auto aspect-square w-full" />
-                <p className="mt-4 text-xs text-[var(--champagne)]">{s.n}</p>
-                <p className="text-base font-medium">{s.step}</p>
-              </Reveal>
-            ))}
+            {processSteps.map((s, i) => {
+              const offsets = ["lg:mt-0", "lg:mt-8", "lg:-mt-3", "lg:mt-6", "lg:mt-1"];
+              return (
+                <Reveal key={s.n} delay={i * 90} className={`text-center ${offsets[i % offsets.length]}`}>
+                  <ProcessTile img={s.img} alt={`${s.step} icon`} className="mx-auto aspect-square w-full" />
+                  <p className="mt-4 text-xs text-[var(--champagne)]">{s.n}</p>
+                  <p className="text-base font-medium">{s.step}</p>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

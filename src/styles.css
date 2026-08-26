@@ -171,6 +171,26 @@
   }
 }
 
+@utility nav-capsule {
+  background: linear-gradient(
+    160deg,
+    color-mix(in oklab, #ffffff 12%, transparent) 0%,
+    color-mix(in oklab, #ffffff 4%, transparent) 60%,
+    color-mix(in oklab, #ffffff 7%, transparent) 100%
+  );
+  border: 1px solid color-mix(in oklab, #ffffff 22%, transparent);
+  backdrop-filter: blur(20px) saturate(160%);
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.22) inset,
+    0 20px 45px -22px rgb(0 0 0 / 0.55);
+}
+
+@utility nav-capsule-scrolled {
+  box-shadow:
+    0 1px 0 0 rgb(255 255 255 / 0.26) inset,
+    0 24px 55px -20px rgb(80 110 220 / 0.4);
+}
+
 @utility glass-panel {
   background: linear-gradient(
     160deg,

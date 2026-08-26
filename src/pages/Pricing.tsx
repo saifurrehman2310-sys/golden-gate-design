@@ -85,12 +85,12 @@ export default function Pricing() {
           }}
           aria-hidden
         />
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid items-start gap-6 lg:grid-cols-3">
           {tiers.map((t, i) => (
-            <Reveal key={t.name} delay={i * 100}>
+            <Reveal key={t.name} delay={i * 100} className={t.featured ? "lg:-mt-6" : ""}>
               <div
                 className={`glass-frame glass-frame-hover glass-edge relative flex h-full flex-col overflow-hidden rounded-2xl p-9 transition-all duration-500 hover:-translate-y-1.5 lg:p-11 ${
-                  t.featured ? "border-[var(--gold)]/30" : ""
+                  t.featured ? "border-[var(--gold)]/30 lg:scale-[1.04]" : ""
                 }`}
               >
                 <div

@@ -25,8 +25,8 @@ export function Nav() {
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
       <nav
         className={cn(
-          "glass-frame glass-edge flex w-full max-w-4xl items-center justify-between rounded-full px-6 py-3 backdrop-blur-md transition-all duration-500",
-          scrolled && "shadow-[0_20px_50px_-28px_rgb(80,110,220,0.35)]",
+          "nav-capsule flex w-full max-w-4xl items-center justify-between rounded-full px-6 py-3.5 transition-all duration-500",
+          scrolled && "nav-capsule-scrolled",
         )}
       >
         <Link to="/" className="font-display text-base tracking-tight" onClick={() => setOpen(false)}>
@@ -50,7 +50,7 @@ export function Nav() {
           ))}
           <Link
             to="/contact"
-            className="rounded-full border border-[var(--gold)]/40 bg-[color-mix(in_oklab,var(--gold)_8%,transparent)] px-5 py-1.5 text-sm text-[var(--champagne)] backdrop-blur-sm transition-all duration-300 hover:border-[var(--gold)] hover:bg-[color-mix(in_oklab,var(--gold)_16%,transparent)]"
+            className="rounded-full border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_14%,transparent)] px-5 py-1.5 text-sm text-[var(--champagne)] backdrop-blur-md transition-all duration-300 hover:border-[var(--gold)] hover:bg-[color-mix(in_oklab,var(--gold)_22%,transparent)]"
           >
             Let's Talk
           </Link>
@@ -66,7 +66,7 @@ export function Nav() {
       </nav>
 
       {open && (
-        <div className="glass-frame glass-edge absolute top-[calc(100%+0.5rem)] w-[calc(100%-2rem)] max-w-4xl rounded-2xl backdrop-blur-md md:hidden">
+        <div className="nav-capsule absolute top-[calc(100%+0.5rem)] w-[calc(100%-2rem)] max-w-4xl rounded-2xl md:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
             {[...links, { to: "/contact", label: "Contact" }].map((l) => (
               <Link
