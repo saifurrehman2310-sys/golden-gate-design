@@ -1,12 +1,12 @@
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { services } from "@/data/services";
-import glassLeaves from "@/assets/v2/leaf-brand.png";
-import glassCube from "@/assets/v2/cube.png";
-import glassRibbon from "@/assets/glass-ribbon.png";
-import glassSpiral from "@/assets/v2/spiral.png";
-import glassBrackets from "@/assets/v2/code-brackets.png";
-import glassStar from "@/assets/v2/star.png";
+import glassLeaves from "@/assets/v3/service-leaf.png";
+import glassCube from "@/assets/v3/service-cube.png";
+import glassRibbon from "@/assets/v3/service-ribbon.png";
+import glassSpiral from "@/assets/v3/service-spiral.png";
+import glassBrackets from "@/assets/v3/service-brackets.png";
+import glassStar from "@/assets/v3/service-star.png";
 
 const serviceIcons: Record<string, string> = {
   "brand-identity": glassLeaves,

@@ -13,7 +13,12 @@ import glassCube from "@/assets/v2/cube.png";
 import glassSpiral from "@/assets/v2/spiral.png";
 import glassBrackets from "@/assets/v2/code-brackets.png";
 import glassStar from "@/assets/v2/star.png";
-import glassLeaves from "@/assets/v2/leaf-brand.png";
+import serviceLeaf from "@/assets/v3/service-leaf.png";
+import serviceCube from "@/assets/v3/service-cube.png";
+import serviceRibbon from "@/assets/v3/service-ribbon.png";
+import serviceSpiral from "@/assets/v3/service-spiral.png";
+import serviceBrackets from "@/assets/v3/service-brackets.png";
+import serviceStar from "@/assets/v3/service-star.png";
 import connectFigure from "@/assets/v2/hourglass-spheres.png";
 
 import tileDiscover from "@/assets/v2/tile-magnify.png";
@@ -28,6 +33,8 @@ import blob2 from "@/assets/v3/blob-2.png";
 import blob3 from "@/assets/v3/blob-3.png";
 import blob4 from "@/assets/v3/blob-4.png";
 import blob5 from "@/assets/v3/blob-5.png";
+import blob6 from "@/assets/v3/blob-6.png";
+import blob7 from "@/assets/v3/blob-7.png";
 
 const processSteps = [
   { n: "01", step: "Discover", img: tileDiscover },
@@ -38,12 +45,12 @@ const processSteps = [
 ];
 
 const serviceIcons: Record<string, string> = {
-  "brand-identity": glassLeaves,
-  "web-design": glassCube,
-  "ui-ux-design": glassRibbon,
-  "motion-design": glassSpiral,
-  "web-development": glassBrackets,
-  "digital-strategy": glassStar,
+  "brand-identity": serviceLeaf,
+  "web-design": serviceCube,
+  "ui-ux-design": serviceRibbon,
+  "motion-design": serviceSpiral,
+  "web-development": serviceBrackets,
+  "digital-strategy": serviceStar,
 };
 
 const featured = ["burger-bliss", "financial-advisor", "sai-real-estate"].map(
@@ -80,6 +87,33 @@ function SculptureIcon({ img, alt, className = "" }: { img: string; alt: string;
   );
 }
 
+const allBlobs = [blob0, blob1, blob2, blob3, blob4, blob5, blob6, blob7];
+
+/** Scattered abstract glass blobs used as ambient background texture across sections - not just the hero. */
+function FloatingBlobs({
+  positions,
+  opacity = 0.5,
+  blur = "blur-sm",
+}: {
+  positions: { blob: number; top: string; left: string; size: string; delay?: string }[];
+  opacity?: number;
+  blur?: string;
+}) {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ opacity }} aria-hidden>
+      {positions.map((p, i) => (
+        <img
+          key={i}
+          src={allBlobs[p.blob % allBlobs.length]}
+          alt=""
+          className={`float-slow absolute ${p.size} ${blur}`}
+          style={{ top: p.top, left: p.left, animationDelay: p.delay ?? "0s" }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -94,40 +128,21 @@ export default function Home() {
           }}
           aria-hidden
         />
-        {/* scattered abstract glass blobs, heavily blurred, behind everything including the headline */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-60" aria-hidden>
-          <img src={blob0} alt="" className="float-slow absolute top-[8%] left-[6%] w-20 blur-md sm:w-28" />
-          <img
-            src={blob1}
-            alt=""
-            className="float-slower absolute top-[38%] left-[22%] w-24 blur-lg sm:w-32"
-            style={{ animationDelay: "2s" }}
-          />
-          <img
-            src={blob2}
-            alt=""
-            className="float-slow absolute top-[65%] left-[10%] w-16 blur-md sm:w-24"
-            style={{ animationDelay: "4s" }}
-          />
-          <img
-            src={blob3}
-            alt=""
-            className="float-slower absolute top-[15%] left-[42%] w-20 blur-lg sm:w-28"
-            style={{ animationDelay: "1s" }}
-          />
-          <img
-            src={blob4}
-            alt=""
-            className="float-slow absolute top-[55%] left-[48%] w-16 blur-md sm:w-24"
-            style={{ animationDelay: "3s" }}
-          />
-          <img
-            src={blob5}
-            alt=""
-            className="float-slower absolute top-[30%] left-[62%] w-20 blur-lg sm:w-28"
-            style={{ animationDelay: "5s" }}
-          />
-        </div>
+        {/* scattered abstract glass blobs across the hero, less blurred and brighter than before */}
+        <FloatingBlobs
+          opacity={0.8}
+          blur="blur-[2px]"
+          positions={[
+            { blob: 0, top: "8%", left: "6%", size: "w-20 sm:w-28" },
+            { blob: 1, top: "38%", left: "22%", size: "w-24 sm:w-32", delay: "2s" },
+            { blob: 2, top: "65%", left: "10%", size: "w-16 sm:w-24", delay: "4s" },
+            { blob: 3, top: "15%", left: "42%", size: "w-20 sm:w-28", delay: "1s" },
+            { blob: 4, top: "55%", left: "48%", size: "w-16 sm:w-24", delay: "3s" },
+            { blob: 5, top: "30%", left: "62%", size: "w-20 sm:w-28", delay: "5s" },
+            { blob: 6, top: "78%", left: "30%", size: "w-16 sm:w-20", delay: "2.5s" },
+            { blob: 7, top: "5%", left: "26%", size: "w-14 sm:w-20", delay: "3.5s" },
+          ]}
+        />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid items-center gap-14 lg:grid-cols-2">
@@ -254,6 +269,14 @@ export default function Home() {
                 }}
                 aria-hidden
               />
+              <FloatingBlobs
+                opacity={0.25}
+                blur="blur-md"
+                positions={[
+                  { blob: 2, top: "5%", left: "88%", size: "w-16" },
+                  { blob: 5, top: "75%", left: "3%", size: "w-14", delay: "2s" },
+                ]}
+              />
               <div className="relative grid grid-cols-3 gap-4 sm:grid-cols-6">
                 {services.map((s, i) => (
                   <Reveal key={s.slug} delay={i * 60}>
@@ -289,6 +312,14 @@ export default function Home() {
               }}
               aria-hidden
             />
+            <FloatingBlobs
+              opacity={0.22}
+              blur="blur-md"
+              positions={[
+                { blob: 1, top: "8%", left: "5%", size: "w-14" },
+                { blob: 4, top: "80%", left: "92%", size: "w-16", delay: "3s" },
+              ]}
+            />
             <div
               className="pointer-events-none absolute top-1/2 left-1/2 w-[130%] -translate-x-1/2 -translate-y-[35%] opacity-45 blur-[2px]"
               aria-hidden
@@ -319,6 +350,14 @@ export default function Home() {
                   "radial-gradient(60% 55% at 15% 40%, color-mix(in oklab, var(--iris) 10%, transparent), transparent 70%), radial-gradient(55% 50% at 90% 70%, color-mix(in oklab, var(--ice) 8%, transparent), transparent 70%)",
               }}
               aria-hidden
+            />
+            <FloatingBlobs
+              opacity={0.2}
+              blur="blur-md"
+              positions={[
+                { blob: 7, top: "10%", left: "90%", size: "w-16" },
+                { blob: 3, top: "82%", left: "8%", size: "w-14", delay: "2.5s" },
+              ]}
             />
             <div className="relative grid items-center gap-14 lg:grid-cols-2">
               <div>
@@ -353,6 +392,14 @@ export default function Home() {
           }}
           aria-hidden
         />
+        <FloatingBlobs
+          opacity={0.2}
+          blur="blur-md"
+          positions={[
+            { blob: 6, top: "12%", left: "6%", size: "w-14" },
+            { blob: 0, top: "78%", left: "94%", size: "w-16", delay: "3.5s" },
+          ]}
+        />
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <Reveal>
             <div className="relative aspect-[4/3] w-full" aria-hidden>
@@ -362,7 +409,7 @@ export default function Home() {
           <Reveal delay={100}>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Let's Connect</p>
             <h2 className="mt-5 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] font-semibold">
-              Have an idea? Let's turn it into something extraordinary.
+              Got a project in mind? We'd love to hear about it.
             </h2>
             <ul className="glass-frame glass-edge mt-8 space-y-4 rounded-2xl p-6 text-sm">
               <li className="flex items-center gap-3">
@@ -405,6 +452,14 @@ export default function Home() {
               "radial-gradient(60% 55% at 50% 40%, color-mix(in oklab, var(--ice) 10%, transparent), transparent 70%), radial-gradient(50% 45% at 50% 90%, color-mix(in oklab, var(--iris) 8%, transparent), transparent 70%)",
           }}
           aria-hidden
+        />
+        <FloatingBlobs
+          opacity={0.18}
+          blur="blur-md"
+          positions={[
+            { blob: 2, top: "15%", left: "45%", size: "w-14" },
+            { blob: 7, top: "70%", left: "55%", size: "w-16", delay: "2s" },
+          ]}
         />
         <div className="relative mx-auto max-w-5xl px-6 py-28 text-center lg:px-10 lg:py-40">
           <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-72 opacity-55 lg:block" aria-hidden>
