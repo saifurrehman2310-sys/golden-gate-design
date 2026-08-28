@@ -35,6 +35,14 @@ import blob4 from "@/assets/v3/blob-4.png";
 import blob5 from "@/assets/v3/blob-5.png";
 import blob6 from "@/assets/v3/blob-6.png";
 import blob7 from "@/assets/v3/blob-7.png";
+import blob8 from "@/assets/v3/blob-8.png";
+import blob9 from "@/assets/v3/blob-9.png";
+import blob10 from "@/assets/v3/blob-10.png";
+import blob11 from "@/assets/v3/blob-11.png";
+import blob12 from "@/assets/v3/blob-12.png";
+import blob13 from "@/assets/v3/blob-13.png";
+import blob14 from "@/assets/v3/blob-14.png";
+import blob15 from "@/assets/v3/blob-15.png";
 
 const processSteps = [
   { n: "01", step: "Discover", img: tileDiscover },
@@ -87,26 +95,25 @@ function SculptureIcon({ img, alt, className = "" }: { img: string; alt: string;
   );
 }
 
-const allBlobs = [blob0, blob1, blob2, blob3, blob4, blob5, blob6, blob7];
+const allBlobs = [
+  blob0, blob1, blob2, blob3, blob4, blob5, blob6, blob7,
+  blob8, blob9, blob10, blob11, blob12, blob13, blob14, blob15,
+];
 
-/** Scattered abstract glass blobs used as ambient background texture across sections - not just the hero. */
+/** Scattered abstract glass blobs used as a consistent wallpaper texture across every section - same opacity and blur everywhere so the whole page reads as one continuous environment. */
 function FloatingBlobs({
   positions,
-  opacity = 0.5,
-  blur = "blur-sm",
 }: {
   positions: { blob: number; top: string; left: string; size: string; delay?: string }[];
-  opacity?: number;
-  blur?: string;
 }) {
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden" style={{ opacity }} aria-hidden>
+    <div className="pointer-events-none absolute inset-0 overflow-hidden opacity-40" aria-hidden>
       {positions.map((p, i) => (
         <img
           key={i}
           src={allBlobs[p.blob % allBlobs.length]}
           alt=""
-          className={`float-slow absolute ${p.size} ${blur}`}
+          className={`float-slow absolute ${p.size} blur-[3px]`}
           style={{ top: p.top, left: p.left, animationDelay: p.delay ?? "0s" }}
         />
       ))}
@@ -130,8 +137,6 @@ export default function Home() {
         />
         {/* scattered abstract glass blobs across the hero, less blurred and brighter than before */}
         <FloatingBlobs
-          opacity={0.8}
-          blur="blur-[2px]"
           positions={[
             { blob: 0, top: "8%", left: "6%", size: "w-20 sm:w-28" },
             { blob: 1, top: "38%", left: "22%", size: "w-24 sm:w-32", delay: "2s" },
@@ -141,6 +146,8 @@ export default function Home() {
             { blob: 5, top: "30%", left: "62%", size: "w-20 sm:w-28", delay: "5s" },
             { blob: 6, top: "78%", left: "30%", size: "w-16 sm:w-20", delay: "2.5s" },
             { blob: 7, top: "5%", left: "26%", size: "w-14 sm:w-20", delay: "3.5s" },
+            { blob: 8, top: "45%", left: "80%", size: "w-16 sm:w-24", delay: "1.5s" },
+            { blob: 9, top: "82%", left: "70%", size: "w-14 sm:w-20", delay: "4.5s" },
           ]}
         />
 
@@ -196,6 +203,12 @@ export default function Home() {
               "radial-gradient(55% 45% at 85% 15%, color-mix(in oklab, var(--champagne) 6%, transparent), transparent 70%), radial-gradient(50% 40% at 10% 85%, color-mix(in oklab, var(--iris) 6%, transparent), transparent 70%)",
           }}
           aria-hidden
+        />
+        <FloatingBlobs
+          positions={[
+            { blob: 15, top: "3%", left: "10%", size: "w-14" },
+            { blob: 1, top: "92%", left: "85%", size: "w-16", delay: "2.5s" },
+          ]}
         />
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -270,11 +283,11 @@ export default function Home() {
                 aria-hidden
               />
               <FloatingBlobs
-                opacity={0.25}
-                blur="blur-md"
                 positions={[
-                  { blob: 2, top: "5%", left: "88%", size: "w-16" },
-                  { blob: 5, top: "75%", left: "3%", size: "w-14", delay: "2s" },
+                  { blob: 10, top: "5%", left: "88%", size: "w-16" },
+                  { blob: 11, top: "75%", left: "3%", size: "w-14", delay: "2s" },
+                  { blob: 12, top: "40%", left: "50%", size: "w-16", delay: "3.5s" },
+                  { blob: 13, top: "85%", left: "60%", size: "w-14", delay: "1s" },
                 ]}
               />
               <div className="relative grid grid-cols-3 gap-4 sm:grid-cols-6">
@@ -313,11 +326,11 @@ export default function Home() {
               aria-hidden
             />
             <FloatingBlobs
-              opacity={0.22}
-              blur="blur-md"
               positions={[
-                { blob: 1, top: "8%", left: "5%", size: "w-14" },
-                { blob: 4, top: "80%", left: "92%", size: "w-16", delay: "3s" },
+                { blob: 14, top: "8%", left: "5%", size: "w-14" },
+                { blob: 15, top: "80%", left: "92%", size: "w-16", delay: "3s" },
+                { blob: 0, top: "85%", left: "15%", size: "w-14", delay: "2s" },
+                { blob: 3, top: "10%", left: "80%", size: "w-14", delay: "4s" },
               ]}
             />
             <div
@@ -352,11 +365,10 @@ export default function Home() {
               aria-hidden
             />
             <FloatingBlobs
-              opacity={0.2}
-              blur="blur-md"
               positions={[
-                { blob: 7, top: "10%", left: "90%", size: "w-16" },
-                { blob: 3, top: "82%", left: "8%", size: "w-14", delay: "2.5s" },
+                { blob: 5, top: "10%", left: "90%", size: "w-16" },
+                { blob: 6, top: "82%", left: "8%", size: "w-14", delay: "2.5s" },
+                { blob: 8, top: "55%", left: "45%", size: "w-14", delay: "1.5s" },
               ]}
             />
             <div className="relative grid items-center gap-14 lg:grid-cols-2">
@@ -393,11 +405,10 @@ export default function Home() {
           aria-hidden
         />
         <FloatingBlobs
-          opacity={0.2}
-          blur="blur-md"
           positions={[
-            { blob: 6, top: "12%", left: "6%", size: "w-14" },
-            { blob: 0, top: "78%", left: "94%", size: "w-16", delay: "3.5s" },
+            { blob: 9, top: "12%", left: "6%", size: "w-14" },
+            { blob: 10, top: "78%", left: "94%", size: "w-16", delay: "3.5s" },
+            { blob: 11, top: "50%", left: "40%", size: "w-14", delay: "2s" },
           ]}
         />
         <div className="grid items-center gap-14 lg:grid-cols-2">
@@ -454,11 +465,10 @@ export default function Home() {
           aria-hidden
         />
         <FloatingBlobs
-          opacity={0.18}
-          blur="blur-md"
           positions={[
-            { blob: 2, top: "15%", left: "45%", size: "w-14" },
-            { blob: 7, top: "70%", left: "55%", size: "w-16", delay: "2s" },
+            { blob: 12, top: "15%", left: "45%", size: "w-14" },
+            { blob: 13, top: "70%", left: "55%", size: "w-16", delay: "2s" },
+            { blob: 14, top: "40%", left: "15%", size: "w-14", delay: "3s" },
           ]}
         />
         <div className="relative mx-auto max-w-5xl px-6 py-28 text-center lg:px-10 lg:py-40">
