@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Play } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
+import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 import { MagneticAnchor, MagneticLink } from "@/components/site/MagneticLink";
 import { getProject, projects } from "@/data/projects";
 import NotFound from "@/pages/NotFound";
@@ -26,6 +27,7 @@ export default function ProjectCaseStudy() {
           className="absolute inset-0 h-full w-full object-cover opacity-30"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-[#0a0a0a]/85 to-[#0a0a0a]" />
+        <FloatingBlobs positions={defaultBlobScatter} />
         <div className="relative mx-auto max-w-7xl px-6 pt-40 pb-24 lg:px-10 lg:pt-52 lg:pb-32">
           <Reveal>
             <Link
@@ -119,6 +121,7 @@ export default function ProjectCaseStudy() {
           }}
           aria-hidden
         />
+        <FloatingBlobs positions={defaultBlobScatter} />
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
             <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-semibold">What we built</h2>

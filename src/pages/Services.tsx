@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/site/Reveal";
+import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { services } from "@/data/services";
 import glassLeaves from "@/assets/v3/service-leaf.png";
@@ -22,6 +23,7 @@ export default function Services() {
     <>
       <section className="relative overflow-hidden border-b border-white/[0.08] bg-grain">
         <div className="absolute inset-0" style={{ background: "var(--gradient-glow)" }} aria-hidden />
+        <FloatingBlobs positions={defaultBlobScatter} />
         <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-24 lg:px-10 lg:pt-52 lg:pb-32">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Services</p>

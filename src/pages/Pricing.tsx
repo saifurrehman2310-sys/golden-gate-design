@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
+import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 import { MagneticLink } from "@/components/site/MagneticLink";
 
 const tiers = [
@@ -58,6 +59,7 @@ export default function Pricing() {
           }}
           aria-hidden
         />
+        <FloatingBlobs positions={defaultBlobScatter} />
         <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-24 text-center lg:px-10 lg:pt-52 lg:pb-32">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Pricing</p>
@@ -85,6 +87,7 @@ export default function Pricing() {
           }}
           aria-hidden
         />
+        <FloatingBlobs positions={defaultBlobScatter} />
         <div className="grid items-start gap-6 lg:grid-cols-3">
           {tiers.map((t, i) => (
             <Reveal key={t.name} delay={i * 100} className={t.featured ? "lg:-mt-6" : ""}>

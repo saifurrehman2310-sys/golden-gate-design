@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
+import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { projects } from "@/data/projects";
 
@@ -46,6 +47,7 @@ export default function Portfolio() {
 
       <section className="relative overflow-hidden border-b border-white/[0.08] bg-grain">
         <div className="absolute inset-0" style={{ background: "var(--gradient-glow)" }} aria-hidden />
+        <FloatingBlobs positions={defaultBlobScatter} />
         <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-24 lg:px-10 lg:pt-52 lg:pb-32">
           <Reveal>
             <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Portfolio</p>
