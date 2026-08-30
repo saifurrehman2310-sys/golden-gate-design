@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import { ScorpioConstellation } from "@/components/site/ScorpioConstellation";
 
 export function Footer() {
   return (
-    <footer className="relative">
+    <footer className="relative overflow-hidden">
       <div
         className="h-px w-full"
         style={{
@@ -11,7 +12,8 @@ export function Footer() {
         }}
         aria-hidden
       />
-      <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
+      <ScorpioConstellation className="pointer-events-none absolute right-[4%] bottom-[6%] hidden w-[280px] opacity-[0.14] sm:block lg:w-[330px]" />
+      <div className="relative mx-auto max-w-7xl px-6 py-14 lg:px-10">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
             <p className="font-display text-xl">
