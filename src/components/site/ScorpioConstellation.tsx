@@ -2,7 +2,13 @@
  * A quiet constellation motif woven into the footer. Not decorative filler -
  * the shape traces Scorpio, positioned to sit low and unobtrusive.
  */
-export function ScorpioConstellation({ className = "" }: { className?: string }) {
+export function ScorpioConstellation({
+  className = "",
+  style,
+}: {
+  className?: string;
+  style?: React.CSSProperties;
+}) {
   // Simplified real star positions tracing the Scorpio hook, normalized to a 400x160 box
   const stars = [
     { x: 18, y: 40, r: 1.6 }, // beta Sco
@@ -23,8 +29,8 @@ export function ScorpioConstellation({ className = "" }: { className?: string })
     <svg
       viewBox="0 0 330 100"
       className={className}
+      style={{ overflow: "visible", ...style }}
       aria-hidden
-      style={{ overflow: "visible" }}
     >
       <polyline
         points={path}
