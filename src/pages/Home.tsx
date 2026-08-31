@@ -3,7 +3,7 @@ import { ArrowRight, ArrowUpRight, Mail, MessageCircle, MapPin } from "lucide-re
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { FloatingBlobs } from "@/components/site/FloatingBlobs";
-import { ScorpioConstellation } from "@/components/site/ScorpioConstellation";
+import heroConstellation from "@/assets/v3/hero-constellation.png";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
@@ -147,13 +147,10 @@ export default function Home() {
                       "radial-gradient(45% 45% at 35% 40%, color-mix(in oklab, var(--ice) 32%, transparent), transparent 70%), radial-gradient(40% 40% at 68% 62%, color-mix(in oklab, var(--champagne) 28%, transparent), transparent 70%)",
                   }}
                 />
-                <ScorpioConstellation
-                  className="pointer-events-none absolute top-[6%] -left-[18%] w-[70%] opacity-40"
-                  style={{ transform: "rotate(-18deg)" }}
-                />
-                <ScorpioConstellation
-                  className="pointer-events-none absolute -right-[15%] bottom-[4%] w-[60%] scale-x-[-1] opacity-40"
-                  style={{ transform: "rotate(14deg) scaleX(-1)" }}
+                <img
+                  src={heroConstellation}
+                  alt=""
+                  className="pointer-events-none absolute -top-[15%] -right-[30%] w-[85%] opacity-70"
                 />
                 <img src={heroSphere} alt="" className="float-slow relative h-full w-full object-contain" />
               </div>

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ScorpioConstellation } from "@/components/site/ScorpioConstellation";
 
 export function Footer() {
   return (
@@ -12,7 +11,6 @@ export function Footer() {
         }}
         aria-hidden
       />
-      <ScorpioConstellation className="pointer-events-none absolute right-[2%] bottom-[8%] w-[220px] opacity-[0.4] sm:right-[4%] sm:bottom-[6%] sm:w-[280px] lg:w-[330px]" />
       <div className="relative mx-auto max-w-7xl px-6 py-14 lg:px-10">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
