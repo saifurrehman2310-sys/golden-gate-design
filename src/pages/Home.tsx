@@ -3,11 +3,11 @@ import { ArrowRight, ArrowUpRight, Mail, MessageCircle, MapPin } from "lucide-re
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { FloatingBlobs } from "@/components/site/FloatingBlobs";
-import heroConstellation from "@/assets/v3/hero-constellation.png";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
 import heroSphere from "@/assets/v2/hero-swirl.png";
+import { HeroOrbitalSymbolism } from "@/components/site/HeroOrbitalSymbolism";
 import glassRibbon from "@/assets/glass-ribbon.png";
 import glassWave from "@/assets/glass-wave.png";
 import glassDroplet from "@/assets/glass-droplet.png";
@@ -147,12 +147,15 @@ export default function Home() {
                       "radial-gradient(45% 45% at 35% 40%, color-mix(in oklab, var(--ice) 32%, transparent), transparent 70%), radial-gradient(40% 40% at 68% 62%, color-mix(in oklab, var(--champagne) 28%, transparent), transparent 70%)",
                   }}
                 />
-                <img
-                  src={heroConstellation}
-                  alt=""
-                  className="pointer-events-none absolute -top-[15%] -right-[30%] w-[85%] opacity-70"
+                <HeroOrbitalSymbolism
+                  layer="back"
+                  className="pointer-events-none absolute -inset-[15%] opacity-90"
                 />
                 <img src={heroSphere} alt="" className="float-slow relative h-full w-full object-contain" />
+                <HeroOrbitalSymbolism
+                  layer="front"
+                  className="pointer-events-none absolute -inset-[15%] opacity-90"
+                />
               </div>
             </Reveal>
           </div>
