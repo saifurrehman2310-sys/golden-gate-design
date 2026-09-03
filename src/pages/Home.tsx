@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Mail, MessageCircle, MapPin } from "lucide-react";
+import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { FloatingBlobs } from "@/components/site/FloatingBlobs";
@@ -22,6 +22,9 @@ import serviceRibbon from "@/assets/v3/service-ribbon.png";
 import serviceSpiral from "@/assets/v3/service-spiral.png";
 import serviceBrackets from "@/assets/v3/service-brackets.png";
 import serviceStar from "@/assets/v3/service-star.png";
+import featuredBurgerBliss from "@/assets/v3/featured-burger-bliss.jpg";
+import featuredFinancialAdvisor from "@/assets/v3/featured-financial-advisor.jpg";
+import featuredSaiRealEstate from "@/assets/v3/featured-sai-real-estate.jpg";
 import connectFigure from "@/assets/v2/hourglass-spheres.png";
 
 import tileDiscover from "@/assets/v2/tile-magnify.png";
@@ -60,6 +63,13 @@ const serviceDescriptions: Record<string, string> = {
 const featured = ["burger-bliss", "financial-advisor", "sai-real-estate"].map(
   (s) => projects.find((p) => p.slug === s)!,
 );
+
+/** Finished gallery-piece thumbnails for the Featured Work exhibition — the glass frame, lighting and info are baked into each image, so these render bare with no additional card/wrapper. */
+const featuredThumbnails: Record<string, string> = {
+  "burger-bliss": featuredBurgerBliss,
+  "financial-advisor": featuredFinancialAdvisor,
+  "sai-real-estate": featuredSaiRealEstate,
+};
 
 /** Process tiles already have their glass frame baked into the source image — render bare, no extra box. */
 function ProcessTile({
@@ -230,40 +240,22 @@ export default function Home() {
           </Link>
         </Reveal>
 
-        <div className="relative mt-20 grid gap-16 py-6 sm:grid-cols-3 sm:gap-6">
+        <div className="relative mt-20 grid gap-16 py-6 sm:grid-cols-3 sm:items-start sm:gap-10 lg:gap-14">
           {featured.map((p, i) => {
-            const tilt = [-4, 3, -3][i % 3];
-            const offset = ["sm:mt-6", "sm:-mt-4", "sm:mt-10"][i % 3];
+            const tilt = [-3, 2, -2][i % 3];
+            const offset = ["sm:mt-0", "sm:mt-10", "sm:mt-4"][i % 3];
             return (
               <Reveal key={p.slug} delay={i * 90} className={offset}>
                 <Link
                   to={`/projects/${p.slug}`}
-                  className="group relative block transition-transform duration-500 hover:z-10 hover:!rotate-0"
+                  className="group relative block transition-transform duration-500 ease-[var(--ease-lux)] hover:z-10 hover:!translate-y-[-6px] hover:!rotate-0"
                   style={{ transform: `rotate(${tilt}deg)` }}
                 >
-                  <div className="glass-panel glass-edge relative aspect-[4/5] overflow-hidden rounded-xl shadow-[0_30px_60px_-25px_rgba(0,0,0,0.6)]">
-                    <img
-                      src={p.image}
-                      alt={`${p.name} website`}
-                      className="absolute inset-0 h-full w-full object-cover opacity-85 transition-all duration-700 ease-[var(--ease-lux)] group-hover:scale-105 group-hover:opacity-100"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[color-mix(in_oklab,var(--background)_75%,transparent)] via-transparent to-transparent" />
-                    <div
-                      className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                      style={{
-                        background:
-                          "radial-gradient(60% 50% at 30% 20%, color-mix(in oklab, var(--ice) 16%, transparent), transparent 70%)",
-                      }}
-                      aria-hidden
-                    />
-                    <span className="glass-frame absolute top-4 right-4 flex h-9 w-9 items-center justify-center rounded-full backdrop-blur-md">
-                      <ArrowUpRight size={15} className="text-foreground" />
-                    </span>
-                    <div className="absolute bottom-5 left-5">
-                      <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--gold)]">{p.category}</p>
-                      <p className="mt-1 text-lg font-semibold">{p.name}</p>
-                    </div>
-                  </div>
+                  <img
+                    src={featuredThumbnails[p.slug]}
+                    alt={`${p.name} — ${p.category}`}
+                    className="aspect-square w-full rounded-xl object-cover shadow-[0_30px_70px_-25px_rgba(0,0,0,0.65)] transition-all duration-500 ease-[var(--ease-lux)] group-hover:scale-[1.02] group-hover:shadow-[0_40px_90px_-20px_rgba(0,0,0,0.75)]"
+                  />
                 </Link>
               </Reveal>
             );
