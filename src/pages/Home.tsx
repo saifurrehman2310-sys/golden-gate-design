@@ -290,14 +290,6 @@ export default function Home() {
                 }}
                 aria-hidden
               />
-              <FloatingBlobs
-                positions={[
-                  { blob: 10, top: "5%", left: "88%", size: "w-16" },
-                  { blob: 11, top: "75%", left: "3%", size: "w-14", delay: "2s" },
-                  { blob: 12, top: "40%", left: "50%", size: "w-16", delay: "3.5s" },
-                  { blob: 13, top: "85%", left: "60%", size: "w-14", delay: "1s" },
-                ]}
-              />
               <div className="relative grid grid-cols-3 gap-4 sm:grid-cols-6">
                 {services.map((s, i) => {
                   const isActive = activeService === s.slug;
