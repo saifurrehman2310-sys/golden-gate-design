@@ -62,9 +62,23 @@ const featured = ["burger-bliss", "financial-advisor", "sai-real-estate"].map(
 );
 
 /** Process tiles already have their glass frame baked into the source image — render bare, no extra box. */
-function ProcessTile({ img, alt, className = "" }: { img: string; alt: string; className?: string }) {
+function ProcessTile({
+  img,
+  alt,
+  active = false,
+  className = "",
+}: {
+  img: string;
+  alt: string;
+  active?: boolean;
+  className?: string;
+}) {
   return (
-    <div className={`relative ${className}`}>
+    <div
+      className={`relative transition-transform duration-[400ms] ease-out motion-reduce:transition-none motion-reduce:!scale-100 ${
+        active ? "scale-[1.045]" : "scale-100"
+      } ${className}`}
+    >
       <img src={img} alt={alt} className="h-full w-full object-contain" />
     </div>
   );
@@ -106,6 +120,7 @@ function SculptureIcon({
 
 export default function Home() {
   const [activeService, setActiveService] = useState<string | null>(null);
+  const [activeStep, setActiveStep] = useState<string | null>(null);
 
   return (
     <>
@@ -368,13 +383,49 @@ export default function Home() {
               <img src={processRibbon} alt="" className="h-auto w-full object-contain" />
             </div>
             <div className="relative grid grid-cols-3 gap-4 sm:grid-cols-5">
-              {processSteps.map((s, i) => (
-                <Reveal key={s.n} delay={i * 90} className="text-center">
-                  <ProcessTile img={s.img} alt={`${s.step} icon`} className="mx-auto aspect-square w-full" />
-                  <p className="mt-3 text-xs text-[var(--champagne)]">{s.n}</p>
-                  <p className="text-sm font-medium">{s.step}</p>
-                </Reveal>
-              ))}
+              {processSteps.map((s, i) => {
+                const isActive = activeStep === s.n;
+                return (
+                  <Reveal key={s.n} delay={i * 90} className="text-center">
+                    <div
+                      className="cursor-pointer text-center transition-opacity duration-[400ms] ease-out motion-reduce:transition-none"
+                      style={{ opacity: activeStep && !isActive ? 0.88 : 1 }}
+                      role="button"
+                      tabIndex={0}
+                      onMouseEnter={() => setActiveStep(s.n)}
+                      onMouseLeave={() => setActiveStep((cur) => (cur === s.n ? null : cur))}
+                      onFocus={() => setActiveStep(s.n)}
+                      onBlur={() => setActiveStep((cur) => (cur === s.n ? null : cur))}
+                      onClick={() => setActiveStep(s.n)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setActiveStep(s.n);
+                        }
+                      }}
+                    >
+                      <ProcessTile
+                        img={s.img}
+                        alt={`${s.step} icon`}
+                        active={isActive}
+                        className="mx-auto aspect-square w-full"
+                      />
+                      <p
+                        className="mt-3 text-xs text-[var(--champagne)] transition-opacity duration-[400ms] ease-out motion-reduce:transition-none"
+                        style={{ opacity: isActive ? 1 : 0.85 }}
+                      >
+                        {s.n}
+                      </p>
+                      <p
+                        className="text-sm font-medium transition-opacity duration-[400ms] ease-out motion-reduce:transition-none"
+                        style={{ opacity: isActive ? 1 : 0.9 }}
+                      >
+                        {s.step}
+                      </p>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </Reveal>
