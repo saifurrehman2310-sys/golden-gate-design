@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
@@ -47,6 +48,15 @@ const serviceIcons: Record<string, string> = {
   "digital-strategy": serviceStar,
 };
 
+const serviceDescriptions: Record<string, string> = {
+  "brand-identity": "Making brands instantly recognisable.",
+  "web-design": "Websites built to be remembered.",
+  "ui-ux-design": "Experiences that feel effortless.",
+  "motion-design": "Giving ideas movement and energy.",
+  "web-development": "Turning concepts into working experiences.",
+  "digital-strategy": "Making creative decisions with purpose.",
+};
+
 const featured = ["burger-bliss", "financial-advisor", "sai-real-estate"].map(
   (s) => projects.find((p) => p.slug === s)!,
 );
@@ -61,12 +71,23 @@ function ProcessTile({ img, alt, className = "" }: { img: string; alt: string; c
 }
 
 /** Services icons are raw un-framed sculptures — presented directly with ambient glow only, no border/card box. */
-function SculptureIcon({ img, alt, className = "" }: { img: string; alt: string; className?: string }) {
+function SculptureIcon({
+  img,
+  alt,
+  active = false,
+  className = "",
+}: {
+  img: string;
+  alt: string;
+  active?: boolean;
+  className?: string;
+}) {
   return (
     <div className={`group relative ${className}`}>
       <div
         className="pointer-events-none absolute inset-[6%] rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-70"
         style={{
+          opacity: active ? 0.85 : undefined,
           background:
             "radial-gradient(60% 60% at 40% 40%, color-mix(in oklab, var(--ice) 14%, transparent), transparent 70%), radial-gradient(50% 50% at 65% 65%, color-mix(in oklab, var(--champagne) 12%, transparent), transparent 70%)",
         }}
@@ -75,13 +96,17 @@ function SculptureIcon({ img, alt, className = "" }: { img: string; alt: string;
       <img
         src={img}
         alt={alt}
-        className="relative h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+        className={`relative h-full w-full object-contain transition-transform duration-500 ease-out group-hover:scale-105 ${
+          active ? "scale-110" : ""
+        }`}
       />
     </div>
   );
 }
 
 export default function Home() {
+  const [activeService, setActiveService] = useState<string | null>(null);
+
   return (
     <>
       {/* HERO */}
@@ -259,16 +284,51 @@ export default function Home() {
                 ]}
               />
               <div className="relative grid grid-cols-3 gap-4 sm:grid-cols-6">
-                {services.map((s, i) => (
-                  <Reveal key={s.slug} delay={i * 60}>
-                    <Link to="/services" className="group block text-center">
-                      <SculptureIcon img={serviceIcons[s.slug]} alt={s.title} className="aspect-square w-full" />
-                      <p className="mt-3 text-xs leading-tight font-medium transition-colors group-hover:text-[var(--champagne)] sm:text-sm">
-                        {s.title}
-                      </p>
-                    </Link>
-                  </Reveal>
-                ))}
+                {services.map((s, i) => {
+                  const isActive = activeService === s.slug;
+                  return (
+                    <Reveal key={s.slug} delay={i * 60}>
+                      <Link
+                        to="/services"
+                        className="group block text-center transition-opacity duration-300 ease-out"
+                        style={{ opacity: activeService && !isActive ? 0.6 : 1 }}
+                        onMouseEnter={() => setActiveService(s.slug)}
+                        onMouseLeave={() => setActiveService((cur) => (cur === s.slug ? null : cur))}
+                        onFocus={() => setActiveService(s.slug)}
+                        onBlur={() => setActiveService((cur) => (cur === s.slug ? null : cur))}
+                        onClick={(e) => {
+                          if (activeService !== s.slug) {
+                            e.preventDefault();
+                            setActiveService(s.slug);
+                          }
+                        }}
+                      >
+                        <SculptureIcon
+                          img={serviceIcons[s.slug]}
+                          alt={s.title}
+                          active={isActive}
+                          className="aspect-square w-full"
+                        />
+                        <p
+                          className="mt-3 text-xs leading-tight font-medium transition-colors group-hover:text-[var(--champagne)] sm:text-sm"
+                          style={{ color: isActive ? "var(--champagne)" : undefined }}
+                        >
+                          {s.title}
+                        </p>
+                        <p
+                          className="overflow-hidden text-[11px] leading-snug text-muted-foreground transition-all duration-300 ease-out sm:text-xs"
+                          style={{
+                            maxHeight: isActive ? "2.75rem" : "0px",
+                            opacity: isActive ? 1 : 0,
+                            marginTop: isActive ? "0.35rem" : "0px",
+                          }}
+                        >
+                          {serviceDescriptions[s.slug]}
+                        </p>
+                      </Link>
+                    </Reveal>
+                  );
+                })}
               </div>
             </div>
           </Reveal>
