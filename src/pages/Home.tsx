@@ -240,21 +240,38 @@ export default function Home() {
           </Link>
         </Reveal>
 
-        <div className="relative mt-20 grid gap-16 py-6 sm:grid-cols-3 sm:items-start sm:gap-10 lg:gap-14">
+        <div className="relative mt-16 flex flex-col items-center gap-14 py-8 sm:mt-20 sm:flex-row sm:items-center sm:justify-center sm:gap-0">
           {featured.map((p, i) => {
-            const tilt = [-3, 2, -2][i % 3];
-            const offset = ["sm:mt-0", "sm:mt-10", "sm:mt-4"][i % 3];
+            const cfg = [
+              {
+                size: "w-[clamp(220px,29vw,460px)]",
+                tilt: "sm:rotate-[-6deg]",
+                scale: "sm:scale-[0.88]",
+                hoverScale: "sm:group-hover:!scale-[0.94]",
+                wrap: "sm:mt-12 sm:-mr-10 lg:-mr-16 sm:z-10",
+              },
+              {
+                size: "w-[clamp(260px,34vw,540px)]",
+                tilt: "",
+                scale: "sm:scale-[1.05]",
+                hoverScale: "sm:group-hover:!scale-[1.1]",
+                wrap: "sm:z-20",
+              },
+              {
+                size: "w-[clamp(220px,29vw,460px)]",
+                tilt: "sm:rotate-[6deg]",
+                scale: "sm:scale-[0.88]",
+                hoverScale: "sm:group-hover:!scale-[0.94]",
+                wrap: "sm:mt-12 sm:-ml-10 lg:-ml-16 sm:z-10",
+              },
+            ][i];
             return (
-              <Reveal key={p.slug} delay={i * 90} className={offset}>
-                <Link
-                  to={`/projects/${p.slug}`}
-                  className="group relative block transition-transform duration-500 ease-[var(--ease-lux)] hover:z-10 hover:!translate-y-[-6px] hover:!rotate-0"
-                  style={{ transform: `rotate(${tilt}deg)` }}
-                >
+              <Reveal key={p.slug} delay={i * 100}>
+                <Link to={`/projects/${p.slug}`} className={`group relative block hover:z-30 ${cfg.wrap}`}>
                   <img
                     src={featuredThumbnails[p.slug]}
                     alt={`${p.name} — ${p.category}`}
-                    className="aspect-square w-full rounded-xl object-cover shadow-[0_30px_70px_-25px_rgba(0,0,0,0.65)] transition-all duration-500 ease-[var(--ease-lux)] group-hover:scale-[1.02] group-hover:shadow-[0_40px_90px_-20px_rgba(0,0,0,0.75)]"
+                    className={`${cfg.size} aspect-square rounded-xl object-cover shadow-[0_45px_120px_-30px_rgba(0,0,0,0.85)] transition-transform duration-500 ease-[var(--ease-lux)] ${cfg.tilt} ${cfg.scale} sm:group-hover:!-translate-y-2 sm:group-hover:!rotate-0 ${cfg.hoverScale}`}
                   />
                 </Link>
               </Reveal>
