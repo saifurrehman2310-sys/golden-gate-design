@@ -247,7 +247,7 @@ export default function Home() {
                 <img
                   src={featuredThumbnails[p.slug]}
                   alt={`${p.name} — ${p.category}`}
-                  className="aspect-square w-full rounded-xl object-cover shadow-[0_35px_90px_-30px_rgba(0,0,0,0.8)] transition-transform duration-500 ease-[var(--ease-lux)] group-hover:-translate-y-2 group-hover:scale-[1.02]"
+                  className="aspect-square w-full rounded-xl object-cover transition-transform duration-500 ease-[var(--ease-lux)] group-hover:-translate-y-2 group-hover:scale-[1.02]"
                 />
               </Link>
             </Reveal>
