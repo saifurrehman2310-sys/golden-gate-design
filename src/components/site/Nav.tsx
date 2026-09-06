@@ -8,6 +8,7 @@ const links = [
   { to: "/services", label: "Services" },
   { to: "/pricing", label: "Pricing" },
   { to: "/about", label: "About" },
+  { to: "/play", label: "Play" },
 ];
 
 export function Nav() {
