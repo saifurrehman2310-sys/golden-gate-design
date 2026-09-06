@@ -410,21 +410,15 @@ export default function Home() {
       {/* ABOUT */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <Reveal>
-          <div className="glass-panel glass-edge relative overflow-hidden rounded-2xl p-8 lg:p-14">
+          <div className="relative p-2 lg:p-4">
+            {/* Section-wide mood: light concentrated toward the sculpture, falling to darkness elsewhere so the left text stays high-contrast. */}
             <div
-              className="pointer-events-none absolute inset-0"
+              className="pointer-events-none absolute inset-0 -z-10"
               style={{
                 background:
-                  "radial-gradient(60% 55% at 15% 40%, color-mix(in oklab, var(--iris) 10%, transparent), transparent 70%), radial-gradient(55% 50% at 90% 70%, color-mix(in oklab, var(--ice) 8%, transparent), transparent 70%)",
+                  "radial-gradient(60% 65% at 80% 50%, color-mix(in oklab, var(--ice) 9%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 38%, transparent 72%)",
               }}
               aria-hidden
-            />
-            <FloatingBlobs
-              positions={[
-                { blob: 5, top: "10%", left: "90%", size: "w-16" },
-                { blob: 6, top: "82%", left: "8%", size: "w-14", delay: "2.5s" },
-                { blob: 8, top: "55%", left: "45%", size: "w-14", delay: "1.5s" },
-              ]}
             />
             <div className="relative grid items-center gap-14 lg:grid-cols-2">
               <div>
@@ -441,8 +435,49 @@ export default function Home() {
                   Our Story <ArrowRight size={15} />
                 </Link>
               </div>
-              <div className="relative mx-auto aspect-square w-full max-w-sm" aria-hidden>
-                <img src={glassDroplet} alt="" className="float-slow relative h-full w-full object-contain" />
+              <div className="relative mx-auto aspect-square w-full max-w-sm">
+                {/* Environmental light — anchored to the sculpture itself so it travels with it at every breakpoint. */}
+                <div
+                  className="ambient-drift pointer-events-none absolute rounded-full"
+                  style={{
+                    inset: "-38%",
+                    background:
+                      "radial-gradient(42% 42% at 30% 24%, color-mix(in oklab, var(--ice) 32%, transparent), transparent 72%)",
+                    filter: "blur(38px)",
+                  }}
+                  aria-hidden
+                />
+                <div
+                  className="ambient-drift-slow pointer-events-none absolute rounded-full"
+                  style={{
+                    inset: "-38%",
+                    background:
+                      "radial-gradient(46% 46% at 76% 80%, color-mix(in oklab, var(--champagne) 26%, transparent), transparent 72%)",
+                    filter: "blur(42px)",
+                  }}
+                  aria-hidden
+                />
+                <div
+                  className="ambient-drift pointer-events-none absolute"
+                  style={{
+                    width: "150%",
+                    height: "34%",
+                    top: "16%",
+                    left: "-22%",
+                    transform: "rotate(-16deg)",
+                    background:
+                      "radial-gradient(closest-side, color-mix(in oklab, var(--ice) 20%, transparent), transparent 78%)",
+                    filter: "blur(26px)",
+                    opacity: 0.55,
+                  }}
+                  aria-hidden
+                />
+                <img
+                  src={glassDroplet}
+                  alt=""
+                  aria-hidden
+                  className="float-slow relative h-full w-full object-contain"
+                />
               </div>
             </div>
           </div>
