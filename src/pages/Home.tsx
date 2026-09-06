@@ -22,9 +22,9 @@ import serviceRibbon from "@/assets/v3/service-ribbon.png";
 import serviceSpiral from "@/assets/v3/service-spiral.png";
 import serviceBrackets from "@/assets/v3/service-brackets.png";
 import serviceStar from "@/assets/v3/service-star.png";
-import featuredBurgerBliss from "@/assets/v3/featured-burger-bliss.jpg";
-import featuredFinancialAdvisor from "@/assets/v3/featured-financial-advisor.jpg";
-import featuredSaiRealEstate from "@/assets/v3/featured-sai-real-estate.jpg";
+import featuredBurgerBliss from "@/assets/v3/featured-burger-bliss.png";
+import featuredFinancialAdvisor from "@/assets/v3/featured-financial-advisor.png";
+import featuredSaiRealEstate from "@/assets/v3/featured-sai-real-estate.png";
 import connectFigure from "@/assets/v2/hourglass-spheres.png";
 
 import tileDiscover from "@/assets/v2/tile-magnify.png";
@@ -240,14 +240,14 @@ export default function Home() {
           </Link>
         </Reveal>
 
-        <div className="relative mt-16 grid gap-10 py-8 sm:mt-20 sm:grid-cols-3 lg:gap-12">
+        <div className="relative mt-16 grid items-center gap-10 py-8 sm:mt-20 sm:grid-cols-3 lg:gap-12">
           {featured.map((p, i) => (
             <Reveal key={p.slug} delay={i * 100}>
               <Link to={`/projects/${p.slug}`} className="group relative block">
                 <img
                   src={featuredThumbnails[p.slug]}
                   alt={`${p.name} — ${p.category}`}
-                  className="aspect-square w-full rounded-xl object-cover transition-transform duration-500 ease-[var(--ease-lux)] group-hover:-translate-y-2 group-hover:scale-[1.02]"
+                  className="h-auto w-full rounded-xl object-contain transition-transform duration-500 ease-[var(--ease-lux)] group-hover:-translate-y-2 group-hover:scale-[1.02]"
                 />
               </Link>
             </Reveal>
