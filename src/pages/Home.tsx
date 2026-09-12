@@ -4,7 +4,6 @@ import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { FloatingBlobs } from "@/components/site/FloatingBlobs";
-import { LightOrb, CatchBurst, useCatchLight, useInputProfile } from "@/components/site/CatchLightOrb";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
@@ -129,59 +128,41 @@ function SculptureIcon({
   );
 }
 
-/** Compact homepage teaser for the full /play experience — same mechanic, no intro/finish gating, just a short infinite loop. */
-function CatchLightTeaser() {
-  const { reducedMotion, isCoarsePointer } = useInputProfile();
-  const { orbAt, visible, catchAt, catches, burstKey, start, catchOne } = useCatchLight({
-    reducedMotion,
-  });
-  const [started, setStarted] = useState(false);
-
-  const particleCount = reducedMotion ? 3 : isCoarsePointer ? 5 : 8;
-
+/** Compact homepage preview for the /play "Hidden Collection" installation — atmospheric, not a duplicate mini-game. One object sits dimly in the dark, hinting there's more to find. */
+function HiddenCollectionTeaser() {
+  const [near, setNear] = useState(false);
   return (
-    <div className="relative h-[46vh] min-h-[320px] w-full overflow-hidden rounded-2xl">
+    <div
+      className="relative flex h-[42vh] min-h-[300px] w-full items-center justify-center overflow-hidden rounded-2xl"
+      onMouseEnter={() => setNear(true)}
+      onMouseLeave={() => setNear(false)}
+    >
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-700"
+        className="pointer-events-none absolute inset-0 transition-opacity duration-1000"
         style={{
           background:
-            "radial-gradient(50% 55% at 50% 45%, color-mix(in oklab, var(--ice) 10%, transparent) 0%, color-mix(in oklab, var(--champagne) 6%, transparent) 42%, transparent 78%)",
-          opacity: visible ? 0.9 : 0.55,
+            "radial-gradient(45% 45% at 50% 45%, color-mix(in oklab, var(--ice) 9%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 40%, transparent 78%)",
+          opacity: near ? 0.9 : 0.5,
         }}
         aria-hidden
       />
-      {!started ? (
-        <div
-          role="button"
-          tabIndex={0}
-          onClick={() => {
-            setStarted(true);
-            start();
+      <div className="relative h-28 w-28 transition-all duration-1000 ease-[var(--ease-lux)]" style={{ opacity: near ? 0.9 : 0.35 }}>
+        <span
+          className="pointer-events-none absolute inset-[-120%] rounded-full blur-2xl transition-opacity duration-1000"
+          style={{
+            background:
+              "radial-gradient(circle, color-mix(in oklab, var(--ice) 38%, transparent) 0%, color-mix(in oklab, var(--champagne) 20%, transparent) 45%, transparent 75%)",
+            opacity: near ? 1 : 0.3,
           }}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setStarted(true);
-              start();
-            }
-          }}
-          aria-label="Catch the light"
-          className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center text-center"
-        >
-          <p className="font-display text-[clamp(1.5rem,3.5vw,2.2rem)] leading-[1.1]">Catch the Light.</p>
-          <p className="mt-3 text-xs tracking-[0.2em] text-muted-foreground uppercase">
-            {isCoarsePointer ? "Tap to try it" : "Click to try it"}
-          </p>
-        </div>
-      ) : (
-        <>
-          <LightOrb at={orbAt} visible={visible} onCatch={catchOne} reducedMotion={reducedMotion} />
-          {catchAt && <CatchBurst at={catchAt} burstKey={burstKey} particleCount={particleCount} />}
-          <p className="pointer-events-none absolute top-4 right-5 text-xs tracking-[0.25em] text-[var(--champagne)]">
-            {String(catches).padStart(2, "0")} caught
-          </p>
-        </>
-      )}
+          aria-hidden
+        />
+        <img src={serviceLeaf} alt="" aria-hidden className="float-slow relative h-full w-full object-contain" />
+      </div>
+      <Reveal className="pointer-events-none absolute inset-x-0 bottom-6 text-center">
+        <p className="text-xs tracking-[0.25em] text-muted-foreground uppercase">
+          Six objects wait in the dark.
+        </p>
+      </Reveal>
     </div>
   );
 }
@@ -384,13 +365,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CATCH THE LIGHT — homepage teaser */}
+      {/* THE HIDDEN COLLECTION — homepage preview */}
       <section className="relative mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
         <Reveal>
-          <CatchLightTeaser />
+          <HiddenCollectionTeaser />
           <p className="mt-6 text-center">
             <Link to="/play" className="lux-link text-sm text-muted-foreground hover:text-foreground">
-              Enter the full experience →
+              Enter the collection →
             </Link>
           </p>
         </Reveal>
