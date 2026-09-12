@@ -91,6 +91,7 @@
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   body {
@@ -99,6 +100,7 @@
     background-attachment: fixed;
     color: #f7f7f8;
     font-family: var(--font-sans);
+    overflow-x: hidden;
   }
 
   h1,

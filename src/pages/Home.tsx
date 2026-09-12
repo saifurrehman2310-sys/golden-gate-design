@@ -4,6 +4,7 @@ import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { FloatingBlobs } from "@/components/site/FloatingBlobs";
+import { LightOrb, CatchBurst, useCatchLight, useInputProfile } from "@/components/site/CatchLightOrb";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
 
@@ -124,6 +125,63 @@ function SculptureIcon({
           active ? "scale-110" : ""
         }`}
       />
+    </div>
+  );
+}
+
+/** Compact homepage teaser for the full /play experience — same mechanic, no intro/finish gating, just a short infinite loop. */
+function CatchLightTeaser() {
+  const { reducedMotion, isCoarsePointer } = useInputProfile();
+  const { orbAt, visible, catchAt, catches, burstKey, start, catchOne } = useCatchLight({
+    reducedMotion,
+  });
+  const [started, setStarted] = useState(false);
+
+  const particleCount = reducedMotion ? 3 : isCoarsePointer ? 5 : 8;
+
+  return (
+    <div className="relative h-[46vh] min-h-[320px] w-full overflow-hidden rounded-2xl">
+      <div
+        className="pointer-events-none absolute inset-0 transition-opacity duration-700"
+        style={{
+          background:
+            "radial-gradient(50% 55% at 50% 45%, color-mix(in oklab, var(--ice) 10%, transparent) 0%, color-mix(in oklab, var(--champagne) 6%, transparent) 42%, transparent 78%)",
+          opacity: visible ? 0.9 : 0.55,
+        }}
+        aria-hidden
+      />
+      {!started ? (
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            setStarted(true);
+            start();
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setStarted(true);
+              start();
+            }
+          }}
+          aria-label="Catch the light"
+          className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center text-center"
+        >
+          <p className="font-display text-[clamp(1.5rem,3.5vw,2.2rem)] leading-[1.1]">Catch the Light.</p>
+          <p className="mt-3 text-xs tracking-[0.2em] text-muted-foreground uppercase">
+            {isCoarsePointer ? "Tap to try it" : "Click to try it"}
+          </p>
+        </div>
+      ) : (
+        <>
+          <LightOrb at={orbAt} visible={visible} onCatch={catchOne} reducedMotion={reducedMotion} />
+          {catchAt && <CatchBurst at={catchAt} burstKey={burstKey} particleCount={particleCount} />}
+          <p className="pointer-events-none absolute top-4 right-5 text-xs tracking-[0.25em] text-[var(--champagne)]">
+            {String(catches).padStart(2, "0")} caught
+          </p>
+        </>
+      )}
     </div>
   );
 }
@@ -326,6 +384,18 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CATCH THE LIGHT — homepage teaser */}
+      <section className="relative mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
+        <Reveal>
+          <CatchLightTeaser />
+          <p className="mt-6 text-center">
+            <Link to="/play" className="lux-link text-sm text-muted-foreground hover:text-foreground">
+              Enter the full experience →
+            </Link>
+          </p>
+        </Reveal>
+      </section>
+
       {/* PROCESS */}
       <section className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <Reveal className="text-center">
@@ -408,7 +478,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
+      <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 lg:px-10 lg:py-32">
         <Reveal>
           <div className="relative p-2 lg:p-4">
             {/* Section-wide mood: light concentrated toward the sculpture, falling to darkness elsewhere so the left text stays high-contrast. */}
