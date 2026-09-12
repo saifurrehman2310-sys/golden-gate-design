@@ -3,169 +3,185 @@ import { Link } from "react-router-dom";
 import { Reveal } from "@/components/site/Reveal";
 import spark from "@/assets/v3/blob-0.png";
 
-const TARGET_CATCHES = 7;
-const CENTER: Point = { x: 50, y: 46 };
+const TARGET_CATCHES = 9;
 
 type Point = { x: number; y: number };
+type Phase = "intro" | "playing" | "finished";
 
-function randomPoint(margin = 14): Point {
+function randomPoint(margin: number): Point {
   return {
     x: margin + Math.random() * (100 - margin * 2),
     y: margin + Math.random() * (100 - margin * 2),
   };
 }
 
-function distance(a: Point, b: Point) {
-  return Math.hypot(a.x - b.x, a.y - b.y);
-}
-
 /**
- * "Catch the Light" — a small interactive installation, not a game embed.
- * Pure CSS-transform driven (no canvas), reusing the site's existing glass
- * blob art, colour tokens and easing so it reads as part of the same world.
+ * "Catch the Light" — a real reaction game dressed as a small interactive
+ * installation. Loop: the orb appears at a random point and waits -> the
+ * player finds and taps/clicks it -> it reacts and relocates -> repeat.
+ * As catches climb it gets a little less predictable (tighter margins,
+ * a chance of one mid-life "juke", faster respawns) but stays fair.
+ * Pure CSS-transform driven -- no canvas, no extra dependencies.
  */
 export default function Play() {
-  const [phase, setPhase] = useState<"intro" | "playing" | "finished">("intro");
-  const [lightAt, setLightAt] = useState<Point>(CENTER);
+  const [phase, setPhase] = useState<Phase>("intro");
+  const [orbAt, setOrbAt] = useState<Point>({ x: 50, y: 46 });
+  const [visible, setVisible] = useState(false);
   const [catchAt, setCatchAt] = useState<Point | null>(null);
   const [catches, setCatches] = useState(0);
   const [burstKey, setBurstKey] = useState(0);
-  const [flash, setFlash] = useState(false);
 
-  const arenaRef = useRef<HTMLDivElement>(null);
-  const moveTimer = useRef<number | null>(null);
-  const lastMoveAt = useRef(0);
-  const isCoarsePointer = useMemo(() => window.matchMedia("(pointer: coarse)").matches, []);
+  const jukeTimer = useRef<number | null>(null);
+  const respawnTimer = useRef<number | null>(null);
   const reducedMotion = useMemo(
     () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     [],
   );
+  const isCoarsePointer = useMemo(() => window.matchMedia("(pointer: coarse)").matches, []);
 
-  const clearMoveTimer = () => {
-    if (moveTimer.current) window.clearTimeout(moveTimer.current);
+  const clearTimers = () => {
+    if (jukeTimer.current) window.clearTimeout(jukeTimer.current);
+    if (respawnTimer.current) window.clearTimeout(respawnTimer.current);
   };
 
-  const scheduleNextMove = useCallback((delayOverride?: number) => {
-    clearMoveTimer();
-    const delay = delayOverride ?? 1800 + Math.random() * 1000;
-    moveTimer.current = window.setTimeout(() => {
-      setLightAt(randomPoint());
-      lastMoveAt.current = Date.now();
-      scheduleNextMove();
-    }, delay);
-  }, []);
+  useEffect(() => clearTimers, []);
 
-  useEffect(() => {
-    if (phase !== "playing") return;
-    scheduleNextMove(1400);
-    return clearMoveTimer;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase]);
+  const spawn = useCallback(
+    (level: number) => {
+      const margin = Math.max(10, 18 - level);
+      const point = randomPoint(margin);
+      setOrbAt(point);
+      setVisible(true);
 
-  const handleArenaPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (phase !== "playing" || isCoarsePointer || reducedMotion) return;
-    const now = Date.now();
-    if (now - lastMoveAt.current < 550) return;
-    const rect = arenaRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const px = ((e.clientX - rect.left) / rect.width) * 100;
-    const py = ((e.clientY - rect.top) / rect.height) * 100;
-    if (distance({ x: px, y: py }, lightAt) < 16) {
-      let candidate = randomPoint();
-      let attempts = 0;
-      while (distance(candidate, { x: px, y: py }) < 30 && attempts < 6) {
-        candidate = randomPoint();
-        attempts++;
+      // From a handful of catches on, there's a growing (capped) chance the
+      // orb slips to a new spot once before it's caught -- a fair, small
+      // "juke" rather than constant unpredictable fleeing.
+      if (!reducedMotion) {
+        const jukeChance = Math.min(0.5, level * 0.07);
+        if (Math.random() < jukeChance) {
+          jukeTimer.current = window.setTimeout(
+            () => {
+              setOrbAt(randomPoint(margin));
+            },
+            550 + Math.random() * 400,
+          );
+        }
       }
-      setLightAt(candidate);
-      lastMoveAt.current = now;
-      scheduleNextMove();
-    }
+    },
+    [reducedMotion],
+  );
+
+  const begin = () => {
+    clearTimers();
+    setCatches(0);
+    setCatchAt(null);
+    setPhase("playing");
+    spawn(0);
   };
 
   const handleCatch = () => {
-    if (phase !== "playing") return;
-    setCatchAt(lightAt);
+    if (phase !== "playing" || !visible) return;
+    clearTimers();
+    setVisible(false);
+    setCatchAt(orbAt);
     setBurstKey((k) => k + 1);
-    setFlash(true);
-    window.setTimeout(() => setFlash(false), 380);
-    setLightAt(randomPoint());
-    lastMoveAt.current = Date.now();
-    scheduleNextMove(650);
+
     setCatches((c) => {
       const next = c + 1;
       if (next >= TARGET_CATCHES) {
-        clearMoveTimer();
-        window.setTimeout(() => setPhase("finished"), 750);
+        respawnTimer.current = window.setTimeout(() => setPhase("finished"), 700);
+      } else {
+        const delay = Math.max(260, 520 - next * 20);
+        respawnTimer.current = window.setTimeout(() => spawn(next), delay);
       }
       return next;
     });
-  };
-
-  const begin = () => {
-    setCatches(0);
-    setCatchAt(null);
-    setLightAt(randomPoint());
-    setPhase("playing");
   };
 
   const particleCount = reducedMotion ? 3 : isCoarsePointer ? 5 : 8;
   const particles = useMemo(() => Array.from({ length: particleCount }), [particleCount]);
 
   return (
-    <section className="relative overflow-hidden bg-grain">
+    <section className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-grain">
+      {/* Deep gallery environment -- mostly empty, light concentrated near the orb. */}
       <div
         className="pointer-events-none absolute inset-0 transition-opacity duration-500"
         style={{
           background:
-            "radial-gradient(60% 60% at 50% 40%, color-mix(in oklab, var(--ice) 11%, transparent) 0%, color-mix(in oklab, var(--champagne) 7%, transparent) 42%, transparent 78%)",
-          opacity: flash ? 1 : 0.55,
+            "radial-gradient(45% 45% at 50% 45%, color-mix(in oklab, var(--ice) 10%, transparent) 0%, color-mix(in oklab, var(--champagne) 6%, transparent) 40%, transparent 75%)",
+          opacity: visible ? 0.9 : 0.5,
         }}
         aria-hidden
       />
-      <div className="relative mx-auto max-w-5xl px-6 pt-40 pb-20 lg:px-10 lg:pt-48 lg:pb-28">
-        <Reveal>
-          <p className="text-center text-xs uppercase tracking-[0.35em] text-[var(--gold)]">
-            A small discovery
+
+      <div className="relative flex min-h-0 flex-1 flex-col px-4 pt-24 pb-6 sm:px-6 sm:pt-28 lg:px-10">
+        {phase === "playing" && (
+          <p className="pointer-events-none absolute top-24 right-5 text-xs tracking-[0.25em] text-[var(--champagne)] sm:top-28 sm:right-8">
+            {String(catches).padStart(2, "0")} caught
           </p>
-        </Reveal>
+        )}
 
-        <div
-          ref={arenaRef}
-          onPointerMove={handleArenaPointerMove}
-          className="relative mx-auto mt-8 h-[62vh] min-h-[420px] max-w-3xl touch-none select-none"
-        >
-          {/* The light itself — always present, drifts idly before play begins. */}
-          <div
-            className="absolute flex items-center justify-center transition-[left,top] duration-[1600ms] ease-[cubic-bezier(0.22,1,0.36,1)]"
-            style={{ left: `${lightAt.x}%`, top: `${lightAt.y}%`, transform: "translate(-50%, -50%)" }}
-          >
-            <span
-              className="pointer-events-none absolute inset-[-160%] rounded-full blur-2xl transition-opacity duration-700"
-              style={{
-                background:
-                  "radial-gradient(circle, color-mix(in oklab, var(--ice) 42%, transparent) 0%, color-mix(in oklab, var(--champagne) 24%, transparent) 45%, transparent 75%)",
-                opacity: phase === "playing" ? 1 : 0.4,
+        <div className="relative min-h-0 w-full flex-1 overflow-hidden">
+          {phase === "intro" && (
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={begin}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  begin();
+                }
               }}
-              aria-hidden
-            />
-            <button
-              type="button"
-              aria-label="Catch the light"
-              disabled={phase !== "playing"}
-              onClick={handleCatch}
-              className="relative flex h-[4.5rem] w-[4.5rem] items-center justify-center sm:h-20 sm:w-20"
+              aria-label="Begin -- catch the light"
+              className="absolute inset-0 flex cursor-pointer flex-col items-center justify-center text-center"
             >
-              <img
-                src={spark}
-                alt=""
-                aria-hidden
-                className={`relative h-full w-full object-contain ${reducedMotion ? "" : "float-slow"}`}
-              />
-            </button>
-          </div>
+              <Reveal>
+                <h1 className="font-display text-[clamp(1.9rem,6vw,3.2rem)] leading-[1.1]">
+                  Catch the Light.
+                </h1>
+                <p className="mt-4 text-sm tracking-[0.15em] text-muted-foreground uppercase">
+                  {isCoarsePointer ? "Tap" : "Click"} to begin
+                </p>
+              </Reveal>
+            </div>
+          )}
 
-          {/* Catch feedback — a handful of drifting motes, capped and auto-cleared. */}
+          {phase !== "intro" && (
+            <div
+              className="absolute flex items-center justify-center transition-[left,top,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              style={{
+                left: `${orbAt.x}%`,
+                top: `${orbAt.y}%`,
+                transform: "translate(-50%, -50%)",
+                opacity: visible ? 1 : 0,
+              }}
+            >
+              <span
+                className="pointer-events-none absolute inset-[-170%] rounded-full blur-2xl"
+                style={{
+                  background:
+                    "radial-gradient(circle, color-mix(in oklab, var(--ice) 44%, transparent) 0%, color-mix(in oklab, var(--champagne) 24%, transparent) 45%, transparent 75%)",
+                }}
+                aria-hidden
+              />
+              <button
+                type="button"
+                aria-label="Catch the light"
+                onClick={handleCatch}
+                disabled={!visible}
+                className="relative flex h-16 w-16 items-center justify-center sm:h-20 sm:w-20"
+              >
+                <img
+                  src={spark}
+                  alt=""
+                  aria-hidden
+                  className={`relative h-full w-full object-contain ${reducedMotion ? "" : "float-slow"}`}
+                />
+              </button>
+            </div>
+          )}
+
           {burstKey > 0 && catchAt && (
             <div
               key={burstKey}
@@ -193,38 +209,15 @@ export default function Play() {
             </div>
           )}
 
-          {phase === "playing" && (
-            <p className="absolute top-0 right-0 text-xs tracking-[0.25em] text-[var(--champagne)]">
-              {catches} / {TARGET_CATCHES}
-            </p>
-          )}
-
-          {phase === "intro" && (
-            <Reveal className="absolute inset-0 flex items-center justify-center">
-              <div className="max-w-sm text-center">
-                <h1 className="font-display text-[clamp(2rem,5vw,3.4rem)] leading-[1.1]">
-                  Catch the light.
-                </h1>
-                <p className="mt-5 text-muted-foreground">
-                  It drifts on its own — {isCoarsePointer ? "tap" : "chase and click"} it{" "}
-                  {TARGET_CATCHES} times.
-                </p>
-                <button onClick={begin} className="lux-link mt-8 inline-flex items-center gap-2 text-sm">
-                  Begin <span aria-hidden>→</span>
-                </button>
-              </div>
-            </Reveal>
-          )}
-
           {phase === "finished" && (
             <Reveal className="absolute inset-0 flex items-center justify-center">
-              <div className="max-w-sm text-center">
+              <div className="max-w-sm px-4 text-center">
                 <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Caught</p>
-                <h2 className="mt-4 font-display text-[clamp(1.7rem,4vw,2.6rem)] leading-[1.15]">
+                <h2 className="mt-4 font-display text-[clamp(1.6rem,5vw,2.4rem)] leading-[1.15]">
                   Light, held for a moment.
                 </h2>
                 <p className="mt-4 text-muted-foreground">
-                  You caught it {TARGET_CATCHES} times. Some things are worth chasing.
+                  {TARGET_CATCHES} catches. Some things are worth chasing.
                 </p>
                 <div className="mt-8 flex items-center justify-center gap-6">
                   <button onClick={begin} className="lux-link text-sm">
