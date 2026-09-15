@@ -11,7 +11,8 @@ import Pricing from "@/pages/Pricing";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Play from "@/pages/Play";
-import ArtFashion from "@/pages/ArtFashion";
+import ArtArchive from "@/pages/ArtArchive";
+import ArtStyle from "@/pages/ArtStyle";
 import NotFound from "@/pages/NotFound";
 
 function ScrollToTop() {
@@ -37,7 +38,8 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/play" element={<Play />} />
-          <Route path="/art-fashion" element={<ArtFashion />} />
+          <Route path="/art" element={<ArtArchive />} />
+          <Route path="/art/:slug" element={<ArtStyle />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
