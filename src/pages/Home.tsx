@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
@@ -6,6 +6,7 @@ import { MagneticLink } from "@/components/site/MagneticLink";
 import { FloatingBlobs } from "@/components/site/FloatingBlobs";
 import { projects } from "@/data/projects";
 import { services } from "@/data/services";
+import { artStyles, type ArtStyleContent, type ArtStyleImage } from "@/data/artStyles";
 
 import heroSphere from "@/assets/v2/hero-swirl.png";
 import { HeroOrbitalSymbolism } from "@/components/site/HeroOrbitalSymbolism";
@@ -163,6 +164,109 @@ function HiddenCollectionTeaser() {
           Six objects wait in the dark.
         </p>
       </Reveal>
+    </div>
+  );
+}
+
+/** Curated homepage preview of the Art Archive -- a handful of pieces from different styles, not a card grid. Hover to focus, click to enter that style directly. */
+function ArtPreviewTeaser() {
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
+  const rafPending = useRef(false);
+
+  const picks = useMemo(() => {
+    const bySlug = new Map(artStyles.map((s) => [s.slug, s]));
+    const pick = (slug: string, imageId: string) => {
+      const s = bySlug.get(slug);
+      const img = s?.images.find((i) => i.id === imageId);
+      return s && img ? { style: s, image: img } : null;
+    };
+    return [
+      pick("futuristic", "fut-03"),
+      pick("maximalism", "max-01"),
+      pick("brutalism", "brut-01"),
+      pick("vector-art", "vec-01"),
+      pick("collage-art", "col-03"),
+    ].filter((p): p is { style: ArtStyleContent; image: ArtStyleImage } => !!p);
+  }, []);
+
+  const RANKS = [
+    { x: 54, y: 50, size: "clamp(180px,24vw,300px)", opacity: 1, blur: 0, z: 50 },
+    { x: 85, y: 22, size: "clamp(70px,8vw,105px)", opacity: 0.5, blur: 0.3, z: 30 },
+    { x: 14, y: 26, size: "clamp(62px,7vw,92px)", opacity: 0.4, blur: 0.5, z: 26 },
+    { x: 84, y: 80, size: "clamp(56px,6vw,84px)", opacity: 0.3, blur: 0.7, z: 20 },
+    { x: 16, y: 82, size: "clamp(52px,5.5vw,76px)", opacity: 0.24, blur: 0.9, z: 16 },
+  ];
+
+  const handleMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (rafPending.current) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    rafPending.current = true;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    requestAnimationFrame(() => {
+      setPointer({ x, y });
+      rafPending.current = false;
+    });
+  };
+
+  return (
+    <div
+      onPointerMove={handleMove}
+      onPointerLeave={() => setPointer(null)}
+      className="relative h-[44vh] min-h-[300px] w-full overflow-hidden rounded-2xl"
+    >
+      <div
+        className="pointer-events-none absolute inset-0 transition-opacity duration-700"
+        style={{
+          background:
+            "radial-gradient(50% 50% at 50% 45%, color-mix(in oklab, var(--ice) 9%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 42%, transparent 78%)",
+        }}
+        aria-hidden
+      />
+      {picks.map((p, i) => {
+        const rank = RANKS[i] ?? RANKS[RANKS.length - 1];
+        const isHovered = hoveredId === p.image.id;
+        const strength = (5 - i) * 2.5;
+        const dx = pointer ? pointer.x * strength : 0;
+        const dy = pointer ? pointer.y * strength * 0.6 : 0;
+        return (
+          <Link
+            key={p.image.id}
+            to={`/art/${p.style.slug}`}
+            onMouseEnter={() => setHoveredId(p.image.id)}
+            onMouseLeave={() => setHoveredId((h) => (h === p.image.id ? null : h))}
+            className="absolute flex items-center justify-center"
+            style={{
+              left: `${rank.x}%`,
+              top: `${rank.y}%`,
+              width: rank.size,
+              height: rank.size,
+              zIndex: isHovered ? 60 : rank.z,
+              opacity: isHovered ? 1 : rank.opacity,
+              filter: `blur(${isHovered ? 0 : rank.blur}px)`,
+              transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${isHovered ? 1.06 : 1})`,
+              transitionProperty: "opacity, filter, transform",
+              transitionDuration: "500ms",
+              transitionTimingFunction: "var(--ease-lux)",
+            }}
+          >
+            <img
+              src={p.image.src}
+              alt=""
+              aria-hidden
+              loading={i === 0 ? "eager" : "lazy"}
+              className="h-full w-full rounded-sm object-cover shadow-[0_25px_60px_-25px_rgba(0,0,0,0.7)]"
+            />
+            <span
+              className="pointer-events-none absolute top-[104%] left-1/2 -translate-x-1/2 text-[0.62rem] tracking-[0.15em] whitespace-nowrap text-[var(--champagne)] uppercase transition-opacity duration-500"
+              style={{ opacity: isHovered ? 1 : 0 }}
+            >
+              {p.style.name}
+            </span>
+          </Link>
+        );
+      })}
     </div>
   );
 }
@@ -372,6 +476,24 @@ export default function Home() {
           <p className="mt-6 text-center">
             <Link to="/play" className="lux-link text-sm text-muted-foreground hover:text-foreground">
               Enter the collection →
+            </Link>
+          </p>
+        </Reveal>
+      </section>
+
+      {/* ART ARCHIVE — homepage preview */}
+      <section className="relative mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
+        <Reveal>
+          <p className="text-center text-xs tracking-[0.3em] text-[var(--gold)] uppercase">Art / Visual Worlds</p>
+          <p className="mx-auto mt-3 max-w-md text-center text-sm text-muted-foreground">
+            Fifteen visual languages, explored through image. A few pieces from the archive.
+          </p>
+          <div className="mt-8">
+            <ArtPreviewTeaser />
+          </div>
+          <p className="mt-6 text-center">
+            <Link to="/art" className="lux-link text-sm text-muted-foreground hover:text-foreground">
+              Explore the collection →
             </Link>
           </p>
         </Reveal>

@@ -32,6 +32,13 @@ const MOOD_RANKS: Record<StyleMood, Rank[]> = {
     { x: 84, y: 82, size: "clamp(72px,8vw,108px)", opacity: 0.28, blur: 1.6, z: 18 },
     { x: 14, y: 85, size: "clamp(66px,7.5vw,98px)", opacity: 0.22, blur: 2, z: 14 },
   ],
+  stark: [
+    { x: 52, y: 50, size: "clamp(260px,33vw,460px)", opacity: 1, blur: 0, z: 50 },
+    { x: 84, y: 26, size: "clamp(108px,13vw,164px)", opacity: 0.5, blur: 0, z: 34 },
+    { x: 16, y: 28, size: "clamp(98px,12vw,150px)", opacity: 0.4, blur: 0, z: 30 },
+    { x: 82, y: 78, size: "clamp(90px,10vw,132px)", opacity: 0.3, blur: 0, z: 24 },
+    { x: 18, y: 80, size: "clamp(86px,9.5vw,126px)", opacity: 0.26, blur: 0, z: 20 },
+  ],
 };
 
 const MOOD_AMBIENT: Record<StyleMood, string> = {
@@ -40,6 +47,7 @@ const MOOD_AMBIENT: Record<StyleMood, string> = {
   rich: "radial-gradient(65% 60% at 50% 45%, color-mix(in oklab, var(--gold) 10%, transparent) 0%, color-mix(in oklab, var(--ice) 8%, transparent) 45%, transparent 80%)",
   atmospheric:
     "radial-gradient(55% 55% at 60% 42%, color-mix(in oklab, var(--ice) 12%, transparent) 0%, color-mix(in oklab, var(--champagne) 6%, transparent) 45%, transparent 78%)",
+  stark: "radial-gradient(55% 55% at 50% 45%, color-mix(in oklab, white 6%, transparent) 0%, transparent 75%)",
 };
 
 function Caption({ piece, visible }: { piece: ArtStyleImage; visible: boolean }) {
