@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
@@ -169,34 +169,51 @@ function HiddenCollectionTeaser() {
 }
 
 /** Curated homepage preview of the Art Archive -- a handful of pieces from different styles, not a card grid. Hover to focus, click to enter that style directly. */
+const ART_RANKS = [
+  { x: 54, y: 50, size: "clamp(220px,30vw,400px)", opacity: 1, blur: 0, z: 50 },
+  { x: 85, y: 20, size: "clamp(76px,9vw,116px)", opacity: 0.45, blur: 0.4, z: 30 },
+  { x: 14, y: 26, size: "clamp(68px,8vw,102px)", opacity: 0.36, blur: 0.6, z: 26 },
+  { x: 84, y: 80, size: "clamp(60px,7vw,90px)", opacity: 0.26, blur: 0.9, z: 20 },
+  { x: 16, y: 82, size: "clamp(56px,6vw,82px)", opacity: 0.2, blur: 1.1, z: 16 },
+];
+
+/**
+ * Homepage doorway into the Art Archive -- one dominant artwork from the
+ * currently selected style, a few of its companions sitting deeper in the
+ * room, a quiet style label/description, and a strip of all 15 styles to
+ * switch between. Switching styles re-enters the same composition rather
+ * than cross-fading a slideshow; clicking the dominant piece (or "Explore")
+ * leaves the homepage for that style's full page.
+ */
 function ArtPreviewTeaser() {
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const available = useMemo(() => artStyles.filter((s) => s.available), []);
+  const [index, setIndex] = useState(0);
+  const [entered, setEntered] = useState(true);
   const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
   const rafPending = useRef(false);
+  const transitionTimer = useRef<number | null>(null);
 
-  const picks = useMemo(() => {
-    const bySlug = new Map(artStyles.map((s) => [s.slug, s]));
-    const pick = (slug: string, imageId: string) => {
-      const s = bySlug.get(slug);
-      const img = s?.images.find((i) => i.id === imageId);
-      return s && img ? { style: s, image: img } : null;
-    };
-    return [
-      pick("futuristic", "fut-03"),
-      pick("maximalism", "max-01"),
-      pick("brutalism", "brut-01"),
-      pick("vector-art", "vec-01"),
-      pick("collage-art", "col-03"),
-    ].filter((p): p is { style: ArtStyleContent; image: ArtStyleImage } => !!p);
-  }, []);
+  useEffect(
+    () => () => {
+      if (transitionTimer.current) window.clearTimeout(transitionTimer.current);
+    },
+    [],
+  );
 
-  const RANKS = [
-    { x: 54, y: 50, size: "clamp(180px,24vw,300px)", opacity: 1, blur: 0, z: 50 },
-    { x: 85, y: 22, size: "clamp(70px,8vw,105px)", opacity: 0.5, blur: 0.3, z: 30 },
-    { x: 14, y: 26, size: "clamp(62px,7vw,92px)", opacity: 0.4, blur: 0.5, z: 26 },
-    { x: 84, y: 80, size: "clamp(56px,6vw,84px)", opacity: 0.3, blur: 0.7, z: 20 },
-    { x: 16, y: 82, size: "clamp(52px,5.5vw,76px)", opacity: 0.24, blur: 0.9, z: 16 },
-  ];
+  const style = available[index];
+  const dominant = style.images[0];
+  const others = style.images.slice(1, 5);
+  const pieces = [{ img: dominant, i: 0 }, ...others.map((img, oi) => ({ img, i: oi + 1 }))];
+
+  const select = (idx: number) => {
+    if (idx === index) return;
+    setEntered(false);
+    if (transitionTimer.current) window.clearTimeout(transitionTimer.current);
+    transitionTimer.current = window.setTimeout(() => {
+      setIndex(idx);
+      requestAnimationFrame(() => requestAnimationFrame(() => setEntered(true)));
+    }, 360);
+  };
 
   const handleMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (rafPending.current) return;
@@ -211,65 +228,150 @@ function ArtPreviewTeaser() {
   };
 
   return (
-    <div
-      onPointerMove={handleMove}
-      onPointerLeave={() => setPointer(null)}
-      className="relative h-[44vh] min-h-[300px] w-full overflow-hidden rounded-2xl"
-    >
+    <div>
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-700"
-        style={{
-          background:
-            "radial-gradient(50% 50% at 50% 45%, color-mix(in oklab, var(--ice) 9%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 42%, transparent 78%)",
-        }}
-        aria-hidden
-      />
-      {picks.map((p, i) => {
-        const rank = RANKS[i] ?? RANKS[RANKS.length - 1];
-        const isHovered = hoveredId === p.image.id;
-        const strength = (5 - i) * 2.5;
-        const dx = pointer ? pointer.x * strength : 0;
-        const dy = pointer ? pointer.y * strength * 0.6 : 0;
-        return (
-          <Link
-            key={p.image.id}
-            to={`/art/${p.style.slug}`}
-            onMouseEnter={() => setHoveredId(p.image.id)}
-            onMouseLeave={() => setHoveredId((h) => (h === p.image.id ? null : h))}
-            className="absolute flex items-center justify-center"
-            style={{
-              left: `${rank.x}%`,
-              top: `${rank.y}%`,
-              width: rank.size,
-              height: rank.size,
-              zIndex: isHovered ? 60 : rank.z,
-              opacity: isHovered ? 1 : rank.opacity,
-              filter: `blur(${isHovered ? 0 : rank.blur}px)`,
-              transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${isHovered ? 1.06 : 1})`,
-              transitionProperty: "opacity, filter, transform",
-              transitionDuration: "500ms",
-              transitionTimingFunction: "var(--ease-lux)",
-            }}
-          >
-            <img
-              src={p.image.src}
-              alt=""
-              aria-hidden
-              loading={i === 0 ? "eager" : "lazy"}
-              className="h-full w-full rounded-sm object-cover shadow-[0_25px_60px_-25px_rgba(0,0,0,0.7)]"
-            />
-            <span
-              className="pointer-events-none absolute top-[104%] left-1/2 -translate-x-1/2 text-[0.62rem] tracking-[0.15em] whitespace-nowrap text-[var(--champagne)] uppercase transition-opacity duration-500"
-              style={{ opacity: isHovered ? 1 : 0 }}
+        onPointerMove={handleMove}
+        onPointerLeave={() => setPointer(null)}
+        className="relative h-[52vh] min-h-[380px] w-full overflow-hidden rounded-2xl sm:h-[56vh]"
+      >
+        <div
+          className="pointer-events-none absolute inset-0 transition-opacity duration-700"
+          style={{
+            background:
+              "radial-gradient(55% 55% at 55% 42%, color-mix(in oklab, var(--ice) 9%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 45%, transparent 80%)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-[22%]"
+          style={{ background: "linear-gradient(180deg, transparent, color-mix(in oklab, var(--ice) 5%, transparent))" }}
+          aria-hidden
+        />
+
+        {pieces.map(({ img, i }) => {
+          const rank = ART_RANKS[i] ?? ART_RANKS[ART_RANKS.length - 1];
+          const isDominant = i === 0;
+          const strength = (5 - i) * 3;
+          const dx = pointer ? pointer.x * strength : 0;
+          const dy = pointer ? pointer.y * strength * 0.6 : 0;
+
+          const positioned = (
+            <div
+              className="absolute flex items-center justify-center transition-all ease-[var(--ease-lux)]"
+              style={{
+                left: `${rank.x}%`,
+                top: `${rank.y}%`,
+                width: rank.size,
+                height: rank.size,
+                zIndex: rank.z,
+                opacity: entered ? rank.opacity : 0,
+                filter: `blur(${entered ? rank.blur : rank.blur + 3}px)`,
+                transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${entered ? 1 : 0.92})`,
+                transitionDuration: isDominant ? "600ms" : `${520 + i * 90}ms`,
+                transitionDelay: entered && !isDominant ? `${i * 70}ms` : "0ms",
+              }}
             >
-              {p.style.name}
-            </span>
+              {isDominant && (
+                <>
+                  <span
+                    className="pointer-events-none absolute -inset-6 rounded-sm blur-2xl"
+                    style={{
+                      background:
+                        "radial-gradient(circle, color-mix(in oklab, var(--ice) 30%, transparent) 0%, color-mix(in oklab, var(--champagne) 16%, transparent) 45%, transparent 75%)",
+                    }}
+                    aria-hidden
+                  />
+                  <img
+                    src={img.src}
+                    alt=""
+                    aria-hidden
+                    className="pointer-events-none absolute top-[101%] left-0 h-1/2 w-full object-cover opacity-[0.16] blur-[2px]"
+                    style={{ transform: "scaleY(-1)", maskImage: "linear-gradient(180deg, black, transparent 80%)" }}
+                  />
+                </>
+              )}
+              <img
+                src={img.src}
+                alt=""
+                aria-hidden
+                loading={isDominant ? "eager" : "lazy"}
+                className={`relative h-full w-full rounded-sm object-cover ${
+                  isDominant
+                    ? "float-slow shadow-[0_40px_100px_-30px_rgba(0,0,0,0.75)] ring-1 ring-white/[0.08]"
+                    : "shadow-[0_25px_60px_-25px_rgba(0,0,0,0.6)]"
+                }`}
+              />
+            </div>
+          );
+
+          return isDominant ? (
+            <Link key={img.id} to={`/art/${style.slug}`} aria-label={`Explore ${style.name}`}>
+              {positioned}
+            </Link>
+          ) : (
+            <div key={img.id}>{positioned}</div>
+          );
+        })}
+
+        <div className="pointer-events-none absolute bottom-5 left-5 sm:bottom-7 sm:left-7">
+          <p
+            className="text-[0.65rem] tracking-[0.3em] text-[var(--gold)] uppercase transition-opacity duration-500"
+            style={{ opacity: entered ? 1 : 0 }}
+          >
+            {style.name}
+          </p>
+          <p
+            className="mt-1 max-w-[16rem] text-sm text-muted-foreground transition-opacity duration-500"
+            style={{ opacity: entered ? 1 : 0 }}
+          >
+            {style.shortDescription}
+          </p>
+          <Link
+            to={`/art/${style.slug}`}
+            className="lux-link pointer-events-auto mt-2 inline-block text-xs tracking-[0.1em] uppercase"
+          >
+            Explore →
           </Link>
-        );
-      })}
+        </div>
+      </div>
+
+      {/* Style strip -- all 15, available ones switch the preview, the rest sit dim. */}
+      <div className="mt-6 overflow-x-auto">
+        <div className="flex w-max gap-4 px-1 pb-1">
+          {artStyles.map((s) => {
+            const availIdx = available.findIndex((a) => a.slug === s.slug);
+            const isSelected = s.slug === style.slug;
+            return (
+              <button
+                key={s.slug}
+                type="button"
+                disabled={!s.available}
+                onClick={() => s.available && select(availIdx)}
+                className="flex shrink-0 flex-col items-center gap-2 disabled:cursor-default"
+              >
+                <span
+                  className="block h-12 w-12 overflow-hidden rounded-sm transition-opacity duration-500 sm:h-14 sm:w-14"
+                  style={{ opacity: s.available ? (isSelected ? 1 : 0.45) : 0.15 }}
+                >
+                  {s.available && (
+                    <img src={s.images[0].src} alt="" aria-hidden loading="lazy" className="h-full w-full object-cover" />
+                  )}
+                </span>
+                <span
+                  className="text-[0.55rem] tracking-[0.12em] whitespace-nowrap uppercase"
+                  style={{ color: isSelected ? "var(--champagne)" : "var(--muted-foreground)" }}
+                >
+                  {s.name}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 }
+
 
 export default function Home() {
   const [activeService, setActiveService] = useState<string | null>(null);
@@ -485,17 +587,10 @@ export default function Home() {
       <section className="relative mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
         <Reveal>
           <p className="text-center text-xs tracking-[0.3em] text-[var(--gold)] uppercase">Art / Visual Worlds</p>
-          <p className="mx-auto mt-3 max-w-md text-center text-sm text-muted-foreground">
-            Fifteen visual languages, explored through image. A few pieces from the archive.
-          </p>
+          <p className="mt-2 text-center text-sm text-muted-foreground">15 visual languages.</p>
           <div className="mt-8">
             <ArtPreviewTeaser />
           </div>
-          <p className="mt-6 text-center">
-            <Link to="/art" className="lux-link text-sm text-muted-foreground hover:text-foreground">
-              Explore the collection →
-            </Link>
-          </p>
         </Reveal>
       </section>
 
