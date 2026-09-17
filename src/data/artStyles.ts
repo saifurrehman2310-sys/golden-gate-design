@@ -28,6 +28,21 @@ import collageArt02 from "@/assets/art/collage-art-02.jpg";
 import collageArt03 from "@/assets/art/collage-art-03.jpg";
 import collageArt04 from "@/assets/art/collage-art-04.jpg";
 import collageArt05 from "@/assets/art/collage-art-05.jpg";
+import cyberpunk01 from "@/assets/art/cyberpunk-01.jpg";
+import cyberpunk02 from "@/assets/art/cyberpunk-02.jpg";
+import cyberpunk03 from "@/assets/art/cyberpunk-03.jpg";
+import cyberpunk04 from "@/assets/art/cyberpunk-04.jpg";
+import cyberpunk05 from "@/assets/art/cyberpunk-05.jpg";
+import popArt01 from "@/assets/art/pop-art-01.jpg";
+import popArt02 from "@/assets/art/pop-art-02.jpg";
+import popArt03 from "@/assets/art/pop-art-03.jpg";
+import popArt04 from "@/assets/art/pop-art-04.jpg";
+import popArt05 from "@/assets/art/pop-art-05.jpg";
+import glassmorphism01 from "@/assets/art/glassmorphism-01.jpg";
+import glassmorphism02 from "@/assets/art/glassmorphism-02.jpg";
+import glassmorphism03 from "@/assets/art/glassmorphism-03.jpg";
+import glassmorphism04 from "@/assets/art/glassmorphism-04.jpg";
+import glassmorphism05 from "@/assets/art/glassmorphism-05.jpg";
 
 export type ArtStyleImage = {
   id: string;
@@ -220,12 +235,88 @@ export const artStyles: ArtStyleContent[] = [
     ],
   },
 
+  {
+    slug: "cyberpunk",
+    name: "Cyberpunk",
+    shortDescription: "High tech, low light.",
+    longDescription:
+      "Cyberpunk imagines a city that never sleeps — neon bleeding into wet asphalt, synthetic materials, and a body already half-merged with its technology.",
+    characteristics: ["Neon against deep shadow", "Synthetic, reflective materials", "Dense urban scale", "Human + machine"],
+    visualLanguage: [
+      { label: "Typography", value: "Technical, glowing, high-contrast" },
+      { label: "Color", value: "Magenta, cyan, near-black" },
+      { label: "Geometry", value: "Dense verticals, glitch fragments" },
+    ],
+    applications: ["Game/UI design", "Music and album art", "Fashion editorial", "Brand worlds"],
+    colors: ["#D6188C", "#1FD3E0", "#120B1F", "#7A2BD9"],
+    fashionNote: "Technical outerwear, iridescent fabric, glasses as armor.",
+    tags: ["neon", "synthetic", "urban night"],
+    mood: "atmospheric",
+    available: true,
+    images: [
+      { id: "cyb-01", src: cyberpunk01, caption: "Rain, Neon, Silence" },
+      { id: "cyb-02", src: cyberpunk02, caption: "Synthetic Portrait" },
+      { id: "cyb-03", src: cyberpunk03, caption: "Advertisement, Unmanned" },
+      { id: "cyb-04", src: cyberpunk04, caption: "Object on Wet Chrome" },
+      { id: "cyb-05", src: cyberpunk05, caption: "Skyline, After Hours" },
+    ],
+  },
+  {
+    slug: "pop-art",
+    name: "Pop Art",
+    shortDescription: "Loud, on purpose.",
+    longDescription:
+      "Pop Art borrows from advertising and mass production — flat saturated color, halftone texture, and everyday objects treated like icons.",
+    characteristics: ["Flat saturated color", "Halftone texture", "Everyday objects as icons", "Bold, graphic outline"],
+    visualLanguage: [
+      { label: "Typography", value: "Bold, comic-adjacent, high impact" },
+      { label: "Color", value: "Primary and secondary brights, hard contrast" },
+      { label: "Geometry", value: "Flat planes, halftone dot patterns" },
+    ],
+    applications: ["Advertising", "Packaging", "Album art", "Campaign concepts"],
+    colors: ["#E8125C", "#F4C81C", "#1D6FD9", "#12100E"],
+    fashionNote: "Statement color, glossy finishes, oversized accessories.",
+    tags: ["saturated", "halftone", "iconic"],
+    mood: "rich",
+    available: true,
+    images: [
+      { id: "pop-01", src: popArt01, caption: "Sunburst Portrait" },
+      { id: "pop-02", src: popArt02, caption: "Hotline Pink" },
+      { id: "pop-03", src: popArt03, caption: "City, Flattened" },
+      { id: "pop-04", src: popArt04, caption: "Two-Tone Close-Up" },
+      { id: "pop-05", src: popArt05, caption: "Still Life, Repeated" },
+    ],
+  },
+  {
+    slug: "glassmorphism",
+    name: "Glassmorphism",
+    shortDescription: "Seen through, not just seen.",
+    longDescription:
+      "Glassmorphism is about what light does on its way through something — transparency, refraction and soft blur standing in for material honesty.",
+    characteristics: ["True transparency", "Light refraction", "Soft frosted blur", "Iridescent surface color"],
+    visualLanguage: [
+      { label: "Typography", value: "Thin weight, quiet, secondary to material" },
+      { label: "Color", value: "Iridescent pastels over neutral ground" },
+      { label: "Geometry", value: "Curved, fluid, continuous surfaces" },
+    ],
+    applications: ["Product design", "UI/interface design", "Architecture", "Spatial design"],
+    colors: ["#B9C7E0", "#E6C9DE", "#F2E7C9", "#5C6470"],
+    fashionNote: "Sheer layering, iridescent fabric, light as an accessory.",
+    tags: ["transparency", "refraction", "iridescence"],
+    mood: "atmospheric",
+    available: true,
+    images: [
+      { id: "gls-01", src: glassmorphism01, caption: "Stairwell, Dawn" },
+      { id: "gls-02", src: glassmorphism02, caption: "Bottled Light" },
+      { id: "gls-03", src: glassmorphism03, caption: "Form, Twisted" },
+      { id: "gls-04", src: glassmorphism04, caption: "Object Study, Chrome" },
+      { id: "gls-05", src: glassmorphism05, caption: "Seat, Suspended" },
+    ],
+  },
+
   // -- Reserved slots: structure ready, waiting on real assets. Fill in
   // `images`, flip `available` to true, and the archive + style page work
   // automatically. Moods below are a starting guess for when that happens.
-  reserved("cyberpunk", "Cyberpunk", "atmospheric"),
-  reserved("pop-art", "Pop Art", "rich"),
-  reserved("glassmorphism", "Glassmorphism", "atmospheric"),
   reserved("clay-soft-3d", "Clay / Soft 3D", "quiet"),
   reserved("pixel-art", "Pixel Art", "rich"),
   reserved("editorial", "Editorial", "quiet"),
