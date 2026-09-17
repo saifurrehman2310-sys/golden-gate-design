@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Toaster } from "sonner";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { MusicControl } from "@/components/site/MusicControl";
 import Home from "@/pages/Home";
 import Portfolio from "@/pages/Portfolio";
 import ProjectCaseStudy from "@/pages/ProjectCaseStudy";
@@ -44,6 +45,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <MusicControl />
       <Toaster />
     </div>
   );
