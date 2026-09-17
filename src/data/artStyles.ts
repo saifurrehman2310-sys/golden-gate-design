@@ -43,6 +43,21 @@ import glassmorphism02 from "@/assets/art/glassmorphism-02.jpg";
 import glassmorphism03 from "@/assets/art/glassmorphism-03.jpg";
 import glassmorphism04 from "@/assets/art/glassmorphism-04.jpg";
 import glassmorphism05 from "@/assets/art/glassmorphism-05.jpg";
+import claySoft3d01 from "@/assets/art/clay-soft-3d-01.jpg";
+import claySoft3d02 from "@/assets/art/clay-soft-3d-02.jpg";
+import claySoft3d03 from "@/assets/art/clay-soft-3d-03.jpg";
+import claySoft3d04 from "@/assets/art/clay-soft-3d-04.jpg";
+import claySoft3d05 from "@/assets/art/clay-soft-3d-05.jpg";
+import pixelArt01 from "@/assets/art/pixel-art-01.jpg";
+import pixelArt02 from "@/assets/art/pixel-art-02.jpg";
+import pixelArt03 from "@/assets/art/pixel-art-03.jpg";
+import pixelArt04 from "@/assets/art/pixel-art-04.jpg";
+import pixelArt05 from "@/assets/art/pixel-art-05.jpg";
+import editorial01 from "@/assets/art/editorial-01.jpg";
+import editorial02 from "@/assets/art/editorial-02.jpg";
+import editorial03 from "@/assets/art/editorial-03.jpg";
+import editorial04 from "@/assets/art/editorial-04.jpg";
+import editorial05 from "@/assets/art/editorial-05.jpg";
 
 export type ArtStyleImage = {
   id: string;
@@ -314,12 +329,86 @@ export const artStyles: ArtStyleContent[] = [
     ],
   },
 
+  {
+    slug: "clay-soft-3d",
+    name: "Clay / Soft 3D",
+    shortDescription: "Weightless, and warm.",
+    longDescription:
+      "Soft 3D treats form like clay — rounded, matte, gently shadowed, and balanced with a playfulness that hard-surface rendering doesn't allow.",
+    characteristics: ["Rounded, matte forms", "Balanced, gravity-defying stacks", "Soft directional shadow", "Pastel material color"],
+    visualLanguage: [
+      { label: "Typography", value: "Rounded sans, friendly weight" },
+      { label: "Color", value: "Muted pastels, warm neutrals" },
+      { label: "Geometry", value: "Spheres, pebbles, stacked forms" },
+    ],
+    applications: ["Product rendering", "App/brand illustration", "Furniture and object design", "Packaging"],
+    colors: ["#C97B54", "#8FA1B8", "#C9A6C4", "#8B9B6E"],
+    tags: ["matte", "pastel", "balance"],
+    mood: "quiet",
+    available: true,
+    images: [
+      { id: "clay-01", src: claySoft3d01, caption: "Cairn" },
+      { id: "clay-02", src: claySoft3d02, caption: "Seat, Softened" },
+      { id: "clay-03", src: claySoft3d03, caption: "Lean" },
+      { id: "clay-04", src: claySoft3d04, caption: "Knot, Untied" },
+      { id: "clay-05", src: claySoft3d05, caption: "Balance Study" },
+    ],
+  },
+  {
+    slug: "pixel-art",
+    name: "Pixel Art",
+    shortDescription: "Small grid, big feeling.",
+    longDescription:
+      "Pixel art works within a strict grid and a limited palette, and somehow that constraint is exactly what makes the light and the nostalgia land.",
+    characteristics: ["Visible pixel grid", "Limited, deliberate palette", "Warm artificial light", "Nostalgic, narrative scenes"],
+    visualLanguage: [
+      { label: "Typography", value: "Bitmap, monospace" },
+      { label: "Color", value: "Sunset gradients, warm interior light" },
+      { label: "Geometry", value: "Grid-locked, blocky detail" },
+    ],
+    applications: ["Games", "Album/cover art", "Merchandise", "Social content"],
+    colors: ["#E8A33D", "#7A4FB5", "#2A2354", "#1C4E80"],
+    tags: ["grid", "nostalgia", "limited palette"],
+    mood: "rich",
+    available: true,
+    images: [
+      { id: "pix-01", src: pixelArt01, caption: "Dusk, Shared With a Cat" },
+      { id: "pix-02", src: pixelArt02, caption: "Corner Shop, After Dark" },
+      { id: "pix-03", src: pixelArt03, caption: "Floating Kingdom" },
+      { id: "pix-04", src: pixelArt04, caption: "Reading Light" },
+      { id: "pix-05", src: pixelArt05, caption: "Pier at Sundown" },
+    ],
+  },
+  {
+    slug: "editorial",
+    name: "Editorial",
+    shortDescription: "Composed, not candid.",
+    longDescription:
+      "Editorial photography is deliberate in every frame — light, wardrobe and architecture all working toward one considered image rather than a documentary moment.",
+    characteristics: ["Deliberate, directional light", "Considered composition", "Restrained color palette", "Wardrobe as sculpture"],
+    visualLanguage: [
+      { label: "Typography", value: "Refined serif, generous tracking" },
+      { label: "Color", value: "Warm neutrals, one saturated accent" },
+      { label: "Geometry", value: "Architectural framing, negative space" },
+    ],
+    applications: ["Fashion campaigns", "Brand photography", "Print editorial", "Luxury advertising"],
+    colors: ["#7A2E1E", "#C9AA6E", "#1B2430", "#E7DFD2"],
+    fashionNote: "The subject as much as the garment — stillness, tailoring, gold.",
+    tags: ["composed light", "wardrobe", "negative space"],
+    mood: "quiet",
+    available: true,
+    images: [
+      { id: "edi-01", src: editorial01, caption: "Profile, Late Light" },
+      { id: "edi-02", src: editorial02, caption: "Threshold" },
+      { id: "edi-03", src: editorial03, caption: "Bloom, Held" },
+      { id: "edi-04", src: editorial04, caption: "Red, Airborne" },
+      { id: "edi-05", src: editorial05, caption: "Curve of Concrete" },
+    ],
+  },
+
   // -- Reserved slots: structure ready, waiting on real assets. Fill in
   // `images`, flip `available` to true, and the archive + style page work
   // automatically. Moods below are a starting guess for when that happens.
-  reserved("clay-soft-3d", "Clay / Soft 3D", "quiet"),
-  reserved("pixel-art", "Pixel Art", "rich"),
-  reserved("editorial", "Editorial", "quiet"),
   reserved("y2k", "Y2K", "rich"),
   reserved("swiss-design", "Swiss Design", "quiet"),
   reserved("surrealism", "Surrealism", "atmospheric"),
