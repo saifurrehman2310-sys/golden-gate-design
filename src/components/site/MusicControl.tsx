@@ -1,116 +1,113 @@
 import { useEffect, useRef, useState } from "react";
-import { Play, Pause } from "lucide-react";
-import { tracks, spotifyUrl } from "@/data/tracks";
+import { spotifyPlaylistUri, spotifyTracks, type SpotifyTrack } from "@/data/spotifyTracks";
 
-type Status = "idle" | "loading" | "ready" | "error";
+// Minimal shape of the bits of the Spotify iFrame API this component uses.
+// (No official TS types are published for it.)
+type SpotifyController = {
+  loadUri: (uri: string) => void;
+  play: () => void;
+  pause: () => void;
+  togglePlay: () => void;
+  addListener: (event: string, cb: (e: { data: { isPaused: boolean } }) => void) => void;
+};
+type SpotifyIFrameAPI = {
+  createController: (
+    el: HTMLElement,
+    options: { uri: string; width?: string | number; height?: string | number },
+    cb: (controller: SpotifyController) => void,
+  ) => void;
+};
+declare global {
+  interface Window {
+    onSpotifyIframeApiReady?: (IFrameAPI: SpotifyIFrameAPI) => void;
+  }
+}
+
+const SPOTIFY_SCRIPT_SRC = "https://open.spotify.com/embed/iframe-api/v1";
 
 /**
- * A small, mostly-dormant object living in the corner of the site — not a
- * music-player widget. Collapsed, it's just a soft point of light. Tapping
- * it reveals the current track and a play/pause control; tapping again
- * puts it back to sleep. Playback never starts on its own.
+ * A small, mostly-dormant object living in the corner of the site.
+ * Collapsed, it's just a soft point of light. Tapping it reveals 3
+ * selectable tracks from the site's Spotify playlist and hands control to
+ * the official Spotify iFrame API — no downloaded/proxied audio, no login.
+ *
+ * NOTE: this pass is functionality-first per the brief; the expanded
+ * panel currently shows Spotify's own compact embed UI as-is. Visual
+ * treatment of the embed itself comes in a follow-up pass.
  */
 export function MusicControl() {
-  const track = tracks[0];
-  const audioRef = useRef<HTMLAudioElement>(null);
-
   const [expanded, setExpanded] = useState(false);
+  const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
-  const [status, setStatus] = useState<Status>("idle");
-  const [progress, setProgress] = useState(0); // 0..1
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  const mountRef = useRef<HTMLDivElement>(null);
+  const controllerRef = useRef<SpotifyController | null>(null);
 
   useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
+    const el = mountRef.current;
+    if (!el) return;
 
-    const onLoadStart = () => setStatus((s) => (s === "error" ? s : "loading"));
-    const onCanPlay = () => setStatus("ready");
-    const onError = () => setStatus("error");
-    const onTimeUpdate = () => {
-      if (audio.duration) setProgress(audio.currentTime / audio.duration);
-    };
-    const onEnded = () => {
-      setPlaying(false);
-      setProgress(0);
+    const init = (IFrameAPI: SpotifyIFrameAPI) => {
+      IFrameAPI.createController(el, { uri: spotifyPlaylistUri, width: "100%", height: 152 }, (controller) => {
+        controllerRef.current = controller;
+        setReady(true);
+        controller.addListener("playback_update", (e) => {
+          setPlaying(!e.data.isPaused);
+        });
+      });
     };
 
-    audio.addEventListener("loadstart", onLoadStart);
-    audio.addEventListener("canplay", onCanPlay);
-    audio.addEventListener("error", onError);
-    audio.addEventListener("timeupdate", onTimeUpdate);
-    audio.addEventListener("ended", onEnded);
-    return () => {
-      audio.removeEventListener("loadstart", onLoadStart);
-      audio.removeEventListener("canplay", onCanPlay);
-      audio.removeEventListener("error", onError);
-      audio.removeEventListener("timeupdate", onTimeUpdate);
-      audio.removeEventListener("ended", onEnded);
-    };
+    const existing = document.querySelector(`script[src="${SPOTIFY_SCRIPT_SRC}"]`);
+    window.onSpotifyIframeApiReady = init;
+    if (!existing) {
+      const script = document.createElement("script");
+      script.src = SPOTIFY_SCRIPT_SRC;
+      script.async = true;
+      document.body.appendChild(script);
+    }
   }, []);
 
-  const togglePlay = () => {
-    const audio = audioRef.current;
-    if (!audio || status === "error") return;
-    if (playing) {
-      audio.pause();
-      setPlaying(false);
-    } else {
-      audio
-        .play()
-        .then(() => setPlaying(true))
-        .catch(() => setStatus("error"));
-    }
+  const selectTrack = (track: SpotifyTrack) => {
+    if (!controllerRef.current || !track.uri) return;
+    controllerRef.current.loadUri(track.uri);
+    controllerRef.current.play();
+    setActiveId(track.id);
   };
 
   const toggleExpanded = () => setExpanded((v) => !v);
 
   return (
     <div className="fixed right-5 bottom-5 z-40 sm:right-6 sm:bottom-6">
-      <audio ref={audioRef} src={track.src} preload="none" />
-
-      {/* Expanded panel -- compact, opens upward so it never clips at the viewport edge. */}
+      {/* Expanded panel -- opens upward so it never clips at the viewport edge. */}
       <div
-        className="nav-capsule absolute right-0 bottom-[calc(100%+0.75rem)] w-56 origin-bottom-right rounded-xl px-4 py-3.5 transition-all duration-500 ease-[var(--ease-lux)]"
+        className="nav-capsule absolute right-0 bottom-[calc(100%+0.75rem)] w-[min(300px,calc(100vw-2.5rem))] origin-bottom-right rounded-xl px-4 py-3.5 transition-all duration-500 ease-[var(--ease-lux)]"
         style={{
           opacity: expanded ? 1 : 0,
           transform: expanded ? "scale(1) translateY(0)" : "scale(0.92) translateY(6px)",
           pointerEvents: expanded ? "auto" : "none",
         }}
       >
-        <p className="truncate text-sm">{track.title}</p>
-        <p className="mt-0.5 truncate text-xs text-muted-foreground">{track.artist}</p>
+        <p className="text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">On the site</p>
 
-        <div className="mt-3 flex items-center gap-3">
-          <button
-            type="button"
-            onClick={togglePlay}
-            disabled={status === "error"}
-            aria-label={playing ? "Pause" : "Play"}
-            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/15 text-foreground transition-opacity disabled:opacity-30"
-          >
-            {playing ? <Pause size={12} fill="currentColor" /> : <Play size={12} fill="currentColor" className="ml-0.5" />}
-          </button>
-
-          <div className="h-px flex-1 bg-white/10">
-            <div
-              className="h-px bg-[var(--gold)] transition-[width] duration-150"
-              style={{ width: `${Math.min(100, progress * 100)}%` }}
-            />
-          </div>
+        <div className="mt-2 flex flex-col gap-1">
+          {spotifyTracks.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => selectTrack(t)}
+              disabled={!t.uri}
+              className="flex items-baseline justify-between rounded-sm px-1.5 py-1 text-left text-sm transition-colors disabled:opacity-30"
+              style={{ color: activeId === t.id ? "var(--champagne)" : undefined }}
+            >
+              <span className="truncate">{t.title}</span>
+              <span className="ml-2 shrink-0 truncate text-xs text-muted-foreground">{t.artist}</span>
+            </button>
+          ))}
         </div>
 
-        {status === "error" && <p className="mt-2 text-[0.65rem] text-muted-foreground/70">Track unavailable</p>}
-
-        {spotifyUrl && (
-          <a
-            href={spotifyUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-3 inline-block text-[0.6rem] tracking-[0.15em] text-muted-foreground/60 uppercase transition-colors hover:text-muted-foreground"
-          >
-            Listen on Spotify
-          </a>
-        )}
+        <div ref={mountRef} className="mt-3 overflow-hidden rounded-lg" />
+        {!ready && <p className="mt-2 text-[0.65rem] text-muted-foreground/70">Loading player…</p>}
       </div>
 
       {/* Collapsed indicator -- the only thing visible by default. */}
@@ -133,10 +130,7 @@ export function MusicControl() {
         />
         <span
           className="relative h-1.5 w-1.5 rounded-full transition-transform duration-500"
-          style={{
-            background: status === "error" ? "var(--muted-foreground)" : "var(--champagne)",
-            transform: expanded ? "scale(1.4)" : "scale(1)",
-          }}
+          style={{ background: "var(--champagne)", transform: expanded ? "scale(1.4)" : "scale(1)" }}
         />
       </button>
     </div>
