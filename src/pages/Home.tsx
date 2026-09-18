@@ -571,24 +571,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* THE HIDDEN COLLECTION — homepage preview */}
-      <section className="relative mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
-        <Reveal>
-          <HiddenCollectionTeaser />
-          <p className="mt-6 text-center">
-            <Link to="/play" className="lux-link text-sm text-muted-foreground hover:text-foreground">
-              Enter the collection →
-            </Link>
+      {/* PLAY — homepage preview */}
+      <section className="relative mx-auto max-w-5xl px-6 py-24 lg:px-10 lg:py-32">
+        <Reveal className="text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Play</p>
+          <h2 className="mt-4 text-[clamp(2rem,5vw,3.2rem)] leading-[1.05] font-semibold">Find what's hidden.</h2>
+          <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
+            A small experiment in light, movement and discovery.
           </p>
+        </Reveal>
+        <Reveal delay={100}>
+          <div className="mt-14">
+            <HiddenCollectionTeaser />
+            <p className="mt-6 text-center">
+              <Link to="/play" className="lux-link text-sm text-muted-foreground hover:text-foreground">
+                Enter the collection →
+              </Link>
+            </p>
+          </div>
         </Reveal>
       </section>
 
       {/* ART ARCHIVE — homepage preview */}
-      <section className="relative mx-auto max-w-5xl px-6 py-16 lg:px-10 lg:py-20">
-        <Reveal>
-          <p className="text-center text-xs tracking-[0.3em] text-[var(--gold)] uppercase">Art / Visual Worlds</p>
-          <p className="mt-2 text-center text-sm text-muted-foreground">15 visual languages.</p>
-          <div className="mt-8">
+      <section className="relative mx-auto max-w-5xl px-6 py-24 lg:px-10 lg:py-32">
+        <Reveal className="text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Art / Visual Worlds</p>
+          <h2 className="mt-4 text-[clamp(2rem,5vw,3.2rem)] leading-[1.05] font-semibold">15 visual languages.</h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <div className="mt-14">
             <ArtPreviewTeaser />
           </div>
         </Reveal>

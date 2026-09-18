@@ -43,6 +43,7 @@ export function MusicControl() {
 
   const mountRef = useRef<HTMLDivElement>(null);
   const controllerRef = useRef<SpotifyController | null>(null);
+  const availableTracks = spotifyTracks.filter((t) => t.uri);
 
   useEffect(() => {
     const el = mountRef.current;
@@ -88,23 +89,25 @@ export function MusicControl() {
           pointerEvents: expanded ? "auto" : "none",
         }}
       >
-        <p className="text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">On the site</p>
-
-        <div className="mt-2 flex flex-col gap-1">
-          {spotifyTracks.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => selectTrack(t)}
-              disabled={!t.uri}
-              className="flex items-baseline justify-between rounded-sm px-1.5 py-1 text-left text-sm transition-colors disabled:opacity-30"
-              style={{ color: activeId === t.id ? "var(--champagne)" : undefined }}
-            >
-              <span className="truncate">{t.title}</span>
-              <span className="ml-2 shrink-0 truncate text-xs text-muted-foreground">{t.artist}</span>
-            </button>
-          ))}
-        </div>
+        {availableTracks.length > 0 && (
+          <>
+            <p className="text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">On the site</p>
+            <div className="mt-2 flex flex-col gap-1">
+              {availableTracks.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => selectTrack(t)}
+                  className="flex items-baseline justify-between rounded-sm px-1.5 py-1 text-left text-sm transition-colors"
+                  style={{ color: activeId === t.id ? "var(--champagne)" : undefined }}
+                >
+                  <span className="truncate">{t.title}</span>
+                  <span className="ml-2 shrink-0 truncate text-xs text-muted-foreground">{t.artist}</span>
+                </button>
+              ))}
+            </div>
+          </>
+        )}
 
         <div ref={mountRef} className="mt-3 overflow-hidden rounded-lg" />
         {!ready && <p className="mt-2 text-[0.65rem] text-muted-foreground/70">Loading player…</p>}

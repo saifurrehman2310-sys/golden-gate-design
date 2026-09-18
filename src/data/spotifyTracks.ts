@@ -14,16 +14,16 @@ export type SpotifyTrack = {
  * The 3 selectable tracks. To add/replace a track: open it in Spotify,
  * "Share -> Copy Song Link", turn https://open.spotify.com/track/<ID> into
  * spotify:track:<ID>, and drop it in below. Nothing else needs to change —
- * the control renders however many entries are in this array.
+ * the control renders only entries that have a real `uri`.
  *
  * NOTE: Spotify's embed/oEmbed endpoints don't expose a playlist's track
  * list publicly (no API credentials were available to query the Web API),
- * so only one of the three below could be verified from the playlist's
- * public metadata. Replace the other two `uri` values with the real
- * track links for the other 2 songs.
+ * so only "Lament" could be verified with a real track URI. Titles/artists
+ * for the other two are filled in for reference, but their `uri` is still
+ * empty — fill those in and they'll start appearing in the UI automatically.
  */
 export const spotifyTracks: SpotifyTrack[] = [
-  { id: "track-1", title: "Track 1 — replace me", artist: "—", uri: "" },
-  { id: "track-2", title: "Track 2 — replace me", artist: "—", uri: "" },
+  { id: "track-1", title: "Orenda", artist: "Senjidema", uri: "" },
+  { id: "track-2", title: "Temple of Time", artist: "Iftekharul Anam", uri: "" },
   { id: "track-3", title: "Lament", artist: "Iftekharul Anam", uri: "spotify:track:14hn4Wvb8wI9ofZKvCNh1S" },
 ];
