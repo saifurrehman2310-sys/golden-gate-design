@@ -3,6 +3,8 @@ import advisor from "@/assets/proj-advisor.jpg";
 import realestate from "@/assets/proj-realestate.jpg";
 import goxxti from "@/assets/proj-goxxti.jpg";
 import gold from "@/assets/hero-gold.jpg";
+import dental from "@/assets/proj-dental.jpg";
+import lawfirm from "@/assets/proj-lawfirm.jpg";
 
 export type Project = {
   slug: string;
@@ -12,6 +14,8 @@ export type Project = {
   tagline: string;
   image: string;
   liveUrl?: string;
+  /** True for concept/demo builds without a stable public URL — CTA is handled differently. */
+  demo?: boolean;
   video?: boolean;
   overview: string;
   challenge: string;
@@ -86,7 +90,8 @@ export const projects: Project[] = [
     category: "Dental Clinic · Demo",
     year: "2025",
     tagline: "A clinic website that converts nervous visitors into booked appointments.",
-    image: gold,
+    image: dental,
+    demo: true,
     liveUrl: "https://id-preview--60f4d0df-3134-449c-8768-f32fe5be80c7.lovable.app",
     services: ["Website Design", "Appointment Funnel", "Local SEO Structure"],
     overview:
@@ -115,7 +120,8 @@ export const projects: Project[] = [
     category: "Law Firm · Demo",
     year: "2025",
     tagline: "Authority, discretion and case enquiries — a firm presence built to command respect.",
-    image: gold,
+    image: lawfirm,
+    demo: true,
     liveUrl: "https://id-preview--21937cae-d99c-4f90-91d3-62e9fe219510.lovable.app",
     services: ["Website Design", "Practice Area Architecture", "Enquiry Funnel"],
     overview:
