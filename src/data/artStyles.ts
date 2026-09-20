@@ -27,16 +27,25 @@ import brutalism02 from "@/assets/art/brutalism-02.jpg";
 import brutalism03 from "@/assets/art/brutalism-03.jpg";
 import brutalism04 from "@/assets/art/brutalism-04.jpg";
 import brutalism05 from "@/assets/art/brutalism-05.jpg";
+import brutalism06 from "@/assets/art/brutalism-06.jpg";
+import brutalism07 from "@/assets/art/brutalism-07.jpg";
+import brutalism08 from "@/assets/art/brutalism-08.jpg";
 import vectorArt01 from "@/assets/art/vector-art-01.jpg";
 import vectorArt02 from "@/assets/art/vector-art-02.jpg";
 import vectorArt03 from "@/assets/art/vector-art-03.jpg";
 import vectorArt04 from "@/assets/art/vector-art-04.jpg";
 import vectorArt05 from "@/assets/art/vector-art-05.jpg";
+import vectorArt06 from "@/assets/art/vector-art-06.jpg";
+import vectorArt07 from "@/assets/art/vector-art-07.jpg";
+import vectorArt08 from "@/assets/art/vector-art-08.jpg";
 import collageArt01 from "@/assets/art/collage-art-01.jpg";
 import collageArt02 from "@/assets/art/collage-art-02.jpg";
 import collageArt03 from "@/assets/art/collage-art-03.jpg";
 import collageArt04 from "@/assets/art/collage-art-04.jpg";
 import collageArt05 from "@/assets/art/collage-art-05.jpg";
+import collageArt06 from "@/assets/art/collage-art-06.jpg";
+import collageArt07 from "@/assets/art/collage-art-07.jpg";
+import collageArt08 from "@/assets/art/collage-art-08.jpg";
 import cyberpunk01 from "@/assets/art/cyberpunk-01.jpg";
 import cyberpunk02 from "@/assets/art/cyberpunk-02.jpg";
 import cyberpunk03 from "@/assets/art/cyberpunk-03.jpg";
@@ -213,6 +222,9 @@ export const artStyles: ArtStyleContent[] = [
       { id: "brut-03", src: brutalism03, caption: "Type as Mass" },
       { id: "brut-04", src: brutalism04, caption: "Weight" },
       { id: "brut-05", src: brutalism05, caption: "Fracture Grid" },
+      { id: "brut-06", src: brutalism06, caption: "Monument, Weathered" },
+      { id: "brut-07", src: brutalism07, caption: "Pulling Weight" },
+      { id: "brut-08", src: brutalism08, caption: "Instrument, Carved" },
     ],
   },
   {
@@ -239,6 +251,9 @@ export const artStyles: ArtStyleContent[] = [
       { id: "vec-03", src: vectorArt03, caption: "Portrait, Reduced" },
       { id: "vec-04", src: vectorArt04, caption: "Geometry Study" },
       { id: "vec-05", src: vectorArt05, caption: "In Motion" },
+      { id: "vec-06", src: vectorArt06, caption: "Coastal Structure" },
+      { id: "vec-07", src: vectorArt07, caption: "Bloom, Flattened" },
+      { id: "vec-08", src: vectorArt08, caption: "Spiral Study" },
     ],
   },
   {
@@ -265,6 +280,9 @@ export const artStyles: ArtStyleContent[] = [
       { id: "col-03", src: collageArt03, caption: "Fallen Grace" },
       { id: "col-04", src: collageArt04, caption: "Fragment & Field" },
       { id: "col-05", src: collageArt05, caption: "Distance" },
+      { id: "col-06", src: collageArt06, caption: "Paper, Layered" },
+      { id: "col-07", src: collageArt07, caption: "Figure, Composed" },
+      { id: "col-08", src: collageArt08, caption: "Fragments, Gathered" },
     ],
   },
 
