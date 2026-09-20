@@ -3,16 +3,25 @@ import minimalism02 from "@/assets/art/minimalism-02.jpg";
 import minimalism03 from "@/assets/art/minimalism-03.jpg";
 import minimalism04 from "@/assets/art/minimalism-04.jpg";
 import minimalism05 from "@/assets/art/minimalism-05.jpg";
+import minimalism06 from "@/assets/art/minimalism-06.jpg";
+import minimalism07 from "@/assets/art/minimalism-07.jpg";
+import minimalism08 from "@/assets/art/minimalism-08.jpg";
 import maximalism01 from "@/assets/art/maximalism-01.jpg";
 import maximalism02 from "@/assets/art/maximalism-02.jpg";
 import maximalism03 from "@/assets/art/maximalism-03.jpg";
 import maximalism04 from "@/assets/art/maximalism-04.jpg";
 import maximalism05 from "@/assets/art/maximalism-05.jpg";
+import maximalism06 from "@/assets/art/maximalism-06.jpg";
+import maximalism07 from "@/assets/art/maximalism-07.jpg";
+import maximalism08 from "@/assets/art/maximalism-08.jpg";
 import futuristic01 from "@/assets/art/futuristic-01.jpg";
 import futuristic02 from "@/assets/art/futuristic-02.jpg";
 import futuristic03 from "@/assets/art/futuristic-03.jpg";
 import futuristic04 from "@/assets/art/futuristic-04.jpg";
 import futuristic05 from "@/assets/art/futuristic-05.jpg";
+import futuristic06 from "@/assets/art/futuristic-06.jpg";
+import futuristic07 from "@/assets/art/futuristic-07.jpg";
+import futuristic08 from "@/assets/art/futuristic-08.jpg";
 import brutalism01 from "@/assets/art/brutalism-01.jpg";
 import brutalism02 from "@/assets/art/brutalism-02.jpg";
 import brutalism03 from "@/assets/art/brutalism-03.jpg";
@@ -116,6 +125,9 @@ export const artStyles: ArtStyleContent[] = [
       { id: "min-03", src: minimalism03, caption: "Still Life No. 1" },
       { id: "min-04", src: minimalism04, caption: "Monogram Study" },
       { id: "min-05", src: minimalism05, caption: "Tailored Silence" },
+      { id: "min-06", src: minimalism06, caption: "Edge of the Horizon" },
+      { id: "min-07", src: minimalism07, caption: "Draped, Undone" },
+      { id: "min-08", src: minimalism08, caption: "Loop, in Stone" },
     ],
   },
   {
@@ -142,6 +154,9 @@ export const artStyles: ArtStyleContent[] = [
       { id: "max-03", src: maximalism03, caption: "Still Life, Overgrown" },
       { id: "max-04", src: maximalism04, caption: "Collage Study" },
       { id: "max-05", src: maximalism05, caption: "Object Arrangement" },
+      { id: "max-06", src: maximalism06, caption: "Palace of Excess" },
+      { id: "max-07", src: maximalism07, caption: "Cabinet of Curiosities" },
+      { id: "max-08", src: maximalism08, caption: "Procession" },
     ],
   },
   {
@@ -168,6 +183,9 @@ export const artStyles: ArtStyleContent[] = [
       { id: "fut-03", src: futuristic03, caption: "Reflective Object I" },
       { id: "fut-04", src: futuristic04, caption: "Aperture" },
       { id: "fut-05", src: futuristic05, caption: "Reflective Object II" },
+      { id: "fut-06", src: futuristic06, caption: "Bioluminescent Garden" },
+      { id: "fut-07", src: futuristic07, caption: "Seat, Poured" },
+      { id: "fut-08", src: futuristic08, caption: "Rite of Light" },
     ],
   },
 
