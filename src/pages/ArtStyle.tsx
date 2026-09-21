@@ -236,7 +236,7 @@ export default function ArtStyle() {
                 alt=""
                 aria-hidden
                 loading={isDominant ? "eager" : "lazy"}
-                className="h-full w-full rounded-sm object-cover shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]"
+                className="h-full w-full rounded-sm object-contain shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]"
               />
               <Caption piece={piece} visible={hoveredId === piece.id} />
             </button>
@@ -255,7 +255,7 @@ export default function ArtStyle() {
             transform: `scale(${entered ? 1 : 0.94})`,
           }}
         >
-          <img src={dominant.src} alt="" aria-hidden className="h-full w-full rounded-sm object-cover" />
+          <img src={dominant.src} alt="" aria-hidden className="h-full w-full rounded-sm object-contain" />
         </div>
         <p className="mt-3 text-[0.65rem] tracking-[0.2em] text-muted-foreground uppercase">{dominant.caption}</p>
 
@@ -277,7 +277,7 @@ export default function ArtStyle() {
                 transitionDelay: entered ? `${i * 70}ms` : "0ms",
               }}
             >
-              <img src={piece.src} alt="" aria-hidden loading="lazy" className="h-full w-full rounded-sm object-cover" />
+              <img src={piece.src} alt="" aria-hidden loading="lazy" className="h-full w-full rounded-sm object-contain" />
             </button>
           ))}
         </div>
