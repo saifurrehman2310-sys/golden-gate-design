@@ -440,6 +440,23 @@
   animation: label-flash 700ms ease-in-out forwards;
 }
 
+/* --- Art collection viewer --- */
+
+@keyframes artwork-enter {
+  0% {
+    opacity: 0;
+    transform: translateX(var(--enter-x, 16px)) scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@utility artwork-enter {
+  animation: artwork-enter 550ms var(--ease-lux) forwards;
+}
+
 
 @utility gold-rule {
   height: 1px;

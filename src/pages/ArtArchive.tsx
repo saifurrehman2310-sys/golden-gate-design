@@ -1,99 +1,82 @@
-import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/site/Reveal";
 import { artStyles } from "@/data/artStyles";
 
+// A handful of entries get a larger cell for rhythm/hierarchy -- everything
+// else is a single cell. `dense` auto-flow fills the remaining gaps
+// automatically, so this stays safe even as styles are added/removed.
+const FEATURED_SLUGS = new Set(["minimalism", "futuristic", "cyberpunk"]);
+
 /**
- * The Archive -- entry point for the Art experience. Not a card grid: a
- * quiet, editorial index of the 15 styles, with the backdrop itself
- * responding to whichever one you're considering. Scales to all 15
- * automatically since it only reads from `artStyles`.
+ * The Archive -- a compact visual index of all 16 design worlds, not a
+ * list of names. Every available style shows one of its own artworks;
+ * Coming Soon entries stay dim and inert-looking but are still a real
+ * destination (a quiet Coming Soon state, not a dead end).
  */
 export default function ArtArchive() {
-  const [hovered, setHovered] = useState<string | null>(null);
-  const active = useMemo(
-    () => artStyles.find((s) => s.slug === hovered && s.available),
-    [hovered],
-  );
-
   return (
     <section className="relative min-h-[100dvh] w-full overflow-hidden bg-grain" style={{ background: "#050506" }}>
-      {/* Backdrop -- crossfades to a dim, blurred glimpse of whichever style is being considered. */}
-      <div className="pointer-events-none absolute inset-0 transition-opacity duration-700" aria-hidden>
-        {artStyles
-          .filter((s) => s.available)
-          .map((s) => (
-            <img
-              key={s.slug}
-              src={s.images[0]?.src}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ease-[var(--ease-lux)]"
-              style={{ opacity: active?.slug === s.slug ? 0.22 : 0, filter: "blur(18px) saturate(0.8)" }}
-            />
-          ))}
-        <div className="absolute inset-0" style={{ background: "color-mix(in oklab, #050506 62%, transparent)" }} />
-      </div>
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-700"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(60% 55% at 50% 40%, color-mix(in oklab, var(--ice) 8%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 42%, transparent 78%)",
+            "radial-gradient(60% 55% at 50% 35%, color-mix(in oklab, var(--ice) 7%, transparent) 0%, color-mix(in oklab, var(--champagne) 4%, transparent) 45%, transparent 80%)",
         }}
         aria-hidden
       />
 
-      <Reveal className="relative px-6 pt-28 text-center sm:pt-32 lg:pt-40">
+      <Reveal className="relative px-6 pt-28 text-center sm:pt-32 lg:pt-36">
         <p className="text-xs tracking-[0.35em] text-[var(--gold)] uppercase">The Art Archive</p>
-        <h1 className="mt-4 font-display text-[clamp(1.9rem,4.5vw,3rem)] leading-[1.1]">
-          Fifteen visual worlds. Choose one to enter.
+        <h1 className="mt-4 font-display text-[clamp(1.7rem,4vw,2.6rem)] leading-[1.1]">
+          Sixteen visual worlds.
         </h1>
       </Reveal>
 
-      <div className="relative mx-auto mt-14 max-w-3xl px-6 pb-24 sm:mt-16">
-        <StyleList onHover={setHovered} activeSlug={active?.slug} />
+      <div className="relative mx-auto mt-12 max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
+        <div
+          className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4"
+          style={{ gridAutoFlow: "dense" }}
+        >
+          {artStyles.map((s, i) => {
+            const featured = FEATURED_SLUGS.has(s.slug);
+            const preview = s.images[0]?.src;
+            return (
+              <Reveal key={s.slug} delay={Math.min(i * 40, 320)}>
+                <Link
+                  to={`/art/${s.slug}`}
+                  className={`group relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-md transition-opacity duration-500 ${
+                    featured ? "sm:col-span-2 sm:row-span-2 sm:aspect-square" : ""
+                  }`}
+                  style={{ opacity: s.available ? 1 : 0.4 }}
+                >
+                  {preview ? (
+                    <img
+                      src={preview}
+                      alt=""
+                      aria-hidden
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 ease-[var(--ease-lux)] group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div className="absolute inset-0" style={{ background: "color-mix(in oklab, var(--background) 40%, transparent)" }} />
+                  )}
+                  <div
+                    className="pointer-events-none absolute inset-0"
+                    style={{ background: "linear-gradient(180deg, transparent 45%, color-mix(in oklab, #050506 88%, transparent) 100%)" }}
+                    aria-hidden
+                  />
+                  <div className="relative px-3 pb-3 sm:px-4 sm:pb-4">
+                    <p className="text-sm text-foreground sm:text-base">{s.name}</p>
+                    {!s.available && (
+                      <p className="mt-0.5 text-[0.6rem] tracking-[0.2em] text-muted-foreground uppercase">Coming soon</p>
+                    )}
+                  </div>
+                </Link>
+              </Reveal>
+            );
+          })}
+        </div>
       </div>
     </section>
-  );
-}
-
-function StyleList({
-  onHover,
-  activeSlug,
-}: {
-  onHover: (slug: string | null) => void;
-  activeSlug?: string;
-}) {
-  return (
-    <ul>
-      {artStyles.map((s) => (
-        <li key={s.slug} className="border-b border-white/[0.05] last:border-b-0">
-          {s.available ? (
-            <Link
-              to={`/art/${s.slug}`}
-              onMouseEnter={() => onHover(s.slug)}
-              onMouseLeave={() => onHover(null)}
-              className="group flex items-baseline justify-between py-4 transition-colors duration-500 sm:py-5"
-            >
-              <span
-                className="font-display text-[clamp(1.4rem,4vw,2.1rem)] leading-none transition-colors duration-500"
-                style={{ color: activeSlug === s.slug ? "var(--champagne)" : undefined }}
-              >
-                {s.name}
-              </span>
-              <span className="ml-4 hidden shrink-0 text-xs text-muted-foreground italic transition-opacity duration-500 sm:inline-block">
-                {activeSlug === s.slug ? s.shortDescription : ""}
-              </span>
-            </Link>
-          ) : (
-            <div className="flex items-baseline justify-between py-4 opacity-30 sm:py-5">
-              <span className="font-display text-[clamp(1.4rem,4vw,2.1rem)] leading-none">{s.name}</span>
-              <span className="ml-4 shrink-0 text-[0.6rem] tracking-[0.2em] text-muted-foreground uppercase">
-                Coming soon
-              </span>
-            </div>
-          )}
-        </li>
-      ))}
-    </ul>
   );
 }

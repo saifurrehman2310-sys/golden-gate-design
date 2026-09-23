@@ -6,9 +6,6 @@ import minimalism05 from "@/assets/art/minimalism-05.jpg";
 import minimalism06 from "@/assets/art/minimalism-06.jpg";
 import minimalism07 from "@/assets/art/minimalism-07.jpg";
 import minimalism08 from "@/assets/art/minimalism-08.jpg";
-import minimalism09 from "@/assets/art/minimalism-09.jpg";
-import minimalism10 from "@/assets/art/minimalism-10.jpg";
-import minimalism11 from "@/assets/art/minimalism-11.jpg";
 import maximalism01 from "@/assets/art/maximalism-01.jpg";
 import maximalism02 from "@/assets/art/maximalism-02.jpg";
 import maximalism03 from "@/assets/art/maximalism-03.jpg";
@@ -17,9 +14,6 @@ import maximalism05 from "@/assets/art/maximalism-05.jpg";
 import maximalism06 from "@/assets/art/maximalism-06.jpg";
 import maximalism07 from "@/assets/art/maximalism-07.jpg";
 import maximalism08 from "@/assets/art/maximalism-08.jpg";
-import maximalism09 from "@/assets/art/maximalism-09.jpg";
-import maximalism10 from "@/assets/art/maximalism-10.jpg";
-import maximalism11 from "@/assets/art/maximalism-11.jpg";
 import futuristic01 from "@/assets/art/futuristic-01.jpg";
 import futuristic02 from "@/assets/art/futuristic-02.jpg";
 import futuristic03 from "@/assets/art/futuristic-03.jpg";
@@ -28,9 +22,6 @@ import futuristic05 from "@/assets/art/futuristic-05.jpg";
 import futuristic06 from "@/assets/art/futuristic-06.jpg";
 import futuristic07 from "@/assets/art/futuristic-07.jpg";
 import futuristic08 from "@/assets/art/futuristic-08.jpg";
-import futuristic09 from "@/assets/art/futuristic-09.jpg";
-import futuristic10 from "@/assets/art/futuristic-10.jpg";
-import futuristic11 from "@/assets/art/futuristic-11.jpg";
 import brutalism01 from "@/assets/art/brutalism-01.jpg";
 import brutalism02 from "@/assets/art/brutalism-02.jpg";
 import brutalism03 from "@/assets/art/brutalism-03.jpg";
@@ -47,9 +38,6 @@ import vectorArt05 from "@/assets/art/vector-art-05.jpg";
 import vectorArt06 from "@/assets/art/vector-art-06.jpg";
 import vectorArt07 from "@/assets/art/vector-art-07.jpg";
 import vectorArt08 from "@/assets/art/vector-art-08.jpg";
-import vectorArt09 from "@/assets/art/vector-art-09.jpg";
-import vectorArt10 from "@/assets/art/vector-art-10.jpg";
-import vectorArt11 from "@/assets/art/vector-art-11.jpg";
 import collageArt01 from "@/assets/art/collage-art-01.jpg";
 import collageArt02 from "@/assets/art/collage-art-02.jpg";
 import collageArt03 from "@/assets/art/collage-art-03.jpg";
@@ -149,9 +137,6 @@ export const artStyles: ArtStyleContent[] = [
       { id: "min-06", src: minimalism06, caption: "Edge of the Horizon" },
       { id: "min-07", src: minimalism07, caption: "Draped, Undone" },
       { id: "min-08", src: minimalism08, caption: "Loop, in Stone" },
-      { id: "min-09", src: minimalism09, caption: "Sphere at Rest" },
-      { id: "min-10", src: minimalism10, caption: "Study in Drape" },
-      { id: "min-11", src: minimalism11, caption: "Form on Plinth" },
     ],
   },
   {
@@ -181,9 +166,6 @@ export const artStyles: ArtStyleContent[] = [
       { id: "max-06", src: maximalism06, caption: "Palace of Excess" },
       { id: "max-07", src: maximalism07, caption: "Cabinet of Curiosities" },
       { id: "max-08", src: maximalism08, caption: "Procession" },
-      { id: "max-09", src: maximalism09, caption: "Loggia, Gilded" },
-      { id: "max-10", src: maximalism10, caption: "Totem of Objects" },
-      { id: "max-11", src: maximalism11, caption: "Court, in Bloom" },
     ],
   },
   {
@@ -213,9 +195,6 @@ export const artStyles: ArtStyleContent[] = [
       { id: "fut-06", src: futuristic06, caption: "Bioluminescent Garden" },
       { id: "fut-07", src: futuristic07, caption: "Seat, Poured" },
       { id: "fut-08", src: futuristic08, caption: "Rite of Light" },
-      { id: "fut-09", src: futuristic09, caption: "Canopy Garden" },
-      { id: "fut-10", src: futuristic10, caption: "Seat, Carved from Light" },
-      { id: "fut-11", src: futuristic11, caption: "Gathering, Suspended" },
     ],
   },
 
@@ -275,9 +254,6 @@ export const artStyles: ArtStyleContent[] = [
       { id: "vec-06", src: vectorArt06, caption: "Coastal Structure" },
       { id: "vec-07", src: vectorArt07, caption: "Bloom, Flattened" },
       { id: "vec-08", src: vectorArt08, caption: "Spiral Study" },
-      { id: "vec-09", src: vectorArt09, caption: "Vessel, Reduced" },
-      { id: "vec-10", src: vectorArt10, caption: "Coastline at Dusk" },
-      { id: "vec-11", src: vectorArt11, caption: "Still Life, Flattened" },
     ],
   },
   {
@@ -469,9 +445,10 @@ export const artStyles: ArtStyleContent[] = [
   // -- Reserved slots: structure ready, waiting on real assets. Fill in
   // `images`, flip `available` to true, and the archive + style page work
   // automatically. Moods below are a starting guess for when that happens.
-  reserved("y2k", "Y2K", "rich"),
-  reserved("swiss-design", "Swiss Design", "quiet"),
+  reserved("solarpunk", "Solarpunk", "rich"),
   reserved("surrealism", "Surrealism", "atmospheric"),
+  reserved("biomorphism", "Biomorphism", "quiet"),
+  reserved("neo-futurism", "Neo-Futurism", "atmospheric"),
 ];
 
 function reserved(slug: string, name: string, mood: StyleMood): ArtStyleContent {

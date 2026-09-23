@@ -285,7 +285,7 @@ function ArtPreviewTeaser() {
                     src={img.src}
                     alt=""
                     aria-hidden
-                    className="pointer-events-none absolute top-[101%] left-0 h-1/2 w-full object-cover opacity-[0.16] blur-[2px]"
+                    className="pointer-events-none absolute top-[101%] left-0 h-1/2 w-full object-contain opacity-[0.16] blur-[2px]"
                     style={{ transform: "scaleY(-1)", maskImage: "linear-gradient(180deg, black, transparent 80%)" }}
                   />
                 </>
@@ -295,11 +295,7 @@ function ArtPreviewTeaser() {
                 alt=""
                 aria-hidden
                 loading={isDominant ? "eager" : "lazy"}
-                className={`relative h-full w-full rounded-sm object-cover ${
-                  isDominant
-                    ? "float-slow shadow-[0_40px_100px_-30px_rgba(0,0,0,0.75)] ring-1 ring-white/[0.08]"
-                    : "shadow-[0_25px_60px_-25px_rgba(0,0,0,0.6)]"
-                }`}
+                className={`relative h-full w-full rounded-sm object-contain ${isDominant ? "float-slow shadow-[0_40px_100px_-30px_rgba(0,0,0,0.75)]" : "shadow-[0_25px_60px_-25px_rgba(0,0,0,0.6)]"}`}
               />
             </div>
           );
@@ -341,20 +337,14 @@ function ArtPreviewTeaser() {
           {artStyles.map((s) => {
             const availIdx = available.findIndex((a) => a.slug === s.slug);
             const isSelected = s.slug === style.slug;
-            return (
-              <button
-                key={s.slug}
-                type="button"
-                disabled={!s.available}
-                onClick={() => s.available && select(availIdx)}
-                className="flex shrink-0 flex-col items-center gap-2 disabled:cursor-default"
-              >
+            const thumb = (
+              <>
                 <span
                   className="block h-12 w-12 overflow-hidden rounded-sm transition-opacity duration-500 sm:h-14 sm:w-14"
                   style={{ opacity: s.available ? (isSelected ? 1 : 0.45) : 0.15 }}
                 >
                   {s.available && (
-                    <img src={s.images[0].src} alt="" aria-hidden loading="lazy" className="h-full w-full object-cover" />
+                    <img src={s.images[0].src} alt="" aria-hidden loading="lazy" className="h-full w-full object-contain" />
                   )}
                 </span>
                 <span
@@ -362,8 +352,23 @@ function ArtPreviewTeaser() {
                   style={{ color: isSelected ? "var(--champagne)" : "var(--muted-foreground)" }}
                 >
                   {s.name}
+                  {!s.available && " · Soon"}
                 </span>
+              </>
+            );
+            return s.available ? (
+              <button
+                key={s.slug}
+                type="button"
+                onClick={() => select(availIdx)}
+                className="flex shrink-0 flex-col items-center gap-2"
+              >
+                {thumb}
               </button>
+            ) : (
+              <Link key={s.slug} to={`/art/${s.slug}`} className="flex shrink-0 flex-col items-center gap-2">
+                {thumb}
+              </Link>
             );
           })}
         </div>
