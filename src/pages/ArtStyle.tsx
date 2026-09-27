@@ -66,7 +66,7 @@ export default function ArtStyle() {
 
   if (!style.available) {
     return (
-      <section className="relative flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-grain px-6 text-center" style={{ background: "#050506" }}>
+      <section className="relative flex h-[100dvh] w-full flex-col items-center justify-center overflow-hidden bg-grain px-6 text-center" style={{ background: "#0e0e12" }}>
         <div
           className="pointer-events-none absolute inset-0"
           style={{
@@ -87,7 +87,7 @@ export default function ArtStyle() {
   }
 
   return (
-    <section className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-grain" style={{ background: "#050506" }}>
+    <section className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-grain" style={{ background: "#0e0e12" }}>
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -97,7 +97,7 @@ export default function ArtStyle() {
         aria-hidden
       />
 
-      <div className="relative flex items-center justify-between px-6 pt-8 sm:px-10 sm:pt-10">
+      <div className="relative flex items-center justify-between px-6 pt-24 sm:px-10 sm:pt-28">
         <Link to="/art" className="text-xs tracking-[0.2em] text-muted-foreground uppercase transition-colors hover:text-foreground">
           ‹ Archive
         </Link>
@@ -153,8 +153,27 @@ export default function ArtStyle() {
         </button>
       </div>
 
-      <div className="relative pb-8 text-center sm:pb-10">
-        {current && <p className="text-xs text-muted-foreground">{current.caption}</p>}
+      <div className="relative pb-6 sm:pb-8">
+        {current && <p className="text-center text-xs text-muted-foreground">{current.caption}</p>}
+
+        {/* Filmstrip -- the rest of the collection, always reachable. */}
+        <div className="mt-4 overflow-x-auto px-6 sm:px-10">
+          <div className="mx-auto flex w-max justify-center gap-2.5">
+            {style.images.map((img, i) => (
+              <button
+                key={img.id}
+                type="button"
+                onClick={() => goTo(i, i > index ? 1 : -1)}
+                aria-label={img.caption}
+                aria-current={i === index}
+                className="h-12 w-12 shrink-0 overflow-hidden rounded-sm transition-all duration-500 sm:h-14 sm:w-14"
+                style={{ opacity: i === index ? 1 : 0.35 }}
+              >
+                <img src={img.src} alt="" aria-hidden loading="lazy" className="h-full w-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

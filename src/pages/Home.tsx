@@ -391,7 +391,7 @@ export default function Home() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(90% 70% at 70% 30%, color-mix(in oklab, var(--ice) 14%, transparent), transparent 65%), radial-gradient(70% 60% at 15% 80%, color-mix(in oklab, var(--iris) 12%, transparent), transparent 70%), radial-gradient(60% 50% at 40% 10%, color-mix(in oklab, var(--champagne) 9%, transparent), transparent 70%)",
+              "radial-gradient(90% 70% at 70% 30%, color-mix(in oklab, var(--ice) 20%, transparent), transparent 68%), radial-gradient(70% 60% at 15% 80%, color-mix(in oklab, var(--iris) 17%, transparent), transparent 72%), radial-gradient(60% 50% at 40% 10%, color-mix(in oklab, var(--champagne) 14%, transparent), transparent 72%)",
           }}
           aria-hidden
         />

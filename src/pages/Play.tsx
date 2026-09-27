@@ -163,7 +163,7 @@ export default function Play() {
       ref={stageRef}
       onPointerMove={handlePointerMove}
       className="relative flex h-[100dvh] w-full flex-col overflow-hidden bg-grain"
-      style={{ background: "#050506" }}
+      style={{ background: "#0e0e12" }}
     >
       {/* Architectural silhouettes -- barely visible, brighten only as the light passes. */}
       {[

@@ -42,7 +42,7 @@
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.18 0.004 265);
+  --background: oklch(0.24 0.006 265);
   --foreground: oklch(0.985 0 0);
   --surface: oklch(0.235 0.005 265);
   --card: oklch(0.235 0.005 265);
@@ -76,7 +76,7 @@
     color-mix(in oklab, var(--ice) 16%, transparent) 0%,
     transparent 70%
   );
-  --gradient-env: radial-gradient(120% 90% at 50% -10%, #1c1d22 0%, #131316 45%, #0b0b0d 100%);
+  --gradient-env: radial-gradient(120% 90% at 50% -10%, #2c2e36 0%, #1e1f25 45%, #16171b 100%);
   --shadow-lux: 0 30px 80px -40px rgb(0 0 0 / 0.9);
   --shadow-glass:
     0 1px 0 0 rgb(255 255 255 / 0.14) inset, 0 24px 60px -30px rgb(120 150 255 / 0.35);
@@ -95,7 +95,7 @@
   }
 
   body {
-    background-color: #0b0b0d;
+    background-color: #131316;
     background-image: var(--gradient-env);
     background-attachment: fixed;
     color: #f7f7f8;
@@ -197,15 +197,15 @@
 @utility glass-panel {
   background: linear-gradient(
     160deg,
-    color-mix(in oklab, #ffffff 7%, transparent) 0%,
-    color-mix(in oklab, #ffffff 2%, transparent) 45%,
-    color-mix(in oklab, #ffffff 4%, transparent) 100%
+    color-mix(in oklab, #ffffff 12%, transparent) 0%,
+    color-mix(in oklab, #ffffff 5%, transparent) 45%,
+    color-mix(in oklab, #ffffff 7%, transparent) 100%
   );
-  border: 1px solid rgb(255 255 255 / 0.14);
-  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid rgb(255 255 255 / 0.2);
+  backdrop-filter: blur(14px) saturate(150%);
   box-shadow:
-    0 1px 0 0 rgb(255 255 255 / 0.16) inset,
-    0 24px 60px -30px rgb(80 110 220 / 0.3);
+    0 1px 0 0 rgb(255 255 255 / 0.22) inset,
+    0 24px 60px -30px rgb(80 110 220 / 0.32);
 }
 
 @utility glass-edge {

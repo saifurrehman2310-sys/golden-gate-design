@@ -15,7 +15,7 @@ const FEATURED_SLUGS = new Set(["minimalism", "futuristic", "cyberpunk"]);
  */
 export default function ArtArchive() {
   return (
-    <section className="relative min-h-[100dvh] w-full overflow-hidden bg-grain" style={{ background: "#050506" }}>
+    <section className="relative min-h-[100dvh] w-full overflow-hidden bg-grain" style={{ background: "#0e0e12" }}>
       <div
         className="pointer-events-none absolute inset-0"
         style={{
@@ -62,7 +62,7 @@ export default function ArtArchive() {
                   )}
                   <div
                     className="pointer-events-none absolute inset-0"
-                    style={{ background: "linear-gradient(180deg, transparent 45%, color-mix(in oklab, #050506 88%, transparent) 100%)" }}
+                    style={{ background: "linear-gradient(180deg, transparent 45%, color-mix(in oklab, #0e0e12 88%, transparent) 100%)" }}
                     aria-hidden
                   />
                   <div className="relative px-3 pb-3 sm:px-4 sm:pb-4">

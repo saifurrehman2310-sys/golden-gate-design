@@ -445,6 +445,8 @@ export const artStyles: ArtStyleContent[] = [
   // -- Reserved slots: structure ready, waiting on real assets. Fill in
   // `images`, flip `available` to true, and the archive + style page work
   // automatically. Moods below are a starting guess for when that happens.
+  reserved("y2k", "Y2K", "rich"),
+  reserved("swiss-design", "Swiss Design", "quiet"),
   reserved("solarpunk", "Solarpunk", "rich"),
   reserved("surrealism", "Surrealism", "atmospheric"),
   reserved("biomorphism", "Biomorphism", "quiet"),
