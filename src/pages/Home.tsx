@@ -704,7 +704,7 @@ export default function Home() {
               }}
               aria-hidden
             />
-            <div className="relative grid items-center gap-14 lg:grid-cols-2">
+            <div className="relative grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">About Us</p>
                 <h2 className="mt-5 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] font-semibold">
@@ -767,6 +767,10 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
+
+      <div className="mx-auto flex max-w-7xl justify-center px-6 lg:px-10">
+        <div className="gold-rule w-16 opacity-60" />
+      </div>
 
       {/* LET'S CONNECT */}
       <section className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
