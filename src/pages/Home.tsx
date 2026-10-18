@@ -30,6 +30,7 @@ import connectFigure from "@/assets/v2/hourglass-spheres.png";
 
 import processRibbon from "@/assets/v3/process-ribbon.png";
 import { processSteps } from "@/data/processSteps";
+import { contact, mailtoUrl, whatsappUrl } from "@/data/contact";
 
 
 const serviceIcons: Record<string, string> = {
@@ -791,14 +792,14 @@ export default function Home() {
             <ul className="glass-frame glass-edge mt-8 max-w-md space-y-4 rounded-2xl p-6 text-sm">
               <li className="flex items-center gap-3">
                 <Mail size={16} className="shrink-0 text-[var(--champagne)]" />
-                <a href="mailto:hello@saifstudio.com" className="text-muted-foreground hover:text-foreground">
-                  hello@saifstudio.com
+                <a href={mailtoUrl} className="text-muted-foreground hover:text-foreground">
+                  {contact.email}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <MessageCircle size={16} className="shrink-0 text-[var(--champagne)]" />
                 <a
-                  href="https://wa.me/919999999999"
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="text-muted-foreground hover:text-foreground"

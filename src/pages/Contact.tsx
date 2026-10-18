@@ -4,6 +4,7 @@ import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
+import { contact, mailtoUrl, whatsappUrl } from "@/data/contact";
 
 const budgets = [
   "Essential Website — CA$389",
@@ -31,11 +32,11 @@ export default function Contact() {
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\nBusiness: ${business}\nPackage: ${budget}\n\n${message}`,
     );
-    window.location.href = `mailto:hello@saifstudio.com?subject=${encodeURIComponent(
+    window.location.href = `${mailtoUrl}?subject=${encodeURIComponent(
       `New project enquiry — ${business || name}`,
     )}&body=${body}`;
     setSent(true);
-    toast.success("Opening your email client to send the enquiry.");
+    toast("Opening your email app with your enquiry. Nothing is sent until you send that email.");
   };
 
   return (
@@ -121,8 +122,8 @@ export default function Contact() {
               {sent && (
                 <p className="text-sm text-muted-foreground">
                   If your email client didn't open, write to{" "}
-                  <a href="mailto:hello@saifstudio.com" className="text-[var(--gold)]">
-                    hello@saifstudio.com
+                  <a href={mailtoUrl} className="text-[var(--gold)]">
+                    {contact.email}
                   </a>
                   .
                 </p>
@@ -136,14 +137,14 @@ export default function Contact() {
               <ul className="mt-8 space-y-7 text-sm">
                 <li className="flex gap-4">
                   <Mail size={18} className="mt-0.5 shrink-0 text-[var(--gold)]" />
-                  <a href="mailto:hello@saifstudio.com" className="lux-link">
-                    hello@saifstudio.com
+                  <a href={mailtoUrl} className="lux-link">
+                    {contact.email}
                   </a>
                 </li>
                 <li className="flex gap-4">
                   <MessageCircle size={18} className="mt-0.5 shrink-0 text-[var(--gold)]" />
                   <a
-                    href="https://wa.me/919999999999"
+                    href={whatsappUrl}
                     target="_blank"
                     rel="noreferrer noopener"
                     className="lux-link"

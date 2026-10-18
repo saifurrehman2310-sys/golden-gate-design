@@ -17,7 +17,7 @@ export const services: Service[] = [
     who: "New businesses, rebrands, and established operators whose branding no longer matches their quality.",
     benefits: [
       "Consistent presence across every touchpoint",
-      "Premium perception, higher price tolerance",
+      "A more premium perception of the business",
       "Assets ready for web, print and social",
       "A system your team can apply without guesswork",
     ],
@@ -44,7 +44,7 @@ export const services: Service[] = [
     what: "Full interface design for web and product — user flows, wireframes, high-fidelity screens and interaction design.",
     who: "Products, apps and platforms that need to feel effortless to use.",
     benefits: [
-      "Fewer drop-offs at every step",
+      "Clear steps through every flow",
       "Interfaces that don't need explaining",
       "Consistent design system across screens",
       "Faster development handoff",
@@ -72,10 +72,10 @@ export const services: Service[] = [
     what: "Custom front-end and back-end development — no page builders, no bloat, built for speed and longevity.",
     who: "Businesses that have outgrown template builders or need custom functionality.",
     benefits: [
-      "Fast load times and clean Core Web Vitals",
-      "Code you actually own",
+      "Fast-loading, performance-minded builds",
+      "Clean, maintainable code",
       "Built to scale as the business grows",
-      "No plugin dependency or platform lock-in",
+      "Built without page-builder bloat",
     ],
     process: ["Technical scoping", "Architecture", "Build", "Testing & QA", "Deployment"],
   },

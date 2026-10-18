@@ -34,14 +34,14 @@ export const projects: Project[] = [
     name: "Burger Bliss",
     category: "Restaurant",
     year: "2025",
-    tagline: "A hunger-inducing digital storefront built to fill tables.",
+    tagline: "A hunger-inducing digital storefront designed to drive orders.",
     image: burger,
     liveUrl: "https://burgerblisssss.netlify.app/",
     services: ["Website Design", "Landing Page", "Brand Direction"],
     overview:
-      "A website built to make people hungry and order within seconds.",
+      "A website designed to make people hungry and to make ordering simple.",
     challenge:
-      "Local restaurant sites hide the menu and phone number. Orders were leaking to delivery apps.",
+      "Local restaurant sites often hide the menu and phone number, which can push orders towards delivery apps.",
     solution:
       "Full-bleed food photography, a menu that reads like a magazine, and one job on every screen — place the order.",
     features: [
@@ -50,12 +50,12 @@ export const projects: Project[] = [
       "Sticky order + reservation calls to action",
       "Location, hours and directions above the fold on mobile",
       "Testimonials and social proof positioned before checkout intent",
-      "Mobile-first performance tuning for sub-second interaction",
+      "Mobile-first build",
     ],
     results: [
-      "Direct-order path shortened from 4 taps to 1",
-      "Menu discoverability on mobile dramatically improved",
-      "A brand presence that finally matches the food",
+      "A direct-order path designed to be one tap away",
+      "Menu placed prominently on mobile",
+      "A brand presence designed to match the food",
     ],
   },
   {
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     overview:
       "Financial advisory is sold on trust. This build was designed to make a first-time visitor feel safe enough to book a consultation.",
     challenge:
-      "Clients hand over their life savings based on a first impression. The previous presence gave no clarity on services, credentials or process — visitors left without ever making contact.",
+      "Clients entrust their savings based partly on a first impression. Sites that don't explain services, credentials or process can lose visitors before they make contact.",
     solution:
       "A calm, authoritative layout that leads with credibility: clear service pillars, a transparent advisory process, and a consultation CTA repeated at every natural decision point.",
     features: [
@@ -78,13 +78,13 @@ export const projects: Project[] = [
       "Service breakdown: planning, investments, insurance, retirement",
       "Step-by-step advisory process to remove uncertainty",
       "Consultation booking CTAs throughout the journey",
-      "Client testimonial and trust-signal sections",
-      "Fully responsive, fast-loading and accessible",
+      "Trust-signal sections",
+      "Responsive layout",
     ],
     results: [
-      "A single clear conversion path: book a consultation",
+      "A single clear path: book a consultation",
       "Services and process explained without jargon",
-      "Positioning elevated from local advisor to trusted professional",
+      "Positioning designed to read as a trusted professional",
     ],
   },
   {
@@ -92,7 +92,7 @@ export const projects: Project[] = [
     name: "Bright Smile Dental Studio",
     category: "Dental Clinic · Demo",
     year: "2025",
-    tagline: "A clinic website that converts nervous visitors into booked appointments.",
+    tagline: "A concept website for a modern dental clinic: reassuring, clear and booking-focused.",
     image: dental,
     liveUrl: "https://brightsmiledentalclinicss.netlify.app/",
     services: ["Website Design", "Appointment Funnel", "Local SEO Structure"],
@@ -101,19 +101,19 @@ export const projects: Project[] = [
     challenge:
       "Dental patients choose on comfort and proximity. Most clinic sites read like brochures and force patients to call during business hours.",
     solution:
-      "A reassuring, treatment-led layout: services explained in plain language, transparent pricing cues, and an always-available appointment request flow.",
+      "A reassuring, treatment-led layout: services explained in plain language, transparent pricing cues, and an appointment request flow.",
     features: [
       "Treatment-focused service sections in patient language",
-      "Appointment request form with clear response promise",
+      "Appointment request form",
       "Team and clinic credibility section",
       "Before/after and results-oriented presentation",
       "Location, hours and emergency contact prominence",
       "Local SEO friendly structure and metadata",
     ],
     results: [
-      "Booking friction removed for after-hours visitors",
+      "Appointment requests possible outside business hours",
       "Treatments explained without clinical intimidation",
-      "A template proven for multi-location clinics",
+      "A structure that could extend to multi-location clinics",
     ],
   },
   {
@@ -207,14 +207,14 @@ export const projects: Project[] = [
     name: "Sai Real Estate",
     category: "Real Estate · Full Digital Presence",
     year: "2025",
-    tagline: "A Kothrud property broker taken from invisible to findable, credible and contactable.",
+    tagline: "A complete digital presence build for a Kothrud property broker.",
     image: realestate,
     video: true,
     services: ["Website", "Local SEO", "Google Business", "WhatsApp Business", "Analytics", "Social Branding"],
     overview:
       "Rohan Ranka's Sai Real Estate operates in Kothrud, Pune. This was not a website project — it was a complete digital presence build covering everything a local broker needs to be found and trusted.",
     challenge:
-      "Property enquiries in Kothrud start on Google Maps and end in WhatsApp. Sai Real Estate had no website, no verified map listing, no analytics and no consistent brand — so every lead went to competitors who were simply easier to find.",
+      "Property enquiries in Kothrud start on Google Maps and end in WhatsApp. Sai Real Estate had no website, no verified map listing, no analytics and no consistent brand — so enquiries were likely going to competitors who were easier to find.",
     solution:
       "We built the entire stack: a conversion-focused website, a verified Google Business Profile with Maps optimisation, WhatsApp Business set up as the primary enquiry channel, local SEO groundwork, social brand assets and analytics to measure what actually drives calls.",
     features: [
@@ -227,8 +227,8 @@ export const projects: Project[] = [
     ],
     results: [
       "Discoverable on Google Maps for local property searches",
-      "Enquiries routed instantly into WhatsApp",
-      "Measurable lead tracking from day one",
+      "Enquiries routed to WhatsApp",
+      "Analytics set up to track enquiry sources",
     ],
   },
   {
@@ -236,7 +236,7 @@ export const projects: Project[] = [
     name: "GOXXTI",
     category: "Music / Artist Brand",
     year: "2025",
-    tagline: "A raw, industrial artist site for a rising hard techno producer — built to help him book more shows.",
+    tagline: "A raw, industrial artist site for a rising hard techno producer — built to make booking enquiries easier.",
     image: goxxti,
     liveUrl: "https://goxxti.netlify.app/",
     services: ["Website Design", "Artist Branding", "Booking Funnel", "EPK / Press Section"],
@@ -252,12 +252,12 @@ export const projects: Project[] = [
       "Upcoming shows and tour dates module",
       "Press / EPK section with bio, stats and downloadable assets",
       "Discography grid with release artwork and links",
-      "Direct booking contact form routed to management",
+      "Direct booking contact form",
     ],
     results: [
       "Single professional destination replaces scattered links",
       "Promoters can evaluate sound, stats and availability in one scroll",
-      "Direct booking funnel turns interest into enquiries",
+      "A direct booking form for enquiries",
     ],
   },
 ];

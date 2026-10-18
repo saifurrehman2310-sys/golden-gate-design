@@ -12,6 +12,10 @@ import {
   renewalNote,
 } from "@/data/domainHosting";
 
+/**
+ * `reference` prices are PROVISIONAL and not yet substantiated as prior prices. They are shown as
+ * labelled "reference" prices only, with no "was"/"save"/discount wording, until verified.
+ */
 const tiers = [
   {
     name: "Essential Website",

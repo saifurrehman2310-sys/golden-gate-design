@@ -59,6 +59,15 @@ export default function ProjectCaseStudy() {
               <MagneticAnchor href={p.liveUrl}>
                 View Live Site <ArrowUpRight size={16} />
               </MagneticAnchor>
+            ) : p.demo && p.liveUrl ? (
+              <>
+                <MagneticAnchor href={p.liveUrl}>
+                  View Demo Preview <ArrowUpRight size={16} />
+                </MagneticAnchor>
+                <span className="inline-flex items-center rounded-full border border-white/10 bg-[color-mix(in_oklab,#ffffff_4%,transparent)] px-5 py-3 text-xs text-muted-foreground">
+                  Concept demo, not a live client website
+                </span>
+              </>
             ) : p.demo ? (
               <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-[color-mix(in_oklab,#ffffff_4%,transparent)] px-7 py-3.5 text-sm text-muted-foreground">
                 Concept project — not publicly hosted

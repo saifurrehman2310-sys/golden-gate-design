@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { contact, mailtoUrl, whatsappUrl } from "@/data/contact";
 
 export function Footer() {
   return (
@@ -47,15 +48,15 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
                 <a
-                  href="mailto:hello@saifstudio.com"
+                  href={mailtoUrl}
                   className="text-muted-foreground transition-colors hover:text-[var(--champagne)]"
                 >
-                  hello@saifstudio.com
+                  {contact.email}
                 </a>
               </li>
               <li>
                 <a
-                  href="https://wa.me/919999999999"
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="text-muted-foreground transition-colors hover:text-[var(--champagne)]"
