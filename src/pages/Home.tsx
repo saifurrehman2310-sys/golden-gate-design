@@ -503,6 +503,16 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={150}>
+          <div className="mt-6 text-center">
+            <Link
+              to="/portfolio"
+              className="lux-link inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-[var(--champagne)]"
+            >
+              See More <ArrowRight size={14} />
+            </Link>
+          </div>
+        </Reveal>
       </section>
 
       {/* SERVICES */}

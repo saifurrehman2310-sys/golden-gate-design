@@ -112,6 +112,14 @@ export default function Portfolio() {
                     </p>
                     <h2 className="mt-5 text-[clamp(1.9rem,4vw,3rem)] leading-tight font-semibold">{p.name}</h2>
                     <p className="mt-5 leading-relaxed text-muted-foreground">{p.tagline}</p>
+                    {p.status === "in-progress" && (
+                      <p className="mt-5 text-sm text-[var(--champagne)]">
+                        <span className="mr-2 rounded-full border border-[var(--gold)]/40 px-3 py-1 text-xs tracking-wide uppercase">
+                          In Progress
+                        </span>
+                        {p.announcement}
+                      </p>
+                    )}
                     <ul className="mt-7 flex flex-wrap gap-2">
                       {p.services.map((s) => (
                         <li

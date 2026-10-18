@@ -17,6 +17,9 @@ export type Project = {
   /** True for concept/demo builds without a stable public URL — CTA is handled differently. */
   demo?: boolean;
   video?: boolean;
+  /** "in-progress": a new site is being built — no live link is shown; `announcement` is displayed instead. */
+  status?: "in-progress";
+  announcement?: string;
   overview: string;
   challenge: string;
   solution: string;
@@ -150,7 +153,8 @@ export const projects: Project[] = [
     year: "2025",
     tagline: "A full Shopify storefront built to sell home decor, not just display it.",
     image: gold,
-    liveUrl: "https://www.easelivingdecor.com/",
+    status: "in-progress",
+    announcement: "Easeliving's new website is coming soon.",
     services: ["Shopify Development", "Store Design", "Conversion Optimisation"],
     overview:
       "A complete Shopify build for a home decor brand — from storefront design to product merchandising and checkout experience.",

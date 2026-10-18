@@ -51,7 +51,11 @@ export default function ProjectCaseStudy() {
             <p className="mt-7 max-w-2xl text-lg text-muted-foreground">{p.tagline}</p>
           </Reveal>
           <Reveal delay={320} className="mt-12 flex flex-wrap gap-4">
-            {p.liveUrl && !p.demo ? (
+            {p.status === "in-progress" ? (
+              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/40 bg-[color-mix(in_oklab,var(--gold)_8%,transparent)] px-7 py-3.5 text-sm text-[var(--champagne)]">
+                In Progress{p.announcement ? ` · ${p.announcement}` : ""}
+              </span>
+            ) : p.liveUrl && !p.demo ? (
               <MagneticAnchor href={p.liveUrl}>
                 View Live Site <ArrowUpRight size={16} />
               </MagneticAnchor>
