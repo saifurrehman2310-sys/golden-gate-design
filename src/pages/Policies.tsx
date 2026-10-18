@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/site/Reveal";
+import { clientJourney, previewNote } from "@/data/clientJourney";
 import { domainOptions, firstYearNote, hostingNote, renewalNote } from "@/data/domainHosting";
 
 function PolicyLayout({ title, children }: { title: string; children: ReactNode }) {
@@ -37,12 +38,18 @@ export function Terms() {
           for what each package includes.
         </p>
       </Block>
-      <Block heading="Payment">
-        <p>
-          Scope and payment arrangements are agreed with you first, after any private concept
-          preview has been presented and approved. The agreed payment is received before the
-          development phase begins.
-        </p>
+      <Block heading="How a project works">
+        <ol className="space-y-3">
+          {clientJourney.map((j, n) => (
+            <li key={j.title}>
+              <span className="font-medium text-foreground">
+                {n + 1}. {j.title}.
+              </span>{" "}
+              {j.text}
+            </li>
+          ))}
+        </ol>
+        <p>{previewNote}</p>
       </Block>
       <Block heading="Domain and hosting">
         {domainOptions.map((o) => (

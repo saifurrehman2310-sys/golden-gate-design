@@ -4,6 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { carePlans, careRange } from "@/data/carePlans";
+import { clientJourney, previewNote } from "@/data/clientJourney";
 import {
   domainOptions,
   firstYearNote,
@@ -223,7 +224,7 @@ export default function Pricing() {
           <div className="mt-20 grid gap-10 border-t border-white/[0.06] pt-14 md:grid-cols-3">
             {[
               ["No templates", "Every build is custom-designed for the business, never a recycled theme."],
-              ["Agreed before we build", "Scope and payment arrangements are finalised, and the agreed payment is received, before the development phase begins."],
+              ["See it first", "Before you commit, we prepare a limited, private first preview of our proposed direction."],
               ["Questions first", "Not sure which package fits? Message us before you decide."],
             ].map(([k, v]) => (
               <div key={k}>
@@ -276,20 +277,19 @@ export default function Pricing() {
 
         <Reveal delay={120}>
           <div className="mt-16 text-center">
-            <h2 className="text-2xl font-semibold">What happens next</h2>
-            <ol className="mx-auto mt-8 grid max-w-5xl gap-6 text-left text-sm leading-relaxed text-muted-foreground md:grid-cols-5">
-              {[
-                "We discuss your needs and agree on the proposed scope.",
-                "Where appropriate, we prepare a limited, private concept preview.",
-                "We present the concept privately and gather your feedback and approval.",
-                "We finalise the project scope and payment arrangements.",
-                "The agreed payment is received before the development phase begins.",
-              ].map((t, n) => (
-                <li key={t}>
-                  <span className="text-[var(--gold)]">{n + 1}.</span> {t}
+            <h2 className="text-2xl font-semibold">How a project works</h2>
+            <ol className="mx-auto mt-10 grid max-w-6xl gap-6 text-left md:grid-cols-5">
+              {clientJourney.map((j, n) => (
+                <li key={j.title}>
+                  <p className="text-xs text-[var(--gold)]">{String(n + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-2 text-base font-semibold">{j.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{j.text}</p>
                 </li>
               ))}
             </ol>
+            <p className="mx-auto mt-8 max-w-2xl text-xs leading-relaxed text-muted-foreground">
+              {previewNote}
+            </p>
             <p className="mt-10 text-xs text-muted-foreground">
               See our <Link to="/terms" className="lux-link text-[var(--champagne)]">Terms of Service</Link>{" "}
               and <Link to="/privacy" className="lux-link text-[var(--champagne)]">Privacy Policy</Link>.

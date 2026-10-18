@@ -36,11 +36,11 @@ import tileDeliver from "@/assets/v2/tile-paperplane.png";
 import processRibbon from "@/assets/v3/process-ribbon.png";
 
 const processSteps = [
-  { n: "01", step: "Discover", img: tileDiscover },
-  { n: "02", step: "Define", img: tileDefine },
-  { n: "03", step: "Design", img: tileDesign },
-  { n: "04", step: "Develop", img: tileDevelop },
-  { n: "05", step: "Deliver", img: tileDeliver },
+  { n: "01", step: "Discover", note: "Understanding your business, goals and vision.", img: tileDiscover },
+  { n: "02", step: "Envision", note: "Turning your needs into a first private concept preview.", img: tileDefine },
+  { n: "03", step: "Approve", note: "You review the private preview and decide whether to proceed.", img: tileDesign },
+  { n: "04", step: "Refine", note: "With approval and the agreed payment, we build the full website.", img: tileDevelop },
+  { n: "05", step: "Deliver", note: "Final checks, then handover of your credentials and access.", img: tileDeliver },
 ];
 
 const serviceIcons: Record<string, string> = {
@@ -681,6 +681,9 @@ export default function Home() {
                         style={{ opacity: isActive ? 1 : 0.9 }}
                       >
                         {s.step}
+                      </p>
+                      <p className="mx-auto mt-1.5 max-w-[11rem] text-[11px] leading-snug text-white/80 sm:text-xs">
+                        {s.note}
                       </p>
                     </div>
                   </Reveal>

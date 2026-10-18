@@ -52,8 +52,9 @@ export default function Contact() {
           </Reveal>
           <Reveal delay={200}>
             <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-              Tell us about the business and the goal, and choose the package that fits. We'll reply
-              with the next steps.
+              Tell us about the business and the goal, and choose the package that fits. We'll reply to
+              understand your requirements and talk through the next steps, including a limited, private
+              first preview.
             </p>
           </Reveal>
         </div>
