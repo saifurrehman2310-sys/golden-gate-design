@@ -70,7 +70,14 @@ export function Footer() {
 
         <div className="mt-10 flex flex-col gap-2 border-t border-white/[0.06] pt-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Saif Studio. All rights reserved.</p>
-          <p>Designed &amp; built in-house.</p>
+          <p className="flex gap-5">
+            <Link to="/terms" className="transition-colors hover:text-[var(--champagne)]">
+              Terms
+            </Link>
+            <Link to="/privacy" className="transition-colors hover:text-[var(--champagne)]">
+              Privacy
+            </Link>
+          </p>
         </div>
       </div>
     </footer>

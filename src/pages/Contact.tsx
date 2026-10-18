@@ -4,7 +4,12 @@ import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 
-const budgets = ["Starter — $250", "Business — $450", "Premium — Custom", "Not sure yet"];
+const budgets = [
+  "Essential — CA$389",
+  "Lead Generation — CA$589",
+  "Smart Business — CA$989",
+  "Not sure yet",
+];
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -19,7 +24,7 @@ export default function Contact() {
     const message = String(data.get("message") ?? "");
 
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nBusiness: ${business}\nBudget: ${budget}\n\n${message}`,
+      `Name: ${name}\nEmail: ${email}\nBusiness: ${business}\nPackage: ${budget}\n\n${message}`,
     );
     window.location.href = `mailto:hello@saifstudio.com?subject=${encodeURIComponent(
       `New project enquiry — ${business || name}`,
@@ -44,8 +49,8 @@ export default function Contact() {
           </Reveal>
           <Reveal delay={200}>
             <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-              Tell us about the business and the goal. You'll get a clear plan, a timeline and a fixed
-              price — usually within 24 hours.
+              Tell us about the business and the goal, and choose the package that fits. We'll reply
+              with the next steps.
             </p>
           </Reveal>
         </div>
@@ -63,7 +68,7 @@ export default function Contact() {
                 <Field label="Business name" name="business" />
                 <div>
                   <label htmlFor="budget" className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    Budget
+                    Package
                   </label>
                   <select
                     id="budget"
@@ -138,8 +143,8 @@ export default function Contact() {
               </ul>
               <div className="gold-rule my-9" />
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Prefer to talk it through? Book a free 20-minute consultation and we'll map the fastest
-                path to more enquiries for your business.
+                Not sure which package fits? Send a message and we'll help you choose. Full payment is
+                required before development begins.
               </p>
             </div>
           </Reveal>
