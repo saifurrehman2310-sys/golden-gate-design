@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/site/Reveal";
+import { domainOptions, firstYearNote, hostingNote, renewalNote } from "@/data/domainHosting";
 
 function PolicyLayout({ title, children }: { title: string; children: ReactNode }) {
   return (
@@ -43,12 +44,19 @@ export function Terms() {
           development phase begins.
         </p>
       </Block>
-      <Block heading="Domain">
-        <p>There are two options. You can buy and own the domain in your own account. Or Saif Studio
-          can manage the domain for you for an additional fee.</p>
+      <Block heading="Domain and hosting">
+        {domainOptions.map((o) => (
+          <p key={o.id}>
+            <span className="font-medium text-foreground">{o.title}.</span> {o.points.join(" ")}
+          </p>
+        ))}
+        <p>{hostingNote}</p>
+        <p>
+          {firstYearNote} {renewalNote}
+        </p>
       </Block>
       <Block heading="Care & Optimization">
-        <p>Optional ongoing care is available from CA$59 to CA$149 per month.</p>
+        <p>Optional ongoing care is available from CA$59 to CA$149 per month. How Care &amp; Optimization applies to domain renewals is set out in the finalised service terms.</p>
       </Block>
       <Block heading="Questions before you pay">
         <p>

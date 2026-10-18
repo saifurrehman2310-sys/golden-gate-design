@@ -147,7 +147,7 @@ export default function Contact() {
               </ul>
               <div className="gold-rule my-9" />
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Not sure which package fits? Send a message and we'll help you choose.
+                Not sure which package fits? Send a message and we'll help you choose. Hosting platform charges are included in the package price, and you can own your domain or have us manage it for an additional cost.
               </p>
             </div>
           </Reveal>

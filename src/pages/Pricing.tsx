@@ -4,6 +4,12 @@ import { Reveal } from "@/components/site/Reveal";
 import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { carePlans, careRange } from "@/data/carePlans";
+import {
+  domainOptions,
+  firstYearNote,
+  keptSeparate,
+  renewalNote,
+} from "@/data/domainHosting";
 
 const tiers = [
   {
@@ -229,19 +235,41 @@ export default function Pricing() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div className="mt-16">
-            <div className="glass-frame glass-edge rounded-2xl p-9 lg:p-11">
-              <h2 className="text-xl font-semibold">Your domain, two ways</h2>
-              <ul className="mt-6 space-y-5 text-sm leading-relaxed text-muted-foreground">
-                <li>
-                  <span className="font-medium text-foreground">You buy and own it.</span> You register
-                  the domain in your own account and it stays in your name.
-                </li>
-                <li>
-                  <span className="font-medium text-foreground">We manage it for you.</span> Saif Studio
-                  handles the domain for an additional fee. Ask us for the details before you choose.
-                </li>
-              </ul>
+          <div id="domain" className="mt-20">
+            <div className="text-center">
+              <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Domain &amp; hosting</p>
+              <h2 className="mx-auto mt-5 max-w-3xl text-[clamp(1.7rem,4vw,2.8rem)] leading-[1.05] font-semibold">
+                Your domain, <span className="text-gold-gradient">two ways</span>
+              </h2>
+            </div>
+            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+              {domainOptions.map((o) => (
+                <div key={o.id} className="glass-frame glass-edge rounded-2xl p-9 lg:p-10">
+                  <h3 className="text-lg font-semibold">{o.title}</h3>
+                  <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
+                    {o.points.map((pt) => (
+                      <li key={pt} className="flex gap-3">
+                        <Check size={16} className="mt-0.5 shrink-0 text-[var(--gold)]" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div className="glass-frame glass-edge mt-6 rounded-2xl p-9 lg:p-10">
+              <div className="grid gap-8 md:grid-cols-3">
+                {keptSeparate.map(([k, v]) => (
+                  <div key={k}>
+                    <h3 className="text-base font-semibold">{k}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="gold-rule my-8" />
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {firstYearNote} {renewalNote}
+              </p>
             </div>
           </div>
         </Reveal>
