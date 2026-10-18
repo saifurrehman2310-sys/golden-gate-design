@@ -50,7 +50,7 @@ export default function Portfolio() {
         <FloatingBlobs positions={defaultBlobScatter} />
         <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-24 lg:px-10 lg:pt-52 lg:pb-32">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Portfolio</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Our Work</p>
           </Reveal>
           <Reveal delay={100}>
             <h1 className="mt-6 max-w-4xl text-[clamp(2.6rem,7vw,5.5rem)] leading-[0.98] font-semibold">

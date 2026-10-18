@@ -151,29 +151,26 @@ export const projects: Project[] = [
     name: "Ease Living Decor",
     category: "Shopify · Home Decor",
     year: "2025",
-    tagline: "A full Shopify storefront built to sell home decor, not just display it.",
+    tagline: "A new Shopify website for a home decor brand, currently in progress.",
     image: gold,
     status: "in-progress",
     announcement: "Easeliving's new website is coming soon.",
     services: ["Shopify Development", "Store Design", "Conversion Optimisation"],
     overview:
-      "A complete Shopify build for a home decor brand — from storefront design to product merchandising and checkout experience.",
+      "Saif Studio is building a new website for Ease Living, a home decor brand. The project is in progress, and this page will be updated when the new website is ready.",
     challenge:
-      "Decor is an emotional, visual purchase. A generic theme flattens the product and kills average order value.",
+      "Decor is a visual purchase, so the website needs to present products clearly and make browsing and buying straightforward.",
     solution:
-      "A tailored Shopify storefront with editorial product presentation, collection storytelling, and a checkout journey tuned to reduce drop-off.",
+      "The new website is planned as a tailored Shopify storefront with considered product presentation, collection storytelling and a clear checkout journey.",
     features: [
       "Custom Shopify theme design and setup",
-      "Collection and product page merchandising",
-      "Trust badges, shipping and returns clarity",
-      "Cart and checkout optimisation",
+      "Collection and product page presentation",
+      "Clear shipping and returns information",
       "Mobile-first browsing experience",
-      "Product photography presentation system",
     ],
     results: [
-      "A branded storefront instead of a stock theme",
-      "Collections structured for cross-sell",
-      "Checkout friction reduced across mobile",
+      "The new website is currently in progress",
+      "Details and visuals will be added on this page at launch",
     ],
   },
   {

@@ -143,7 +143,7 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <div className="relative mt-10">
-                  <MagneticLink to="/contact" variant={t.featured ? "gold" : "ghost"} className="w-full">
+                  <MagneticLink to={`/contact?package=${encodeURIComponent(t.name)}`} variant={t.featured ? "gold" : "ghost"} className="w-full">
                     Get Started
                   </MagneticLink>
                 </div>

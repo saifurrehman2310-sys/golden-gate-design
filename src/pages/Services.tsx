@@ -26,7 +26,7 @@ export default function Services() {
         <FloatingBlobs positions={defaultBlobScatter} />
         <div className="relative mx-auto max-w-7xl px-6 pt-44 pb-24 lg:px-10 lg:pt-52 lg:pb-32">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Services</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">What We Create</p>
           </Reveal>
           <Reveal delay={100}>
             <h1 className="mt-6 max-w-4xl text-[clamp(2.6rem,7vw,5.5rem)] leading-[0.98] font-semibold">
@@ -35,8 +35,7 @@ export default function Services() {
           </Reveal>
           <Reveal delay={200}>
             <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-              Six services, one standard. Everything is custom-built, performance-tuned and designed to
-              convert visitors into enquiries.
+              Six services, one standard. Everything is custom-built around your business and your goals.
             </p>
           </Reveal>
         </div>
@@ -87,17 +86,6 @@ export default function Services() {
                       </li>
                     ))}
                   </ul>
-                  <h3 className="mt-8 text-xs uppercase tracking-[0.25em] text-[var(--gold)]">Process</h3>
-                  <ol className="mt-4 flex flex-wrap gap-2">
-                    {s.process.map((step) => (
-                      <li
-                        key={step}
-                        className="rounded-full border border-white/[0.08] px-3.5 py-1.5 text-xs text-muted-foreground"
-                      >
-                        {step}
-                      </li>
-                    ))}
-                  </ol>
                 </Reveal>
               </div>
             </div>
@@ -121,7 +109,7 @@ export default function Services() {
             </p>
           </Reveal>
           <Reveal delay={120} className="mt-10 flex justify-center">
-            <MagneticLink to="/contact">Book a Free Consultation</MagneticLink>
+            <MagneticLink to="/contact">Start a Project</MagneticLink>
           </Reveal>
         </div>
       </section>

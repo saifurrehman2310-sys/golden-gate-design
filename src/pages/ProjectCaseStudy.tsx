@@ -39,7 +39,7 @@ export default function ProjectCaseStudy() {
           </Reveal>
           <Reveal delay={80}>
             <p className="mt-10 text-xs uppercase tracking-[0.3em] text-[var(--gold)]">
-              {p.category} · {p.year}
+              {p.status === "in-progress" ? p.category : `${p.category} · ${p.year}`}
             </p>
           </Reveal>
           <Reveal delay={150}>
@@ -132,7 +132,9 @@ export default function ProjectCaseStudy() {
         <FloatingBlobs positions={defaultBlobScatter} />
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
-            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-semibold">What we built</h2>
+            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-semibold">
+              {p.status === "in-progress" ? "Planned scope" : "What we built"}
+            </h2>
           </Reveal>
           <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {p.features.map((f, i) => (
@@ -173,7 +175,9 @@ export default function ProjectCaseStudy() {
 
         <div className={p.video ? "mt-24" : ""}>
           <Reveal>
-            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-semibold">Results</h2>
+            <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-semibold">
+              {p.status === "in-progress" ? "Status" : "Results"}
+            </h2>
           </Reveal>
           <ul className="mt-10 grid gap-6 md:grid-cols-3">
             {p.results.map((r, i) => (

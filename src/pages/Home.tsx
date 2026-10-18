@@ -28,20 +28,9 @@ import featuredFinancialAdvisor from "@/assets/v3/featured-financial-advisor.png
 import featuredSaiRealEstate from "@/assets/v3/featured-sai-real-estate.png";
 import connectFigure from "@/assets/v2/hourglass-spheres.png";
 
-import tileDiscover from "@/assets/v2/tile-magnify.png";
-import tileDefine from "@/assets/v2/tile-sphere.png";
-import tileDesign from "@/assets/v2/tile-knot.png";
-import tileDevelop from "@/assets/v2/tile-cube.png";
-import tileDeliver from "@/assets/v2/tile-paperplane.png";
 import processRibbon from "@/assets/v3/process-ribbon.png";
+import { processSteps } from "@/data/processSteps";
 
-const processSteps = [
-  { n: "01", step: "Discover", note: "Understanding your business, goals and vision.", img: tileDiscover },
-  { n: "02", step: "Envision", note: "Turning your needs into a first private concept preview.", img: tileDefine },
-  { n: "03", step: "Approve", note: "You review the private preview and decide whether to proceed.", img: tileDesign },
-  { n: "04", step: "Refine", note: "With approval and the agreed payment, we build the full website.", img: tileDevelop },
-  { n: "05", step: "Deliver", note: "Final checks, then handover of your credentials and access.", img: tileDeliver },
-];
 
 const serviceIcons: Record<string, string> = {
   "brand-identity": serviceLeaf,
@@ -519,7 +508,7 @@ export default function Home() {
       <section className="relative overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Services</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">What We Create</p>
             <h2 className="mt-4 max-w-2xl text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-semibold">
               Everything your business needs to look inevitable online.
             </h2>
@@ -623,7 +612,7 @@ export default function Home() {
       {/* PROCESS */}
       <section className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
         <Reveal className="text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Process</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">How It Works</p>
           <h2 className="mt-4 text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] font-semibold">
             Five steps. No surprises.
           </h2>
@@ -702,6 +691,16 @@ export default function Home() {
             </div>
           </div>
         </Reveal>
+        <Reveal delay={120}>
+          <div className="mt-6 text-center">
+            <Link
+              to="/how-it-works"
+              className="lux-link inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-[var(--champagne)]"
+            >
+              See how it works <ArrowRight size={14} />
+            </Link>
+          </div>
+        </Reveal>
       </section>
 
       {/* ABOUT */}
@@ -719,7 +718,7 @@ export default function Home() {
             />
             <div className="relative grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">About Us</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">The Studio</p>
                 <h2 className="mt-5 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] font-semibold">
                   We turn ideas into meaningful digital experiences.
                 </h2>

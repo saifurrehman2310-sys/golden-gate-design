@@ -81,17 +81,33 @@ export function Terms() {
 export function Privacy() {
   return (
     <PolicyLayout title="Privacy Policy">
-      <Block heading="Enquiries">
+      <Block heading="What the contact form collects">
         <p>
-          The contact form on this site doesn't send your details to a server. When you submit it, it
-          opens a pre-filled email in your own email app, addressed to Saif Studio. What you send is
-          whatever you choose to include in that email.
+          The form on the contact page asks for your name, email address, business name (optional),
+          the package you're interested in, and your project details. There is no phone number field.
         </p>
       </Block>
-      <Block heading="Third-party content">
+      <Block heading="Why we ask for it">
         <p>
-          This site is hosted on Cloudflare. The music player on the site loads content from Spotify,
-          which may set its own cookies and collect its own data under its own policy.
+          We use these details to respond to your enquiry and to discuss your project with you. Your
+          name and email address tell us who to reply to, and the rest helps us understand what you
+          need.
+        </p>
+      </Block>
+      <Block heading="How the form works">
+        <p>
+          The form does not send your details to a server and this website does not store them. When
+          you press "Send Enquiry", it opens a pre-filled email in your own email app, addressed to
+          Saif Studio. Nothing is sent until you send that email yourself. If you contact us on
+          WhatsApp or by email instead, we receive the contact details and messages you choose to
+          send.
+        </p>
+      </Block>
+      <Block heading="Third-party services">
+        <p>
+          This site is hosted on Cloudflare. It loads fonts from Google Fonts, and the music player
+          loads content from Spotify. These services may receive technical information such as your
+          IP address when your browser loads them, and are governed by their own policies.
         </p>
       </Block>
       <Block heading="Questions">

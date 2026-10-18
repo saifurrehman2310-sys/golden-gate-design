@@ -4,10 +4,11 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { to: "/portfolio", label: "Portfolio" },
-  { to: "/services", label: "Services" },
+  { to: "/portfolio", label: "Our Work" },
+  { to: "/services", label: "What We Create" },
+  { to: "/how-it-works", label: "How It Works" },
   { to: "/pricing", label: "Pricing" },
-  { to: "/about", label: "About" },
+  { to: "/about", label: "The Studio" },
   { to: "/art", label: "Art" },
   { to: "/play", label: "Play" },
 ];
@@ -27,7 +28,7 @@ export function Nav() {
     <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
       <nav
         className={cn(
-          "nav-capsule flex w-full max-w-4xl items-center justify-between rounded-full px-6 py-3.5 transition-all duration-500",
+          "nav-capsule flex w-full max-w-5xl items-center justify-between rounded-full px-6 py-3.5 transition-all duration-500",
           scrolled && "nav-capsule-scrolled",
         )}
       >
@@ -35,7 +36,7 @@ export function Nav() {
           Saif<span className="text-[var(--gold)]"> Studio</span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           {links.map((l) => (
             <NavLink
               key={l.to}
@@ -54,12 +55,12 @@ export function Nav() {
             to="/contact"
             className="rounded-full border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_14%,transparent)] px-5 py-1.5 text-sm text-[var(--champagne)] backdrop-blur-md transition-all duration-300 hover:border-[var(--gold)] hover:bg-[color-mix(in_oklab,var(--gold)_22%,transparent)]"
           >
-            Let's Talk
+            Start a Project
           </Link>
         </div>
 
         <button
-          className="md:hidden"
+          className="lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
@@ -68,9 +69,9 @@ export function Nav() {
       </nav>
 
       {open && (
-        <div className="nav-capsule absolute top-[calc(100%+0.5rem)] w-[calc(100%-2rem)] max-w-4xl rounded-2xl md:hidden">
+        <div className="nav-capsule absolute top-[calc(100%+0.5rem)] w-[calc(100%-2rem)] max-w-5xl rounded-2xl lg:hidden">
           <div className="flex flex-col gap-1 px-6 py-4">
-            {[...links, { to: "/contact", label: "Contact" }].map((l) => (
+            {[...links, { to: "/contact", label: "Start a Project" }].map((l) => (
               <Link
                 key={l.to}
                 to={l.to}

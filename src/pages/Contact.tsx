@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
@@ -16,6 +16,8 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
   const [params] = useSearchParams();
   const plan = params.get("plan");
+  const pkg = params.get("package");
+  const defaultBudget = budgets.find((b) => pkg && b.startsWith(pkg)) ?? budgets[3];
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -77,7 +79,7 @@ export default function Contact() {
                   <select
                     id="budget"
                     name="budget"
-                    defaultValue={budgets[3]}
+                    defaultValue={defaultBudget}
                     className="mt-3 w-full rounded-lg border border-white/[0.1] bg-[color-mix(in_oklab,#ffffff_4%,transparent)] px-4 py-3.5 text-sm outline-none backdrop-blur-sm transition-colors focus:border-[var(--gold)]"
                   >
                     {budgets.map((b) => (
@@ -108,6 +110,14 @@ export default function Contact() {
               >
                 Send Enquiry <ArrowRight size={16} />
               </button>
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                We use your name, email address and message to respond to your enquiry. Sending opens a
+                pre-filled email in your email app; nothing is sent until you send it. See our{" "}
+                <Link to="/privacy" className="lux-link text-[var(--champagne)]">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
               {sent && (
                 <p className="text-sm text-muted-foreground">
                   If your email client didn't open, write to{" "}
