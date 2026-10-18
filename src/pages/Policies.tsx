@@ -28,8 +28,8 @@ export function Terms() {
     <PolicyLayout title="Terms of Service">
       <Block heading="Packages and prices">
         <p>
-          Saif Studio offers three website packages, priced in Canadian dollars: Essential (CA$389),
-          Lead Generation (CA$589) and Smart Business (CA$989). See the{" "}
+          Saif Studio offers three website packages, priced in Canadian dollars: Essential Website (CA$389),
+          Lead Generation Website (CA$589) and Smart Website (CA$989). See the{" "}
           <Link to="/pricing" className="lux-link text-[var(--champagne)]">
             pricing page
           </Link>{" "}
@@ -37,7 +37,11 @@ export function Terms() {
         </p>
       </Block>
       <Block heading="Payment">
-        <p>Full payment is required before development begins.</p>
+        <p>
+          Scope and payment arrangements are agreed with you first, after any private concept
+          preview has been presented and approved. The agreed payment is received before the
+          development phase begins.
+        </p>
       </Block>
       <Block heading="Domain">
         <p>There are two options. You can buy and own the domain in your own account. Or Saif Studio

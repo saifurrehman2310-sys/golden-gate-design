@@ -1,18 +1,21 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/site/Reveal";
 import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 
 const budgets = [
-  "Essential — CA$389",
-  "Lead Generation — CA$589",
-  "Smart Business — CA$989",
+  "Essential Website — CA$389",
+  "Lead Generation Website — CA$589",
+  "Smart Website — CA$989",
   "Not sure yet",
 ];
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const [params] = useSearchParams();
+  const plan = params.get("plan");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -93,6 +96,7 @@ export default function Contact() {
                   name="message"
                   rows={6}
                   required
+                  defaultValue={plan ? `I'd like to enquire about ${plan}.` : undefined}
                   placeholder="What does your business do, and what should the website achieve?"
                   className="mt-3 w-full resize-none rounded-lg border border-white/[0.1] bg-[color-mix(in_oklab,#ffffff_4%,transparent)] px-4 py-3.5 text-sm outline-none backdrop-blur-sm transition-colors placeholder:text-muted-foreground/60 focus:border-[var(--gold)]"
                 />
@@ -143,8 +147,7 @@ export default function Contact() {
               </ul>
               <div className="gold-rule my-9" />
               <p className="text-sm leading-relaxed text-muted-foreground">
-                Not sure which package fits? Send a message and we'll help you choose. Full payment is
-                required before development begins.
+                Not sure which package fits? Send a message and we'll help you choose.
               </p>
             </div>
           </Reveal>
