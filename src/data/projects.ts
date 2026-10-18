@@ -33,7 +33,7 @@ export const projects: Project[] = [
     year: "2025",
     tagline: "A hunger-inducing digital storefront built to fill tables.",
     image: burger,
-    liveUrl: "https://preview--burger-bliss-booster.lovable.app/",
+    liveUrl: "https://burgerblisssss.netlify.app/",
     services: ["Website Design", "Landing Page", "Brand Direction"],
     overview:
       "A website built to make people hungry and order within seconds.",
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     year: "2025",
     tagline: "Trust, credibility and consultations — designed for a high-stakes decision.",
     image: advisor,
-    liveUrl: "https://preview--shekhar-pathare-advisor.lovable.app/",
+    liveUrl: "https://shekharpathare.netlify.app/",
     services: ["Website Design", "Copy Structure", "Lead Generation"],
     overview:
       "Financial advisory is sold on trust. This build was designed to make a first-time visitor feel safe enough to book a consultation.",
@@ -91,8 +91,7 @@ export const projects: Project[] = [
     year: "2025",
     tagline: "A clinic website that converts nervous visitors into booked appointments.",
     image: dental,
-    demo: true,
-    liveUrl: "https://id-preview--60f4d0df-3134-449c-8768-f32fe5be80c7.lovable.app",
+    liveUrl: "https://brightsmiledentalclinicss.netlify.app/",
     services: ["Website Design", "Appointment Funnel", "Local SEO Structure"],
     overview:
       "A concept build demonstrating how a modern dental practice should present itself online — warm, clinical-clean and booking-focused.",
@@ -238,7 +237,7 @@ export const projects: Project[] = [
     year: "2025",
     tagline: "A raw, industrial artist site for a rising hard techno producer — built to help him book more shows.",
     image: goxxti,
-    liveUrl: "https://id-preview--5082e761-e8d7-4443-a88a-d51e30f32589.lovable.app",
+    liveUrl: "https://goxxti.netlify.app/",
     services: ["Website Design", "Artist Branding", "Booking Funnel", "EPK / Press Section"],
     overview:
       "GOXXTI is a rising hard techno producer who needed more than a Linktree — he needed a branded destination where promoters, press and fans could immediately understand his sound, see his stats and start a booking conversation.",

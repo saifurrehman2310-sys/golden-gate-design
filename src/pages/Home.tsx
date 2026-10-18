@@ -724,7 +724,7 @@ export default function Home() {
                 <div
                   className="ambient-drift pointer-events-none absolute rounded-full"
                   style={{
-                    inset: "-38%",
+                    inset: "-20%",
                     background:
                       "radial-gradient(42% 42% at 30% 24%, color-mix(in oklab, var(--ice) 32%, transparent), transparent 72%)",
                     filter: "blur(38px)",
@@ -734,25 +734,10 @@ export default function Home() {
                 <div
                   className="ambient-drift-slow pointer-events-none absolute rounded-full"
                   style={{
-                    inset: "-38%",
+                    inset: "-20%",
                     background:
                       "radial-gradient(46% 46% at 76% 80%, color-mix(in oklab, var(--champagne) 26%, transparent), transparent 72%)",
                     filter: "blur(42px)",
-                  }}
-                  aria-hidden
-                />
-                <div
-                  className="ambient-drift pointer-events-none absolute"
-                  style={{
-                    width: "150%",
-                    height: "34%",
-                    top: "16%",
-                    left: "-22%",
-                    transform: "rotate(-16deg)",
-                    background:
-                      "radial-gradient(closest-side, color-mix(in oklab, var(--ice) 20%, transparent), transparent 78%)",
-                    filter: "blur(26px)",
-                    opacity: 0.55,
                   }}
                   aria-hidden
                 />
@@ -767,10 +752,6 @@ export default function Home() {
           </div>
         </Reveal>
       </section>
-
-      <div className="mx-auto flex max-w-7xl justify-center px-6 lg:px-10">
-        <div className="gold-rule w-16 opacity-60" />
-      </div>
 
       {/* LET'S CONNECT */}
       <section className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32">
@@ -789,18 +770,13 @@ export default function Home() {
             { blob: 11, top: "50%", left: "40%", size: "w-14", delay: "2s" },
           ]}
         />
-        <div className="grid items-center gap-14 lg:grid-cols-2">
+        <div className="relative">
           <Reveal>
-            <div className="relative aspect-[4/3] w-full" aria-hidden>
-              <img src={connectFigure} alt="" className="float-slow h-full w-full object-contain" />
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Let's Connect</p>
             <h2 className="mt-5 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] font-semibold">
               Got a project in mind? We'd love to hear about it.
             </h2>
-            <ul className="glass-frame glass-edge mt-8 space-y-4 rounded-2xl p-6 text-sm">
+            <ul className="glass-frame glass-edge mt-8 max-w-md space-y-4 rounded-2xl p-6 text-sm">
               <li className="flex items-center gap-3">
                 <Mail size={16} className="shrink-0 text-[var(--champagne)]" />
                 <a href="mailto:hello@saifstudio.com" className="text-muted-foreground hover:text-foreground">
@@ -827,6 +803,11 @@ export default function Home() {
               <MagneticLink to="/contact">
                 Start a Conversation <ArrowRight size={16} />
               </MagneticLink>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="relative mx-auto mt-16 aspect-[4/3] w-full max-w-md" aria-hidden>
+              <img src={connectFigure} alt="" className="float-slow h-full w-full object-contain" />
             </div>
           </Reveal>
         </div>
