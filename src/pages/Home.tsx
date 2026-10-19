@@ -27,6 +27,7 @@ import featuredBurgerBliss from "@/assets/v3/featured-burger-bliss.png";
 import featuredFinancialAdvisor from "@/assets/v3/featured-financial-advisor.png";
 import featuredSaiRealEstate from "@/assets/v3/featured-sai-real-estate.png";
 import connectFigure from "@/assets/v2/hourglass-spheres.png";
+import canadaFlagSoft from "@/assets/canada-flag-soft.jpg";
 
 import processRibbon from "@/assets/v3/process-ribbon.png";
 import { processSteps, stageExplanations } from "@/data/processSteps";
@@ -848,6 +849,38 @@ export default function Home() {
               <MagneticLink to="/contact">
                 Start a Conversation <ArrowRight size={16} />
               </MagneticLink>
+            </div>
+          </Reveal>
+          <Reveal delay={60}>
+            <div className="glass-frame glass-edge relative mt-14 max-w-2xl overflow-hidden rounded-3xl">
+              {/* Softly blurred flag, kept low-opacity so the glass stays the subject. */}
+              <img
+                src={canadaFlagSoft}
+                alt=""
+                aria-hidden
+                loading="lazy"
+                className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover opacity-[0.22] blur-2xl"
+              />
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(160deg, color-mix(in oklab, #ffffff 7%, transparent) 0%, color-mix(in oklab, var(--background) 55%, transparent) 70%)",
+                }}
+                aria-hidden
+              />
+              <span className="absolute top-5 right-5 rounded-full border border-[color-mix(in_oklab,var(--champagne)_30%,transparent)] bg-[color-mix(in_oklab,#ffffff_6%,transparent)] px-3 py-1 text-[0.62rem] tracking-[0.18em] text-[var(--champagne)] uppercase backdrop-blur-md">
+                Canada-Based Client Support
+              </span>
+              <div className="relative px-6 pt-16 pb-8 sm:px-9 sm:pt-14 sm:pb-10">
+                <h3 className="max-w-sm text-[clamp(1.5rem,3vw,2rem)] leading-[1.15] font-semibold">
+                  A studio without borders.
+                </h3>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+                  Thoughtful digital experiences, with a connected client experience for businesses
+                  across Canada.
+                </p>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={100}>
