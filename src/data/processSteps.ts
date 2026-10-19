@@ -16,3 +16,30 @@ export const processSteps = [
   { n: "04", step: "Refine", note: "With approval and the agreed payment, we build the full website.", img: tileDevelop },
   { n: "05", step: "Deliver", note: "Final checks, then handover of your credentials and access.", img: tileDeliver },
 ].map((s, i) => ({ ...s, title: clientJourney[i].title, detail: clientJourney[i].text }));
+
+/**
+ * The finalized, approved explanation for each stage (same order as `processSteps`). `lead` is the
+ * opening line; `body` is the rest. Shown on /how-it-works and, on click or tap, on the homepage.
+ */
+export const stageExplanations = [
+  {
+    lead: "First, we understand.",
+    body: "We discuss the business, its goals, its audience and what the website needs to achieve. This is where the project takes shape.",
+  },
+  {
+    lead: "The idea becomes tangible.",
+    body: "We translate the client's requirements and chosen package into a limited, private first concept preview, so they can see the proposed direction before committing.",
+  },
+  {
+    lead: "The client decides.",
+    body: "The client reviews the preview. If they want to move forward, we confirm the agreed project scope and payment arrangements before full development begins.",
+  },
+  {
+    lead: "The complete experience takes shape.",
+    body: "Once the agreed payment is received, we refine the direction, develop the complete website and implement the agreed scope.",
+  },
+  {
+    lead: "Ready for its next chapter.",
+    body: "We carry out the agreed final checks, finalize the website and hand over the relevant credentials and access.",
+  },
+] as const;

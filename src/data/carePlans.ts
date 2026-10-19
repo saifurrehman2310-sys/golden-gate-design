@@ -2,11 +2,10 @@
  * Care & Optimization plans.
  *
  * CONFIRMED: the overall range is CA$59–149 per month.
- * NOT YET CONFIRMED: each plan's individual price and its inclusions.
- *
- * Leave `monthlyPrice` as null and `inclusions` empty until decided. The cards then show an
- * honest placeholder instead of an invented figure. Set a number (CAD per month) and add
- * inclusion strings to publish them; the UI updates automatically.
+ * CONFIRMED (per the owner): Essential Care CA$59, Care & Optimization CA$99, Priority Care CA$149
+ * per month.
+ * NOT YET CONFIRMED: each plan's inclusions. Leave `inclusions` empty until decided; nothing is
+ * invented. Add inclusion strings to publish them.
  */
 export type CarePlan = {
   id: string;
@@ -23,21 +22,21 @@ export const carePlans: CarePlan[] = [
     id: "essential-care",
     name: "Essential Care",
     forWho: "For sites that need a dependable foundation of upkeep after launch.",
-    monthlyPrice: null,
+    monthlyPrice: 59,
     inclusions: [],
   },
   {
     id: "care-optimization",
     name: "Care & Optimization",
     forWho: "For businesses that want ongoing optimisation alongside regular care.",
-    monthlyPrice: null,
+    monthlyPrice: 99,
     inclusions: [],
   },
   {
     id: "priority-care",
     name: "Priority Care",
     forWho: "For businesses that want the highest level of attention for their site.",
-    monthlyPrice: null,
+    monthlyPrice: 149,
     inclusions: [],
   },
 ];

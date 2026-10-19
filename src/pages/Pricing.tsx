@@ -165,23 +165,25 @@ export default function Pricing() {
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 Optional monthly care for your website, from CA${careRange.min} to CA${careRange.max} CAD
-                per month depending on the plan. Monthly price and inclusions for each plan are confirmed with you
-                when you enquire.
+                per month depending on the plan. Prices are shown below; you can also enquire about any plan.
               </p>
             </div>
-            <div className="mt-10 divide-y divide-white/[0.08] border-t border-white/[0.08]">
+            <div className="mt-10 grid gap-px overflow-hidden rounded-xl bg-white/[0.08] lg:grid-cols-3">
               {carePlans.map((c) => (
-                <div key={c.id} className="grid items-center gap-4 py-6 md:grid-cols-[14rem_1fr_auto] md:gap-8">
-                  <div>
-                    <h3 className="text-lg font-semibold">{c.name}</h3>
-                    {c.monthlyPrice !== null && (
-                      <p className="mt-1 text-sm text-[var(--champagne)]">CA${c.monthlyPrice} CAD / month</p>
-                    )}
-                  </div>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{c.forWho}</p>
+                <div key={c.id} className="flex flex-col bg-[color-mix(in_oklab,var(--background)_88%,transparent)] p-7 lg:p-8">
+                  <h3 className="text-lg font-semibold">{c.name}</h3>
+                  {c.monthlyPrice !== null && (
+                    <p className="mt-4 flex items-baseline gap-2 font-display text-[2.6rem] leading-none text-gold-gradient">
+                      CA${c.monthlyPrice}
+                      <span className="font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase">
+                        / month
+                      </span>
+                    </p>
+                  )}
+                  <p className="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground">{c.forWho}</p>
                   <Link
                     to={`/contact?plan=${encodeURIComponent(c.name)}`}
-                    className="lux-link text-sm text-[var(--champagne)]"
+                    className="lux-link mt-6 self-start text-sm text-[var(--champagne)]"
                   >
                     Enquire about {c.name} →
                   </Link>

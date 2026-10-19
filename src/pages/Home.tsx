@@ -29,7 +29,7 @@ import featuredSaiRealEstate from "@/assets/v3/featured-sai-real-estate.png";
 import connectFigure from "@/assets/v2/hourglass-spheres.png";
 
 import processRibbon from "@/assets/v3/process-ribbon.png";
-import { processSteps } from "@/data/processSteps";
+import { processSteps, stageExplanations } from "@/data/processSteps";
 import { contact, mailtoUrl, whatsappUrl } from "@/data/contact";
 
 
@@ -680,22 +680,13 @@ export default function Home() {
                 const isActive = activeStep === s.n;
                 return (
                   <Reveal key={s.n} delay={i * 90} className="text-center">
-                    <div
-                      className="cursor-pointer text-center transition-opacity duration-[400ms] ease-out motion-reduce:transition-none"
+                    <button
+                      type="button"
+                      aria-pressed={isActive}
+                      aria-controls="home-step-panel"
+                      className="block w-full cursor-pointer rounded-xl text-center outline-none transition-opacity duration-[400ms] ease-out focus-visible:ring-2 focus-visible:ring-[var(--gold)]/60 motion-reduce:transition-none [-webkit-tap-highlight-color:transparent]"
                       style={{ opacity: activeStep && !isActive ? 0.88 : 1 }}
-                      role="button"
-                      tabIndex={0}
-                      onMouseEnter={() => setActiveStep(s.n)}
-                      onMouseLeave={() => setActiveStep((cur) => (cur === s.n ? null : cur))}
-                      onFocus={() => setActiveStep(s.n)}
-                      onBlur={() => setActiveStep((cur) => (cur === s.n ? null : cur))}
                       onClick={() => setActiveStep(s.n)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          setActiveStep(s.n);
-                        }
-                      }}
                     >
                       <ProcessTile
                         img={s.img}
@@ -703,25 +694,37 @@ export default function Home() {
                         active={isActive}
                         className="mx-auto aspect-square w-full"
                       />
-                      <p
-                        className="mt-3 text-xs text-[var(--champagne)] transition-opacity duration-[400ms] ease-out motion-reduce:transition-none"
+                      <span
+                        className="mt-3 block text-xs text-[var(--champagne)] transition-opacity duration-[400ms] ease-out motion-reduce:transition-none"
                         style={{ opacity: isActive ? 1 : 0.85 }}
                       >
                         {s.n}
-                      </p>
-                      <p
-                        className="text-sm font-medium transition-opacity duration-[400ms] ease-out motion-reduce:transition-none"
+                      </span>
+                      <span
+                        className="block text-sm font-medium transition-opacity duration-[400ms] ease-out motion-reduce:transition-none"
                         style={{ opacity: isActive ? 1 : 0.9 }}
                       >
                         {s.step}
-                      </p>
-                      <p className="mx-auto mt-1.5 max-w-[11rem] text-[11px] leading-snug text-white/80 sm:text-xs">
-                        {s.note}
-                      </p>
-                    </div>
+                      </span>
+                    </button>
                   </Reveal>
                 );
               })}
+            </div>
+            <div id="home-step-panel" aria-live="polite" className="relative">
+              {activeStep && (() => {
+                const idx = processSteps.findIndex((x) => x.n === activeStep);
+                const ex = stageExplanations[idx];
+                return (
+                  <div key={activeStep} className="mx-auto mt-10 max-w-xl border-t border-white/[0.08] pt-8 text-center">
+                    <p className="text-xs tracking-[0.25em] text-[var(--gold)] uppercase">
+                      {processSteps[idx].n} · {processSteps[idx].step}
+                    </p>
+                    <p className="mt-3 font-display text-xl leading-snug">{ex.lead}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{ex.body}</p>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </Reveal>
@@ -746,27 +749,23 @@ export default function Home() {
               className="pointer-events-none absolute inset-0 -z-10"
               style={{
                 background:
-                  "radial-gradient(60% 65% at 80% 50%, color-mix(in oklab, var(--ice) 9%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 38%, transparent 72%)",
+                  "radial-gradient(55% 45% at 50% 78%, color-mix(in oklab, var(--ice) 9%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 38%, transparent 72%)",
               }}
               aria-hidden
             />
-            <div className="relative grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
+            <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-14">
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">The Studio</p>
-                <h2 className="mt-5 text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.1] font-semibold">
-                  We turn ideas into meaningful digital experiences.
+                <h2 className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">
+                  SAIF STUDIO · A WAY OF SEEING
                 </h2>
-                <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">
-                  We're a small team of designers, thinkers and builders who believe premium doesn't have
-                  to mean corporate. Every project starts with the business and ends with something worth
-                  remembering.
+                <p className="mt-6 font-display text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.6] text-foreground/90">
+                  Some people see the world as it is. Others wonder what else it could be. I've always felt there is more to life than what sits on the surface. More to a moment than what happens in it, more to an object than its form, more to an idea than what it first appears to be. Perhaps it's about learning to look a little deeper — noticing connections where others see coincidence, beauty where others see the ordinary, and possibilities where others see things as they are. That way of seeing finds its way into everything I create. Saif Studio is simply one expression of it — a place where imagination takes form, and the invisible becomes something you can almost feel. The world doesn't always need to change. Sometimes, the way we see it does.
                 </p>
                 <Link to="/about" className="lux-link mt-7 inline-flex items-center gap-2 text-sm">
                   Our Story <ArrowRight size={15} />
                 </Link>
               </div>
-              <div className="relative mx-auto aspect-square w-full max-w-sm">
-                {/* Environmental light — anchored to the sculpture itself so it travels with it at every breakpoint. */}
+              <div className="relative mx-auto aspect-square w-full max-w-xs">
                 <div
                   className="ambient-drift pointer-events-none absolute rounded-full"
                   style={{
