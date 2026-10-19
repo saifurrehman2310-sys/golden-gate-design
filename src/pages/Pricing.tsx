@@ -4,7 +4,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { FloatingBlobs, defaultBlobScatter } from "@/components/site/FloatingBlobs";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { carePlans, careRange } from "@/data/carePlans";
-import { clientJourney, previewNote } from "@/data/clientJourney";
+import { previewNote } from "@/data/clientJourney";
 import {
   domainOptions,
   firstYearNote,
@@ -157,101 +157,51 @@ export default function Pricing() {
         </div>
 
         <Reveal delay={120}>
-          <div id="care" className="mt-28 text-center">
-            <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">After launch</p>
-            <h2 className="mx-auto mt-5 max-w-3xl text-[clamp(1.9rem,4.5vw,3.2rem)] leading-[1.05] font-semibold">
-              Care &amp; <span className="text-gold-gradient">Optimization</span>
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-              Optional monthly care for your website, from CA${careRange.min} to CA${careRange.max} CAD
-              per month depending on the plan.
-            </p>
-          </div>
-        </Reveal>
-        <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
-          {carePlans.map((c, i) => (
-            <Reveal key={c.id} delay={i * 100}>
-              <div className="glass-frame glass-frame-hover glass-edge relative flex h-full flex-col overflow-hidden rounded-2xl p-9 transition-all duration-500 hover:-translate-y-1.5 lg:p-10">
-                <div
-                  className="pointer-events-none absolute inset-[-20%] opacity-50 blur-3xl"
-                  style={{
-                    background:
-                      "radial-gradient(45% 45% at 50% 25%, color-mix(in oklab, var(--iris) 12%, transparent), transparent 70%)",
-                  }}
-                  aria-hidden
-                />
-                <h3 className="relative text-xl font-semibold">{c.name}</h3>
-                <div className="relative mt-6 min-h-[4.5rem]">
-                  {c.monthlyPrice === null ? (
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      Monthly price confirmed with you when you enquire.
-                    </p>
-                  ) : (
-                    <p className="flex items-baseline gap-2 font-display text-[2.6rem] leading-none text-gold-gradient">
-                      CA${c.monthlyPrice}
-                      <span className="font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase">
-                        CAD / month
-                      </span>
-                    </p>
-                  )}
-                </div>
-                <p className="relative mt-4 text-sm leading-relaxed text-muted-foreground">{c.forWho}</p>
-                <div className="relative mt-8 flex-1 border-t border-white/[0.08] pt-7 text-sm">
-                  {c.inclusions.length > 0 ? (
-                    <ul className="space-y-4">
-                      {c.inclusions.map((f) => (
-                        <li key={f} className="flex gap-3 text-muted-foreground">
-                          <Check size={16} className="mt-0.5 shrink-0 text-[var(--gold)]" />
-                          {f}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <p className="text-muted-foreground">Inclusions for this plan are shared when you enquire.</p>
-                  )}
-                </div>
-                <div className="relative mt-9">
-                  <MagneticLink
-                    to={`/contact?plan=${encodeURIComponent(c.name)}`}
-                    variant="ghost"
-                    className="w-full"
-                  >
-                    Enquire about {c.name}
-                  </MagneticLink>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={120}>
-          <div className="mt-20 grid gap-10 border-t border-white/[0.06] pt-14 md:grid-cols-3">
-            {[
-              ["No templates", "Every build is custom-designed for the business, never a recycled theme."],
-              ["See it first", "Before you commit, we prepare a limited, private first preview of our proposed direction."],
-              ["Questions first", "Not sure which package fits? Message us before you decide."],
-            ].map(([k, v]) => (
-              <div key={k}>
-                <h3 className="text-lg font-semibold">{k}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{v}</p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal delay={120}>
-          <div id="domain" className="mt-20">
-            <div className="text-center">
-              <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Domain &amp; hosting</p>
-              <h2 className="mx-auto mt-5 max-w-3xl text-[clamp(1.7rem,4vw,2.8rem)] leading-[1.05] font-semibold">
-                Your domain, <span className="text-gold-gradient">two ways</span>
+          <div id="care" className="glass-frame glass-edge mt-24 rounded-2xl p-8 lg:p-12">
+            <div className="max-w-2xl">
+              <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">After launch</p>
+              <h2 className="mt-4 text-[clamp(1.7rem,4vw,2.6rem)] leading-[1.05] font-semibold">
+                Care &amp; <span className="text-gold-gradient">Optimization</span>
               </h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Optional monthly care for your website, from CA${careRange.min} to CA${careRange.max} CAD
+                per month depending on the plan. Monthly price and inclusions for each plan are confirmed with you
+                when you enquire.
+              </p>
             </div>
-            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            <div className="mt-10 divide-y divide-white/[0.08] border-t border-white/[0.08]">
+              {carePlans.map((c) => (
+                <div key={c.id} className="grid items-center gap-4 py-6 md:grid-cols-[14rem_1fr_auto] md:gap-8">
+                  <div>
+                    <h3 className="text-lg font-semibold">{c.name}</h3>
+                    {c.monthlyPrice !== null && (
+                      <p className="mt-1 text-sm text-[var(--champagne)]">CA${c.monthlyPrice} CAD / month</p>
+                    )}
+                  </div>
+                  <p className="text-sm leading-relaxed text-muted-foreground">{c.forWho}</p>
+                  <Link
+                    to={`/contact?plan=${encodeURIComponent(c.name)}`}
+                    className="lux-link text-sm text-[var(--champagne)]"
+                  >
+                    Enquire about {c.name} →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={120}>
+          <div id="domain" className="glass-frame glass-edge mt-10 rounded-2xl p-8 lg:p-12">
+            <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Domain &amp; hosting</p>
+            <h2 className="mt-4 text-[clamp(1.7rem,4vw,2.6rem)] leading-[1.05] font-semibold">
+              Your domain, <span className="text-gold-gradient">two ways</span>
+            </h2>
+            <div className="mt-10 grid gap-10 md:grid-cols-2">
               {domainOptions.map((o) => (
-                <div key={o.id} className="glass-frame glass-edge rounded-2xl p-9 lg:p-10">
+                <div key={o.id}>
                   <h3 className="text-lg font-semibold">{o.title}</h3>
-                  <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
+                  <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
                     {o.points.map((pt) => (
                       <li key={pt} className="flex gap-3">
                         <Check size={16} className="mt-0.5 shrink-0 text-[var(--gold)]" />
@@ -262,39 +212,30 @@ export default function Pricing() {
                 </div>
               ))}
             </div>
-            <div className="glass-frame glass-edge mt-6 rounded-2xl p-9 lg:p-10">
-              <div className="grid gap-8 md:grid-cols-3">
-                {keptSeparate.map(([k, v]) => (
-                  <div key={k}>
-                    <h3 className="text-base font-semibold">{k}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="gold-rule my-8" />
-              <p className="text-sm leading-relaxed text-muted-foreground">
-                {firstYearNote} {renewalNote}
-              </p>
+            <div className="gold-rule my-8" />
+            <div className="grid gap-6 md:grid-cols-3">
+              {keptSeparate.map(([k, v]) => (
+                <div key={k}>
+                  <h3 className="text-base font-semibold">{k}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v}</p>
+                </div>
+              ))}
             </div>
+            <p className="mt-8 text-sm leading-relaxed text-muted-foreground">
+              {firstYearNote} {renewalNote}
+            </p>
           </div>
         </Reveal>
 
         <Reveal delay={120}>
           <div className="mt-16 text-center">
-            <h2 className="text-2xl font-semibold">How a project works</h2>
-            <ol className="mx-auto mt-10 grid max-w-6xl gap-6 text-left md:grid-cols-5">
-              {clientJourney.map((j, n) => (
-                <li key={j.title}>
-                  <p className="text-xs text-[var(--gold)]">{String(n + 1).padStart(2, "0")}</p>
-                  <h3 className="mt-2 text-base font-semibold">{j.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{j.text}</p>
-                </li>
-              ))}
-            </ol>
-            <p className="mx-auto mt-8 max-w-2xl text-xs leading-relaxed text-muted-foreground">
-              {previewNote}
+            <p className="mx-auto max-w-2xl text-sm leading-relaxed text-muted-foreground">{previewNote}</p>
+            <p className="mt-6 text-sm">
+              <Link to="/how-it-works" className="lux-link text-[var(--champagne)]">
+                See how a project works, from first conversation to ongoing support →
+              </Link>
             </p>
-            <p className="mt-10 text-xs text-muted-foreground">
+            <p className="mt-8 text-xs text-muted-foreground">
               See our <Link to="/terms" className="lux-link text-[var(--champagne)]">Terms of Service</Link>{" "}
               and <Link to="/privacy" className="lux-link text-[var(--champagne)]">Privacy Policy</Link>.
             </p>

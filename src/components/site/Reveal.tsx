@@ -18,6 +18,10 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true);
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -30,7 +34,22 @@ export function Reveal({
       { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
     );
     io.observe(el);
-    return () => io.disconnect();
+    // Failsafe: content already in (or above) the viewport must never stay hidden, for example
+    // after a jump-scroll, a restored scroll position, or while an image is still loading.
+    const reveal = () => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < window.innerHeight) {
+        setVisible(true);
+        io.disconnect();
+      }
+    };
+    const raf = requestAnimationFrame(reveal);
+    const timer = window.setTimeout(reveal, 1200);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+      window.clearTimeout(timer);
+    };
   }, []);
 
   const Comp = Tag as "div";

@@ -55,6 +55,40 @@ const featured = ["burger-bliss", "financial-advisor", "sai-real-estate"].map(
   (s) => projects.find((p) => p.slug === s)!,
 );
 
+/** Featured Work thumbnail: reserves its space before the (large) image loads, and falls back to a
+ * text link if the image ever fails, so the section is never empty. */
+const featuredSizes: Record<string, [number, number]> = {
+  "burger-bliss": [950, 831],
+  "financial-advisor": [950, 815],
+  "sai-real-estate": [950, 865],
+};
+
+function FeaturedThumb({ slug, name, category, src }: { slug: string; name: string; category: string; src: string }) {
+  const [failed, setFailed] = useState(false);
+  const [w, h] = featuredSizes[slug] ?? [950, 850];
+  return (
+    <Link to={`/projects/${slug}`} className="group relative block">
+      {failed ? (
+        <div className="glass-frame glass-edge flex aspect-[8/7] flex-col justify-end rounded-xl p-6">
+          <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">{category}</p>
+          <p className="mt-3 text-2xl font-semibold">{name}</p>
+        </div>
+      ) : (
+        <img
+          src={src}
+          alt={`${name} — ${category}`}
+          width={w}
+          height={h}
+          decoding="async"
+          onError={() => setFailed(true)}
+          style={{ aspectRatio: `${w} / ${h}` }}
+          className="h-auto w-full rounded-xl object-contain transition-transform duration-500 ease-[var(--ease-lux)] group-hover:-translate-y-2 group-hover:scale-[1.02]"
+        />
+      )}
+    </Link>
+  );
+}
+
 /** Finished gallery-piece thumbnails for the Featured Work exhibition — the glass frame, lighting and info are baked into each image, so these render bare with no additional card/wrapper. */
 const featuredThumbnails: Record<string, string> = {
   "burger-bliss": featuredBurgerBliss,
@@ -483,13 +517,12 @@ export default function Home() {
         <div className="relative mt-16 grid items-center gap-10 py-8 sm:mt-20 sm:grid-cols-3 lg:gap-12">
           {featured.map((p, i) => (
             <Reveal key={p.slug} delay={i * 100}>
-              <Link to={`/projects/${p.slug}`} className="group relative block">
-                <img
-                  src={featuredThumbnails[p.slug]}
-                  alt={`${p.name} — ${p.category}`}
-                  className="h-auto w-full rounded-xl object-contain transition-transform duration-500 ease-[var(--ease-lux)] group-hover:-translate-y-2 group-hover:scale-[1.02]"
-                />
-              </Link>
+              <FeaturedThumb
+                slug={p.slug}
+                name={p.name}
+                category={p.category}
+                src={featuredThumbnails[p.slug]}
+              />
             </Reveal>
           ))}
         </div>

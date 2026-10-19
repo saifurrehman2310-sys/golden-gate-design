@@ -102,6 +102,11 @@ export default function HowItWorks() {
           {previewNote}
         </p>
 
+        <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-muted-foreground">
+          After handover, optional monthly support is available through{" "}
+          <Link to="/pricing#care" className="lux-link text-[var(--champagne)]">Care &amp; Optimization</Link>.
+        </p>
+
         <div className="mt-14 flex flex-col items-center gap-5">
           <MagneticLink to="/contact">Start a Project</MagneticLink>
           <p className="text-xs text-muted-foreground">
