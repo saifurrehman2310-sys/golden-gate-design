@@ -800,7 +800,10 @@ export default function Home() {
       {/* CANADA SUPPORT — transition into Let's Connect */}
       <div className="relative mx-auto -mb-8 max-w-7xl px-6 sm:-mb-10 lg:-mb-14 lg:px-10">
         <Reveal>
-          <div className="glass-frame glass-edge relative max-w-2xl overflow-hidden rounded-3xl">
+          <Link
+            to="/canadian-support"
+            className="glass-frame glass-edge relative block max-w-2xl overflow-hidden rounded-3xl outline-none focus-visible:ring-2 focus-visible:ring-[var(--gold)]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
             {/* Softly blurred flag, kept low-opacity so the glass stays the subject. */}
             <img
               src={canadaFlagSoft}
@@ -829,7 +832,7 @@ export default function Home() {
                 across Canada.
               </p>
             </div>
-          </div>
+          </Link>
         </Reveal>
       </div>
 
