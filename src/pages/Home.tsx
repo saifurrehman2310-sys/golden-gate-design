@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
+import { StudioStory } from "@/components/site/StudioStory";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { FloatingBlobs } from "@/components/site/FloatingBlobs";
@@ -742,61 +743,52 @@ export default function Home() {
       </section>
 
       {/* ABOUT */}
-      <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 lg:px-10 lg:py-32">
-        <Reveal>
-          <div className="relative p-2 lg:p-4">
-            {/* Section-wide mood: light concentrated toward the sculpture, falling to darkness elsewhere so the left text stays high-contrast. */}
-            <div
-              className="pointer-events-none absolute inset-0 -z-10"
-              style={{
-                background:
-                  "radial-gradient(55% 45% at 50% 78%, color-mix(in oklab, var(--ice) 9%, transparent) 0%, color-mix(in oklab, var(--champagne) 5%, transparent) 38%, transparent 72%)",
-              }}
-              aria-hidden
-            />
-            <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-14">
-              <div>
-                <h2 className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">
-                  SAIF STUDIO · A WAY OF SEEING
-                </h2>
-                <p className="mt-6 font-display text-[clamp(1.2rem,2.2vw,1.6rem)] leading-[1.6] text-foreground/90">
-                  Some people see the world as it is. Others wonder what else it could be. I've always felt there is more to life than what sits on the surface. More to a moment than what happens in it, more to an object than its form, more to an idea than what it first appears to be. Perhaps it's about learning to look a little deeper — noticing connections where others see coincidence, beauty where others see the ordinary, and possibilities where others see things as they are. That way of seeing finds its way into everything I create. Saif Studio is simply one expression of it — a place where imagination takes form, and the invisible becomes something you can almost feel. The world doesn't always need to change. Sometimes, the way we see it does.
-                </p>
-                <Link to="/about" className="lux-link mt-7 inline-flex items-center gap-2 text-sm">
+      <section className="relative mx-auto max-w-7xl overflow-x-clip px-6 py-24 lg:px-10 lg:py-32">
+        <div
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              "radial-gradient(55% 40% at 50% 80%, color-mix(in oklab, var(--ice) 8%, transparent) 0%, color-mix(in oklab, var(--champagne) 4%, transparent) 40%, transparent 72%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-14">
+          <div className="w-full">
+            <StudioStory size="md" />
+            <Reveal delay={120}>
+              <div className="mx-auto mt-8 w-full max-w-2xl">
+                <Link to="/about" className="lux-link inline-flex items-center gap-2 text-sm">
                   Our Story <ArrowRight size={15} />
                 </Link>
               </div>
-              <div className="relative mx-auto aspect-square w-full max-w-xs">
-                <div
-                  className="ambient-drift pointer-events-none absolute rounded-full"
-                  style={{
-                    inset: "-20%",
-                    background:
-                      "radial-gradient(42% 42% at 30% 24%, color-mix(in oklab, var(--ice) 32%, transparent), transparent 72%)",
-                    filter: "blur(38px)",
-                  }}
-                  aria-hidden
-                />
-                <div
-                  className="ambient-drift-slow pointer-events-none absolute rounded-full"
-                  style={{
-                    inset: "-20%",
-                    background:
-                      "radial-gradient(46% 46% at 76% 80%, color-mix(in oklab, var(--champagne) 26%, transparent), transparent 72%)",
-                    filter: "blur(42px)",
-                  }}
-                  aria-hidden
-                />
-                <img
-                  src={glassDroplet}
-                  alt=""
-                  aria-hidden
-                  className="float-slow relative h-full w-full object-contain"
-                />
-              </div>
-            </div>
+            </Reveal>
           </div>
-        </Reveal>
+          <Reveal delay={120} className="w-full">
+            <div className="relative mx-auto aspect-square w-full max-w-xs">
+              <div
+                className="ambient-drift pointer-events-none absolute rounded-full"
+                style={{
+                  inset: "-20%",
+                  background:
+                    "radial-gradient(42% 42% at 30% 24%, color-mix(in oklab, var(--ice) 32%, transparent), transparent 72%)",
+                  filter: "blur(38px)",
+                }}
+                aria-hidden
+              />
+              <div
+                className="ambient-drift-slow pointer-events-none absolute rounded-full"
+                style={{
+                  inset: "-20%",
+                  background:
+                    "radial-gradient(46% 46% at 76% 80%, color-mix(in oklab, var(--champagne) 26%, transparent), transparent 72%)",
+                  filter: "blur(42px)",
+                }}
+                aria-hidden
+              />
+              <img src={glassDroplet} alt="" aria-hidden className="float-slow relative h-full w-full object-contain" />
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* CANADA SUPPORT — transition into Let's Connect */}

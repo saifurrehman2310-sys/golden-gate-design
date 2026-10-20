@@ -101,12 +101,12 @@ export default function Pricing() {
           aria-hidden
         />
         <FloatingBlobs positions={defaultBlobScatter} />
-        <div className="grid items-start gap-6 lg:grid-cols-3">
+        <div className="grid items-stretch gap-6 lg:grid-cols-3">
           {tiers.map((t, i) => (
-            <Reveal key={t.name} delay={i * 100} className={t.featured ? "lg:-mt-6" : ""}>
+            <Reveal key={t.name} delay={i * 100}>
               <div
-                className={`glass-frame glass-frame-hover glass-edge relative flex h-full flex-col overflow-hidden rounded-2xl p-9 transition-all duration-500 hover:-translate-y-1.5 lg:p-11 ${
-                  t.featured ? "border-[var(--gold)]/30 lg:scale-[1.04]" : ""
+                className={`glass-frame glass-frame-hover glass-edge relative flex h-full flex-col overflow-hidden rounded-2xl p-8 transition-all duration-500 hover:-translate-y-1.5 lg:p-10 ${
+                  t.featured ? "border-[var(--gold)]/40" : ""
                 }`}
               >
                 <div
@@ -119,26 +119,24 @@ export default function Pricing() {
                   aria-hidden
                 />
                 {t.featured && (
-                  <span className="relative mb-6 w-fit rounded-full border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_12%,transparent)] px-3 py-1 text-[11px] font-medium tracking-wide text-[var(--champagne)] uppercase backdrop-blur-sm">
+                  <span className="absolute top-5 right-5 rounded-full border border-[var(--gold)]/50 bg-[color-mix(in_oklab,var(--gold)_12%,transparent)] px-3 py-1 text-[11px] font-medium tracking-wide text-[var(--champagne)] uppercase backdrop-blur-sm">
                     Recommended
                   </span>
                 )}
                 <h2 className="relative text-xl font-semibold">{t.name}</h2>
-                <div className="relative mt-6">
-                  <p className="text-sm text-muted-foreground">
+                <div className="relative mt-5">
+                  <p className="flex items-baseline gap-2 font-display text-[3rem] leading-none text-gold-gradient">
+                    {t.price}
+                    <span className="font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase">CAD</span>
+                  </p>
+                  <p className="mt-3 text-xs text-muted-foreground">
                     <span className="sr-only">Reference price: </span>
                     <s className="decoration-white/60 decoration-[1.5px]">{t.reference}</s>
-                    <span className="ml-2 text-[11px] tracking-wide uppercase">reference</span>
-                  </p>
-                  <p className="mt-2 flex items-baseline gap-2 font-display text-[3.2rem] leading-none text-gold-gradient">
-                    {t.price}
-                    <span className="font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase">
-                      CAD
-                    </span>
+                    <span className="ml-2 tracking-wide uppercase">reference</span>
                   </p>
                 </div>
-                <p className="relative mt-6 text-sm leading-relaxed text-muted-foreground">{t.for}</p>
-                <ul className="relative mt-9 flex-1 space-y-4 border-t border-white/[0.08] pt-8 text-sm">
+                <p className="relative mt-5 min-h-[3.5rem] text-sm leading-relaxed text-muted-foreground">{t.for}</p>
+                <ul className="relative mt-7 flex-1 space-y-3.5 border-t border-white/[0.08] pt-7 text-sm">
                   {t.features.map((f) => (
                     <li key={f} className="flex gap-3 text-muted-foreground">
                       <Check size={16} className="mt-0.5 shrink-0 text-[var(--gold)]" />
@@ -146,7 +144,7 @@ export default function Pricing() {
                     </li>
                   ))}
                 </ul>
-                <div className="relative mt-10">
+                <div className="relative mt-9">
                   <MagneticLink to={`/contact?package=${encodeURIComponent(t.name)}`} variant={t.featured ? "gold" : "ghost"} className="w-full">
                     Get Started
                   </MagneticLink>
@@ -157,35 +155,34 @@ export default function Pricing() {
         </div>
 
         <Reveal delay={120}>
-          <div id="care" className="glass-frame glass-edge mt-24 rounded-2xl p-8 lg:p-12">
+          <div id="care" className="glass-frame glass-edge mt-24 scroll-mt-28 rounded-2xl p-8 lg:p-12">
             <div className="max-w-2xl">
               <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">After launch</p>
               <h2 className="mt-4 text-[clamp(1.7rem,4vw,2.6rem)] leading-[1.05] font-semibold">
                 Care &amp; <span className="text-gold-gradient">Optimization</span>
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Optional monthly care for your website, from CA${careRange.min} to CA${careRange.max} CAD
-                per month depending on the plan. Prices are shown below; you can also enquire about any plan.
+                Optional monthly care for your website, from CA${careRange.min} to CA${careRange.max} CAD per
+                month.
               </p>
             </div>
-            <div className="mt-10 grid gap-px overflow-hidden rounded-xl bg-white/[0.08] lg:grid-cols-3">
+            <div className="mt-9 grid gap-5 lg:grid-cols-3">
               {carePlans.map((c) => (
-                <div key={c.id} className="flex flex-col bg-[color-mix(in_oklab,var(--background)_88%,transparent)] p-7 lg:p-8">
+                <div key={c.id} className="flex flex-col rounded-xl border border-white/[0.08] p-7">
                   <h3 className="text-lg font-semibold">{c.name}</h3>
                   {c.monthlyPrice !== null && (
                     <p className="mt-4 flex items-baseline gap-2 font-display text-[2.6rem] leading-none text-gold-gradient">
                       CA${c.monthlyPrice}
-                      <span className="font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase">
-                        / month
-                      </span>
+                      <span className="font-sans text-xs tracking-[0.2em] text-muted-foreground uppercase">/ month</span>
                     </p>
                   )}
                   <p className="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground">{c.forWho}</p>
                   <Link
                     to={`/contact?plan=${encodeURIComponent(c.name)}`}
+                    aria-label={`Enquire about ${c.name}`}
                     className="lux-link mt-6 self-start text-sm text-[var(--champagne)]"
                   >
-                    Enquire about {c.name} →
+                    Enquire →
                   </Link>
                 </div>
               ))}
@@ -194,7 +191,7 @@ export default function Pricing() {
         </Reveal>
 
         <Reveal delay={120}>
-          <div id="domain" className="glass-frame glass-edge mt-10 rounded-2xl p-8 lg:p-12">
+          <div id="domain" className="glass-frame glass-edge mt-10 scroll-mt-28 rounded-2xl p-8 lg:p-12">
             <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">Domain &amp; hosting</p>
             <h2 className="mt-4 text-[clamp(1.7rem,4vw,2.6rem)] leading-[1.05] font-semibold">
               Your domain, <span className="text-gold-gradient">two ways</span>
@@ -214,7 +211,7 @@ export default function Pricing() {
                 </div>
               ))}
             </div>
-            <div className="gold-rule my-8" />
+            <div className="my-8 border-t border-white/[0.08]" />
             <div className="grid gap-6 md:grid-cols-3">
               {keptSeparate.map(([k, v]) => (
                 <div key={k}>
