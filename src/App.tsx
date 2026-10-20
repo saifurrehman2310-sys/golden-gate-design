@@ -16,6 +16,7 @@ import Play from "@/pages/Play";
 import ArtArchive from "@/pages/ArtArchive";
 import ArtStyle from "@/pages/ArtStyle";
 import { Terms, Privacy } from "@/pages/Policies";
+import CanadianSupport from "@/pages/CanadianSupport";
 import NotFound from "@/pages/NotFound";
 
 function ScrollToTop() {
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/canadian-support" element={<CanadianSupport />} />
           <Route path="/play" element={<Play />} />
           <Route path="/art" element={<ArtArchive />} />
           <Route path="/art/:slug" element={<ArtStyle />} />
