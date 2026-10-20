@@ -54,7 +54,7 @@ export default function Portfolio() {
           </Reveal>
           <Reveal delay={100}>
             <h1 className="mt-6 max-w-4xl text-[clamp(2.6rem,7vw,5.5rem)] leading-[0.98] font-semibold">
-              Eight builds. <span className="text-gold-gradient">Eight results.</span>
+              Ideas, <span className="text-gold-gradient">brought to life.</span>
             </h1>
           </Reveal>
           <Reveal delay={200}>

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Mail, MessageCircle, MapPin } from "lucide-react";
-import { StudioStory } from "@/components/site/StudioStory";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
 import { FloatingBlobs } from "@/components/site/FloatingBlobs";
@@ -450,8 +449,8 @@ export default function Home() {
                 </h1>
               </Reveal>
               <Reveal delay={200}>
-                <p className="mt-7 max-w-md text-lg text-muted-foreground">
-                  We design digital experiences that feel fluid, immersive and unforgettable.
+                <p className="mt-7 max-w-md text-lg text-balance text-muted-foreground">
+                  Considered digital work, shaped by a way of seeing.
                 </p>
               </Reveal>
               <Reveal delay={300} className="mt-10 flex flex-wrap gap-4">
@@ -754,7 +753,29 @@ export default function Home() {
         />
         <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-14">
           <div className="w-full">
-            <StudioStory size="md" />
+            <div className="mx-auto w-full max-w-2xl">
+              <Reveal>
+                <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">The Studio</p>
+              </Reveal>
+              <div className="mt-8 space-y-6 font-display text-[clamp(1.1rem,1.9vw,1.35rem)] leading-[1.75] text-foreground/85">
+                <Reveal delay={80}>
+                  <p className="text-foreground">
+                    Some people see the world as it is. Others wonder what else it could be.
+                  </p>
+                </Reveal>
+                <Reveal delay={150}>
+                  <p>
+                    Saif Studio turns that curiosity into digital experiences — thoughtfully designed,
+                    carefully crafted, and built to make an impression.
+                  </p>
+                </Reveal>
+                <Reveal delay={220}>
+                  <p className="text-gold-gradient">
+                    Not just websites. A different way to experience the digital world.
+                  </p>
+                </Reveal>
+              </div>
+            </div>
             <Reveal delay={120}>
               <div className="mx-auto mt-8 w-full max-w-2xl">
                 <Link to="/about" className="lux-link inline-flex items-center gap-2 text-sm">
