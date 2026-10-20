@@ -450,7 +450,7 @@ export default function Home() {
               </Reveal>
               <Reveal delay={200}>
                 <p className="mt-7 max-w-md text-lg text-balance text-muted-foreground">
-                  Considered digital work, shaped by a way of seeing.
+                  Imagination, given form.
                 </p>
               </Reveal>
               <Reveal delay={300} className="mt-10 flex flex-wrap gap-4">
@@ -753,31 +753,16 @@ export default function Home() {
         />
         <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-14">
           <div className="w-full">
-            <div className="mx-auto w-full max-w-2xl">
+            <div className="mx-auto w-full max-w-2xl text-center font-display text-[clamp(1.7rem,4vw,2.7rem)] leading-[1.25] font-semibold">
               <Reveal>
-                <p className="text-xs uppercase tracking-[0.35em] text-[var(--gold)]">The Studio</p>
+                <p className="text-balance">Curiosity fuels what we imagine.</p>
               </Reveal>
-              <div className="mt-8 space-y-6 font-display text-[clamp(1.1rem,1.9vw,1.35rem)] leading-[1.75] text-foreground/85">
-                <Reveal delay={80}>
-                  <p className="text-foreground">
-                    Some people see the world as it is. Others wonder what else it could be.
-                  </p>
-                </Reveal>
-                <Reveal delay={150}>
-                  <p>
-                    Saif Studio turns that curiosity into digital experiences — thoughtfully designed,
-                    carefully crafted, and built to make an impression.
-                  </p>
-                </Reveal>
-                <Reveal delay={220}>
-                  <p className="text-gold-gradient">
-                    Not just websites. A different way to experience the digital world.
-                  </p>
-                </Reveal>
-              </div>
+              <Reveal delay={120}>
+                <p className="mt-2 text-balance text-gold-gradient">Imagination shapes what we create.</p>
+              </Reveal>
             </div>
             <Reveal delay={120}>
-              <div className="mx-auto mt-8 w-full max-w-2xl">
+              <div className="mx-auto mt-8 flex w-full max-w-2xl justify-center">
                 <Link to="/about" className="lux-link inline-flex items-center gap-2 text-sm">
                   Our Story <ArrowRight size={15} />
                 </Link>
