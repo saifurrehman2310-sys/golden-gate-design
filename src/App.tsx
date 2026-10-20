@@ -19,10 +19,19 @@ import { Terms, Privacy } from "@/pages/Policies";
 import NotFound from "@/pages/NotFound";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      // Let the new page render, then jump to the in-page anchor (e.g. /pricing#care).
+      const t = window.setTimeout(() => {
+        const el = document.getElementById(decodeURIComponent(hash.slice(1)));
+        if (el) el.scrollIntoView({ block: "start" });
+        else window.scrollTo(0, 0);
+      }, 80);
+      return () => window.clearTimeout(t);
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 
