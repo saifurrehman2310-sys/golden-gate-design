@@ -234,7 +234,7 @@ export default function Pricing() {
                 See how a project works, from first conversation to ongoing support →
               </Link>
             </p>
-            <p className="mt-8 text-xs text-muted-foreground">
+            <p className="mt-8 text-sm text-muted-foreground">\n              Want the full breakdown? <Link to="/brochure" className="lux-link text-[var(--champagne)]">Explore the Saif Studio Client Guide →</Link>\n            </p>\n            <p className="mt-8 text-xs text-muted-foreground">
               See our <Link to="/terms" className="lux-link text-[var(--champagne)]">Terms of Service</Link>{" "}
               and <Link to="/privacy" className="lux-link text-[var(--champagne)]">Privacy Policy</Link>.
             </p>
