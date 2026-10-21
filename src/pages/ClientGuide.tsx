@@ -1,4 +1,5 @@
-import { ArrowDownRight, ArrowRight, Check, CircleHelp, Globe2, Layers3, ShieldCheck, Sparkles, Store, WandSparkles } from "lucide-react";\nimport type { ReactNode } from "react";
+import { ArrowDownRight, ArrowRight, Check, CircleHelp, Globe2, Layers3, ShieldCheck, Sparkles, Store, WandSparkles } from "lucide-react";
+import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
