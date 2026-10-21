@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowRight, Check, CircleHelp, Globe2, Layers3, MessageCircle, ShieldCheck, Sparkles, Store, WandSparkles } from "lucide-react";
+import { ArrowDownRight, ArrowRight, Check, CircleHelp, Globe2, Layers3, ShieldCheck, Sparkles, Store, WandSparkles } from "lucide-react";\nimport type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/site/Reveal";
 import { MagneticLink } from "@/components/site/MagneticLink";
@@ -76,7 +76,7 @@ const principles = [
   { icon: ShieldCheck, title: "A private preview first", text: "See a limited concept preview before deciding whether to continue with the project." },
 ];
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({ children }: { children: ReactNode }) {
   return <p className="text-[11px] uppercase tracking-[0.32em] text-[var(--gold)]">{children}</p>;
 }
 
